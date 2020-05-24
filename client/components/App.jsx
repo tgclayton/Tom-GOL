@@ -17,12 +17,18 @@ class App extends Component {
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
+    this.stopGame = this.stopGame.bind(this)
   }
 
 setMap = (mapArr) => {
   this.setState({
+    generation: 0,
     mapArr: mapArr
   })
+}
+
+stopGame = () => {
+  clearInterval(this.state.game)
 }
 
 runGame = () => {
@@ -33,7 +39,7 @@ runGame = () => {
     })
   } else {
     this.setState({
-      game: setInterval(() => this.showNextGen(this.state.mapArr), 50),
+      game: setInterval(() => this.showNextGen(this.state.mapArr), 20),
       running: true
     })
   }
@@ -56,6 +62,7 @@ runGame = () => {
        <Route exact path = '/' component = {() => <Home/>} />
        <Route exact path = '/game' component = {() => <GameView
          runGame = {this.runGame}
+         stopGame = {this.stopGame}
          setMap = {this.setMap}
          mapArr ={this.state.mapArr}
          gen = {this.state.generation}/>} />
