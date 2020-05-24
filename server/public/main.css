@@ -10,11 +10,11 @@
   padding: 0;
 }
 
-.alive-tile {
+.live-cell {
   background-color: chartreuse;
 }
 
-.dead-tile {
+.dead-cell {
   background-color: antiquewhite;
 }
 

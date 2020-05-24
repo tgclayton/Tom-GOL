@@ -6,9 +6,9 @@ const GameView = (props) => {
   return (
     <>
     <div id='tile-container' className = ''>
-      {props.mapArr.map(tile => {
+      {props.mapArr.map((tile, idx) => {
         return (
-          <Tile key = {tile.id} alive = {tile.alive}/>
+          <Tile key = {idx} value = {tile}/>
         )
       })}
     </div>

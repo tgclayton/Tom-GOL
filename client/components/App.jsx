@@ -9,7 +9,7 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      mapArr: null,
+      mapArr: new Array(400).fill(0),
       generations: null
     }
     this.setMap = this.setMap.bind(this)
