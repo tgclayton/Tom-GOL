@@ -1,18 +1,6 @@
 import React from 'react'
 import Tile from './Tile'
-
-const makeRandomMap = () => {
-  const field = new Array(400).fill(0)
-  let newField = []
-  newField = field.map(tile => {
-    let rand = Math.random()
-    if (rand > 0.6) {
-      tile = 1
-    }
-    return tile
-  })
-  return newField
-}
+import { makeRandomMap } from './functions'
 
 const GameView = (props) => {
   return (
