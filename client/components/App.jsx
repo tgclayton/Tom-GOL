@@ -1,9 +1,15 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { Route, BrowserRouter as Router } from 'react-router-dom'
+import Home from './Home'
 
-const App = () => {
-  return (
-    <h1>React development has begun!</h1>
-  )
+class App extends Component {
+  render () {
+    return (
+      <Router>
+        <Route exact path = '/' component = {() => <Home/>} />
+      </Router>
+    )
+  }
 }
 
 export default App
