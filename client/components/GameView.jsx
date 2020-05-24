@@ -12,7 +12,9 @@ const GameView = (props) => {
           )
         })}
       </div>
+      <p>Generation: {props.gen}</p>
       <button onClick = {() => props.setMap(makeRandomMap())}>Create Random Map</button>
+      <button onClick = {() => props.runGame(props.mapArr)}>Run Game</button>
     </div>
   )
 }
