@@ -12,7 +12,7 @@ const GameView = (props) => {
         )
       })}
     </div>
-    <button onClick = {makeRandomMap}>Create Random Map</button>
+    <button onClick = {() => props.setMap(makeRandomMap())}>Create Random Map</button>
     </>
   )
 }
