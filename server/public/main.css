@@ -3,9 +3,19 @@
   margin: auto;
 }
 
+button {
+  margin: 1em;
+  display: inline-block;
+}
+
 #tile-container {
-  height: 400px;
-  width: 400px;
+  height: 800px;
+  width: 800px;
+  display: inline-block;
+}
+
+.centerer {
+  text-align: center;
 }
 
 .tile {

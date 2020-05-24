@@ -1,5 +1,5 @@
 export const makeRandomMap = () => {
-  const field = new Array(400).fill(0)
+  const field = new Array(1600).fill(0)
   let newField = []
   newField = field.map(tile => {
     let rand = Math.random()
