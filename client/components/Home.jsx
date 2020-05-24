@@ -1,11 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Home extends Component {
-  render () {
-    return (
-      <h1>Spin This Shit Up</h1>
-    )
-  }
+const Home = () => {
+  return (
+    <div id='tile-container' className = ''>
+    </div>
+  )
 }
 
 export default Home
