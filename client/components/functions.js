@@ -11,20 +11,27 @@ export const makeRandomMap = () => {
   return newField
 }
 
-function makeCheckArr (field) {
+function onlyUnique (value, index, self) {
+  return self.indexOf(value) === index
+}
+
+function makeCheckArr (field, size) {
   let checkArr = []
   field.forEach((cell, idx) => {
     if (cell === 1) {
-      checkArr.push(idx)
+      let neighbours = getNeighbours(idx, size)
+      checkArr = checkArr.concat(neighbours)
     }
   })
+  checkArr = checkArr.filter(onlyUnique)
+  console.log(checkArr)
   return checkArr
 }
 
 export function nextGeneration (field) {
-  console.log('checkArr is:', makeCheckArr(field))
-  let nextField = []
   let size = Math.sqrt(field.length)
+  console.log('checkArr is:', makeCheckArr(field, size))
+  let nextField = []
   for (let i = 0; i < field.length; i++) {
     let f = field[i]
     let n = getNeighbours(i, size)

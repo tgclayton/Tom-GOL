@@ -32,17 +32,18 @@ stopGame = () => {
 }
 
 runGame = () => {
-  if (this.state.running) {
-    clearInterval(this.state.game)
-    this.setState({
-      running: false
-    })
-  } else {
-    this.setState({
-      game: setInterval(() => this.showNextGen(this.state.mapArr), 100),
-      running: true
-    })
-  }
+  this.showNextGen(this.state.mapArr)
+  // if (this.state.running) {
+  //   clearInterval(this.state.game)
+  //   this.setState({
+  //     running: false
+  //   })
+  // } else {
+  //   this.setState({
+  //     game: setInterval(() => this.showNextGen(this.state.mapArr), 100),
+  //     running: true
+  //   })
+  // }
 }
 
  showNextGen = (field) => {
