@@ -11,7 +11,18 @@ export const makeRandomMap = () => {
   return newField
 }
 
+function makeCheckArr (field) {
+  let checkArr = []
+  field.forEach((cell, idx) => {
+    if (cell === 1) {
+      checkArr.push(idx)
+    }
+  })
+  return checkArr
+}
+
 export function nextGeneration (field) {
+  console.log('checkArr is:', makeCheckArr(field))
   let nextField = []
   let size = Math.sqrt(field.length)
   for (let i = 0; i < field.length; i++) {

@@ -39,7 +39,7 @@ runGame = () => {
     })
   } else {
     this.setState({
-      game: setInterval(() => this.showNextGen(this.state.mapArr), 20),
+      game: setInterval(() => this.showNextGen(this.state.mapArr), 100),
       running: true
     })
   }

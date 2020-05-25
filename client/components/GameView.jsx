@@ -3,7 +3,6 @@ import Tile from './Tile'
 import { makeRandomMap } from './functions'
 
 class GameView extends Component {
-
   render () {
     return (
       <div className = 'centerer'>
