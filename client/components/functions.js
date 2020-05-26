@@ -36,20 +36,23 @@ function updateCheckArr (arr){
 export function nextGeneration (field, checkArr) {
   let size = Math.sqrt(field.length)
   let nextField = []
+  let liveCount = 0
   for (let i = 0; i < field.length; i++) {
     let f = field[i]
     let n = getNeighbours(i, size)
     let ln = findLiveNeighbours(field, n)
     if (f === 0 && ln === 3) {
       f = 1
+      liveCount++
     } else if (f === 1 && (ln === 2 || ln === 3)) {
       f = 1
+      liveCount++
     } else {
       f = 0
     }
     nextField.push(f)
   }
-  return nextField
+  return [nextField, liveCount]
 }
 
 export function getNeighbours (ind, size) { // (index being looked up, square root of array length)

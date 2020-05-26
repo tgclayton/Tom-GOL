@@ -15,7 +15,8 @@ class App extends Component {
       gameRunning: false,
       game: null,
       mouseDown: null,
-      runSpeed: 150
+      runSpeed: 150,
+      liveCells: 0
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -58,7 +59,15 @@ setSpeed = (speed, id) => {
   })
 }
 
+setLiveCells = (field) => {
+  let live = field.filter(cell => cell === 1)
+  this.setState({
+    liveCells: live.length
+  })
+}
+
 clearGame = () => {
+  this.stopGame()
   let mapArr = new Array(1600).fill(0)
   this.setState({
     generation: 0,
@@ -67,7 +76,9 @@ clearGame = () => {
 }
 
 setMap = () => {
+  this.stopGame()
   let mapArr = makeRandomMap()
+  this.setLiveCells(mapArr)
   let checkArr = makeCheckArr(mapArr)
   this.setState({
     generation: 0,
@@ -86,7 +97,9 @@ stopGame = () => {
 
 runGame = (singleGen) => {
   if (singleGen) {
-    this.showNextGen(this.state.mapArr)
+    if (this.state.gameRunning) {
+      this.showNextGen(this.state.mapArr)
+    }
   } else if (!this.state.gameRunning) {
     this.setState({
       game: setInterval(() => this.showNextGen(this.state.mapArr), this.state.runSpeed),
@@ -96,12 +109,14 @@ runGame = (singleGen) => {
 }
 
  showNextGen = (field) => {
-   field = nextGeneration(field, this.state.checkArr)
+   let nextGen = nextGeneration(field, this.state.checkArr)
+   field = nextGen[0]
    let generation = this.state.generation
    generation++
    this.setState({
      mapArr: field,
-     generation: generation
+     generation: generation,
+     liveCells: nextGen[1]
    }, () => {})
  }
 
@@ -111,6 +126,7 @@ runGame = (singleGen) => {
        <h1 id = 'main-title'>The Game of Life</h1>
        {/* <Route exact path = '/' component = {() => <Home/>} /> */}
        <Route exact path = '/' component = {() => <GameView
+         liveCells= {this.state.liveCells}
          setSpeed = {this.setSpeed}
          speed = {this.state.runSpeed}
          clearGame = {this.clearGame}

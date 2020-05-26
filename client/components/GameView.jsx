@@ -31,11 +31,12 @@ class GameView extends Component {
           })}
         </div>
         <p>Generation: {this.props.gen}</p>
-        <button onClick = {this.props.setMap}>Create Random Map</button>
-        <button onClick = {() => this.props.runGame(false)}>Run Game</button>
+        <p>Living Cells: {this.props.liveCells}</p>
+        <button onMouseDown = {this.props.setMap}>Create Random Map</button>
+        <button onMouseDown = {() => this.props.runGame(false)}>Run Game</button>
         <button onMouseDown = {() => this.props.stopGame(this.props.mapArr)}>Pause Game</button>
-        <button onClick = {() => this.props.runGame(true)}>Run One Generation</button>
-        <button onClick = {() => this.props.clearGame()}>Clear Game</button>
+        <button onMouseDown = {() => this.props.runGame(true)}>Run One Generation</button>
+        <button onMouseDown = {() => this.props.clearGame()}>Clear Game</button>
         <div id= 'speed-control'>
           <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(600, 'very-slow')}>Very Slow</button>
           <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(300, 'slow')}>Slow</button>
