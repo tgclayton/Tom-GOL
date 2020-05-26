@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap } from './functions'
+import { nextGeneration, makeRandomMap, makeCheckArr } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
@@ -19,21 +19,7 @@ class App extends Component {
     this.runGame = this.runGame.bind(this)
     this.stopGame = this.stopGame.bind(this)
     this.toggleTile = this.toggleTile.bind(this)
-    // this.handleMouse = this.handleMouse.bind(this)
   }
-
-  // handleMouse = () => {
-  //   let isTrue
-  //   if (this.state.mouseDown === true) {
-  //     isTrue = false
-  //   } else {
-  //     isTrue = true
-  //   }
-  //   this.setState({
-  //     mouseDown: isTrue
-  //   })
-  //   setTimeout(() => {}, 100)
-  // }
 
   toggleTile = (idx) => {
     let mapArr = this.state.mapArr
@@ -51,10 +37,11 @@ class App extends Component {
 
 setMap = () => {
   let mapArr = makeRandomMap()
-  let checkArr = makeC
+  let checkArr = makeCheckArr(mapArr)
   this.setState({
     generation: 0,
-    mapArr: mapArr
+    mapArr: mapArr,
+    checkArr: checkArr
   })
 }
 
@@ -93,7 +80,7 @@ runGame = () => {
        <h1 id = 'main-title'>The Game of Life</h1>
        <Route exact path = '/' component = {() => <Home/>} />
        <Route exact path = '/game' component = {() => <GameView
-         handleMouse = {this.handleMouse}
+         checkArr = {this.state.checkArr}
          toggleTile = {this.toggleTile}
          runGame = {this.runGame}
          stopGame = {this.stopGame}

@@ -15,7 +15,8 @@ function onlyUnique (value, index, self) {
   return self.indexOf(value) === index
 }
 
-function makeCheckArr (field, size) {
+export function makeCheckArr (field) {
+  let size = Math.sqrt(field.length)
   let checkArr = []
   field.forEach((cell, idx) => {
     if (cell === 1) {
