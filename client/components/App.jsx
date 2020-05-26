@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, makeCheckArr, idxToCoords, coordsToIdx } from './functions'
+import { nextGeneration, makeRandomMap, makeCheckArr, idxToCoords, coordsToIdx, getNeighbours, findLiveNeighbours } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
@@ -27,6 +27,7 @@ class App extends Component {
   }
 
   toggleTile = (idx) => {
+    console.log(idx)
     let mapArr = this.state.mapArr
     let tile = document.getElementById(idx)
     if (this.state.gameRunning === false) {
@@ -97,9 +98,7 @@ stopGame = () => {
 
 runGame = (singleGen) => {
   if (singleGen) {
-    if (this.state.gameRunning) {
-      this.showNextGen(this.state.mapArr)
-    }
+    this.showNextGen(this.state.mapArr)
   } else if (!this.state.gameRunning) {
     this.setState({
       game: setInterval(() => this.showNextGen(this.state.mapArr), this.state.runSpeed),
@@ -117,6 +116,11 @@ coordstoidxtest = () => {
   let targetx = Number(document.getElementById('coordtestx').value)
   let targety = Number(document.getElementById('coordtesty').value)
   console.log(coordsToIdx([targetx, targety]))
+}
+
+neightest = () => {
+  let idx = Number(document.getElementById('neightest').value)
+console.log(getNeighbours(idx))
 }
 
  showNextGen = (field) => {
@@ -137,9 +141,11 @@ coordstoidxtest = () => {
        <h1 id = 'main-title'>The Game of Life</h1>
        <button onClick= {this.idxtocoordstest}>id test</button>
        <button onClick= {this.coordstoidxtest}>coord test</button>
+       <button onClick= {this.neightest}>neighbour test</button>
        <input type="text" name="" id="idtest"/>
        <input type="text" name="" id="coordtestx"/>
        <input type="text" name="" id="coordtesty"/>
+       <input type="text" name="" id="neightest"/>
        {/* <Route exact path = '/' component = {() => <Home/>} /> */}
        <Route exact path = '/' component = {() => <GameView
          liveCells= {this.state.liveCells}
