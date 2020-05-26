@@ -17,6 +17,7 @@ class GameView extends Component {
         <button onClick = {() => this.props.runGame(false)}>Run Game</button>
         <button onClick = {() => this.props.stopGame(this.props.mapArr)}>Stop Game</button>
         <button onClick = {() => this.props.runGame(true)}>Run One Generation</button>
+        <button onClick = {() => this.props.clearGame()}>Clear Game</button>
       </div>
     )
   }

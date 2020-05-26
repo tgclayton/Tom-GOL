@@ -19,6 +19,7 @@ class App extends Component {
     this.runGame = this.runGame.bind(this)
     this.stopGame = this.stopGame.bind(this)
     this.toggleTile = this.toggleTile.bind(this)
+    this.clearGame = this.clearGame.bind(this)
   }
 
   toggleTile = (idx) => {
@@ -34,6 +35,14 @@ class App extends Component {
     }, () => {
     })
   }
+
+clearGame = () => {
+  let mapArr = new Array(1600).fill(0)
+  this.setState({
+    generation: 0,
+    mapArr: mapArr
+  })
+}
 
 setMap = () => {
   let mapArr = makeRandomMap()
@@ -81,6 +90,7 @@ runGame = (singleGen) => {
        <h1 id = 'main-title'>The Game of Life</h1>
        <Route exact path = '/' component = {() => <Home/>} />
        <Route exact path = '/game' component = {() => <GameView
+         clearGame = {this.clearGame}
          toggleTile = {this.toggleTile}
          runGame = {this.runGame}
          stopGame = {this.stopGame}
