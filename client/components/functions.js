@@ -33,9 +33,9 @@ function updateCheckArr (arr) {
 
 }
 
-export function nextGeneration (field, checkArr) {
+export function nextGeneration (field, checkArr, size) {
   // console.log('checkArr in nextgen was:', checkArr)
-  let size = 39
+  size--
   let liveCount = 0
   let newCheck = []
   let newField = [...field]

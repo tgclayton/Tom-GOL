@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, makeCheckArr, idxToCoords, coordsToIdx, getNeighbours, findLiveNeighbours } from './functions'
+import { nextGeneration, makeRandomMap, makeCheckArr } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
@@ -16,7 +16,8 @@ class App extends Component {
       game: null,
       mouseDown: null,
       runSpeed: 150,
-      liveCells: 0
+      liveCells: 0,
+      size: 40
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -27,7 +28,6 @@ class App extends Component {
   }
 
   toggleTile = (idx) => {
-    console.log(idx)
     let mapArr = this.state.mapArr
     let tile = document.getElementById(idx)
     if (this.state.gameRunning === false) {
@@ -108,25 +108,9 @@ runGame = (singleGen) => {
   }
 }
 
-idxtocoordstest = () => {
-  let target = document.getElementById('idtest').value
-  console.log(idxToCoords(target))
-}
-
-coordstoidxtest = () => {
-  let targetx = Number(document.getElementById('coordtestx').value)
-  let targety = Number(document.getElementById('coordtesty').value)
-  console.log(coordsToIdx([targetx, targety]))
-}
-
-neightest = () => {
-  let idx = Number(document.getElementById('neightest').value)
-  console.log(getNeighbours(idx))
-}
-
  showNextGen = (field) => {
    //  console.log(this.state.checkArr)
-   let nextGen = nextGeneration(field, this.state.checkArr)
+   let nextGen = nextGeneration(field, this.state.checkArr, this.state.size)
    let generation = this.state.generation
    generation++
    this.setState({
@@ -141,13 +125,6 @@ neightest = () => {
    return (
      <Router>
        <h1 id = 'main-title'>The Game of Life</h1>
-       <button onClick= {this.idxtocoordstest}>id test</button>
-       <button onClick= {this.coordstoidxtest}>coord test</button>
-       <button onClick= {this.neightest}>neighbour test</button>
-       <input type="text" name="" id="idtest"/>
-       <input type="text" name="" id="coordtestx"/>
-       <input type="text" name="" id="coordtesty"/>
-       <input type="text" name="" id="neightest"/>
        {/* <Route exact path = '/' component = {() => <Home/>} /> */}
        <Route exact path = '/' component = {() => <GameView
          liveCells= {this.state.liveCells}
