@@ -35,7 +35,6 @@ function updateCheckArr (arr){
 
 export function nextGeneration (field, checkArr) {
   let size = Math.sqrt(field.length)
-  console.log('checkArr is:', checkArr)
   let nextField = []
   for (let i = 0; i < field.length; i++) {
     let f = field[i]

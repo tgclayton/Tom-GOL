@@ -24,7 +24,9 @@ class App extends Component {
 
   toggleTile = (idx) => {
     let mapArr = this.state.mapArr
-    // let tile = document.getElementById('idx')
+    let tile = document.getElementById(idx)
+    tile.classList.toggle('live-cell')
+    tile.classList.toggle('dead-cell')
     if (mapArr[idx] === 1) {
       mapArr[idx] = 0
     } else {
