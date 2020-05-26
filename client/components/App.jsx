@@ -11,7 +11,7 @@ class App extends Component {
     this.state = {
       mapArr: new Array(1600).fill(0), // change this to be less hardcoded
       generation: 0,
-      running: false,
+      gameRunning: false,
       game: null,
       mouseDown: null
     }
@@ -58,20 +58,18 @@ setMap = () => {
 
 stopGame = () => {
   clearInterval(this.state.game)
+  this.setState({
+    gameRunning: false
+  })
 }
 
 runGame = (singleGen) => {
   if (singleGen) {
     this.showNextGen(this.state.mapArr)
-  } else if (this.state.running) {
-    clearInterval(this.state.game)
-    this.setState({
-      running: false
-    })
-  } else {
+  } else if (!this.state.gameRunning) {
     this.setState({
       game: setInterval(() => this.showNextGen(this.state.mapArr), 100),
-      running: true
+      gameRunning: true
     }, () => {})
   }
 }
