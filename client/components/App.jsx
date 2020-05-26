@@ -80,7 +80,6 @@ runGame = () => {
        <h1 id = 'main-title'>The Game of Life</h1>
        <Route exact path = '/' component = {() => <Home/>} />
        <Route exact path = '/game' component = {() => <GameView
-         checkArr = {this.state.checkArr}
          toggleTile = {this.toggleTile}
          runGame = {this.runGame}
          stopGame = {this.stopGame}
