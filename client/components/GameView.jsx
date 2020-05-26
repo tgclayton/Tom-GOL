@@ -4,18 +4,26 @@ import Tile from './Tile'
 class GameView extends Component {
   render () {
     let speedLabel
+    let vsClass = null
+    let sClass = null
+    let nClass = null
+    let fClass = null
     switch (this.props.speed) {
       case 600:
         speedLabel = 'Very Slow'
+        vsClass = 'pressed-button'
         break
       case 300:
         speedLabel = 'Slow'
+        sClass = 'pressed-button'
         break
       case 150:
         speedLabel = 'Normal'
+        nClass = 'pressed-button'
         break
       case 80:
         speedLabel = 'Fast'
+        fClass = 'pressed-button'
         break
     }
     return (
@@ -34,11 +42,11 @@ class GameView extends Component {
         <button onClick = {() => this.props.runGame(true)}>Run One Generation</button>
         <button onClick = {() => this.props.clearGame()}>Clear Game</button>
         <div id= 'speed-control'>
-        <div className = 'speed-button' onMouseDown = {() => this.props.setSpeed(600)}>Very Slow</div>
-          <div className = 'speed-button' onMouseDown = {() => this.props.setSpeed(300)}>Slow</div>
-          <div className = 'speed-button' onMouseDown = {() => this.props.setSpeed(150)}>Normal</div>
-          <div className = 'speed-button' onMouseDown = {() => this.props.setSpeed(80)}>Fast</div>
-          <p>Current Speed: {speedLabel}</p>
+          <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(600, 'very-slow')}>Very Slow</button>
+          <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(300, 'slow')}>Slow</button>
+          <button id = 'normal' className = {`speed-button ${nClass}`} onMouseDown = {() => this.props.setSpeed(150, 'normal')}>Normal</button>
+          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(80, 'fast')}>Fast</button>
+          {/* <p>Current Speed: {speedLabel}</p> */}
         </div>
 
       </div>

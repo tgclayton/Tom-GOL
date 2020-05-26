@@ -43,7 +43,7 @@ class App extends Component {
     }
   }
 
-setSpeed = speed => {
+setSpeed = (speed, id) => {
   let wasRunning
   if (this.state.gameRunning) {
     wasRunning = true
@@ -51,7 +51,7 @@ setSpeed = speed => {
   this.stopGame()
   this.setState({
     runSpeed: speed
-  }, running => {
+  }, () => {
     if (wasRunning) {
       this.runGame(false)
     }

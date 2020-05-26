@@ -46,3 +46,14 @@ button {
   margin: auto;
   margin-bottom: 4px;
 }
+
+.pressed-button {
+  background-color: rgb(83, 82, 82);
+  color: darkred;
+}
+
+/* .speed-button:hover {
+  background-color: rgb(83, 82, 82);
+  color: darkred;
+} */
+
