@@ -3,26 +3,21 @@ import Tile from './Tile'
 
 class GameView extends Component {
   render () {
-    let speedLabel
     let vsClass = null
     let sClass = null
     let nClass = null
     let fClass = null
     switch (this.props.speed) {
       case 600:
-        speedLabel = 'Very Slow'
         vsClass = 'pressed-button'
         break
       case 300:
-        speedLabel = 'Slow'
         sClass = 'pressed-button'
         break
       case 150:
-        speedLabel = 'Normal'
         nClass = 'pressed-button'
         break
       case 80:
-        speedLabel = 'Fast'
         fClass = 'pressed-button'
         break
     }
