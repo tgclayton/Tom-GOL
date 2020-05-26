@@ -5,6 +5,7 @@ import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
+import { run } from 'jest'
 class App extends Component {
   constructor () {
     super()
@@ -13,30 +14,49 @@ class App extends Component {
       generation: 0,
       gameRunning: false,
       game: null,
-      mouseDown: null
+      mouseDown: null,
+      runSpeed: 150
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
     this.stopGame = this.stopGame.bind(this)
     this.toggleTile = this.toggleTile.bind(this)
     this.clearGame = this.clearGame.bind(this)
+    this.setSpeed = this.setSpeed.bind(this)
   }
 
   toggleTile = (idx) => {
     let mapArr = this.state.mapArr
     let tile = document.getElementById(idx)
-    tile.classList.toggle('live-cell')
-    tile.classList.toggle('dead-cell')
-    if (mapArr[idx] === 1) {
-      mapArr[idx] = 0
-    } else {
-      mapArr[idx] = 1
+    if (this.state.gameRunning === false) {
+      tile.classList.toggle('live-cell')
+      tile.classList.toggle('dead-cell')
+      if (mapArr[idx] === 1) {
+        mapArr[idx] = 0
+      } else {
+        mapArr[idx] = 1
+      }
+      this.setState({
+        mapArr
+      }, () => {
+      })
     }
-    this.setState({
-      mapArr
-    }, () => {
-    })
   }
+
+setSpeed = speed => {
+  let wasRunning
+  if (this.state.gameRunning) {
+    wasRunning = true
+  }
+  this.stopGame()
+  this.setState({
+    runSpeed: speed
+  }, running => {
+    if (wasRunning) {
+      this.runGame(false)
+    }
+  })
+}
 
 clearGame = () => {
   let mapArr = new Array(1600).fill(0)
@@ -61,6 +81,7 @@ stopGame = () => {
   this.setState({
     gameRunning: false
   })
+  setTimeout(() => {}, 50)
 }
 
 runGame = (singleGen) => {
@@ -68,7 +89,7 @@ runGame = (singleGen) => {
     this.showNextGen(this.state.mapArr)
   } else if (!this.state.gameRunning) {
     this.setState({
-      game: setInterval(() => this.showNextGen(this.state.mapArr), 100),
+      game: setInterval(() => this.showNextGen(this.state.mapArr), this.state.runSpeed),
       gameRunning: true
     }, () => {})
   }
@@ -90,6 +111,8 @@ runGame = (singleGen) => {
        <h1 id = 'main-title'>The Game of Life</h1>
        {/* <Route exact path = '/' component = {() => <Home/>} /> */}
        <Route exact path = '/' component = {() => <GameView
+         setSpeed = {this.setSpeed}
+         speed = {this.state.runSpeed}
          clearGame = {this.clearGame}
          toggleTile = {this.toggleTile}
          runGame = {this.runGame}
