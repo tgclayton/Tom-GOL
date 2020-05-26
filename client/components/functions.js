@@ -29,7 +29,7 @@ export function makeCheckArr (field) {
   return checkArr
 }
 
-function updateCheckArr (arr){
+function updateCheckArr (arr) {
 
 }
 
@@ -53,6 +53,36 @@ export function nextGeneration (field, checkArr) {
     nextField.push(f)
   }
   return [nextField, liveCount]
+}
+
+export function idxToCoords (idx) {
+  var x = idx % 20
+  var y = Math.floor(idx / 20)
+  return [x, y]
+}
+
+export function coordsToIdx (coords) {
+  let x = coords[0]
+  let y = coords[1] * 20
+  let idx = x + y
+  return idx
+}
+
+function newGetNeighbours (idx, size) {
+  size = 20
+  let targetCoords = idxToCoords(idx)
+  for (let i = 0; i < 9; i++) {
+    let itx = Math.floor(i / 3) - 1
+    let ity = (i % 3) - 1
+    let newX = targetCoords[0] + itx
+    let newY = targetCoords[1] + ity
+    if (i !== 4) {
+      let calc = Math.round(rowModified * size) + colModified
+      calc = Math.round(calc * size)
+      neighbours.push(calc)
+    }
+  }
+  return neighbours
 }
 
 export function getNeighbours (ind, size) { // (index being looked up, square root of array length)

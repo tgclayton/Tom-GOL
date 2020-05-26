@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, makeCheckArr } from './functions'
+import { nextGeneration, makeRandomMap, makeCheckArr, idxToCoords, coordsToIdx } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
-import { run } from 'jest'
+
 class App extends Component {
   constructor () {
     super()
@@ -108,6 +108,17 @@ runGame = (singleGen) => {
   }
 }
 
+idxtocoordstest = () => {
+  let target = document.getElementById('idtest').value
+  console.log(idxToCoords(target))
+}
+
+coordstoidxtest = () => {
+  let targetx = Number(document.getElementById('coordtestx').value)
+  let targety = Number(document.getElementById('coordtesty').value)
+  console.log(coordsToIdx([targetx, targety]))
+}
+
  showNextGen = (field) => {
    let nextGen = nextGeneration(field, this.state.checkArr)
    field = nextGen[0]
@@ -124,6 +135,11 @@ runGame = (singleGen) => {
    return (
      <Router>
        <h1 id = 'main-title'>The Game of Life</h1>
+       <button onClick= {this.idxtocoordstest}>id test</button>
+       <button onClick= {this.coordstoidxtest}>coord test</button>
+       <input type="text" name="" id="idtest"/>
+       <input type="text" name="" id="coordtestx"/>
+       <input type="text" name="" id="coordtesty"/>
        {/* <Route exact path = '/' component = {() => <Home/>} /> */}
        <Route exact path = '/' component = {() => <GameView
          liveCells= {this.state.liveCells}
