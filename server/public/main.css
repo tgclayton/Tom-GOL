@@ -12,6 +12,8 @@ button {
   height: 800px;
   width: 800px;
   display: inline-block;
+  z-index: 100;
+  background-color: chocolate;
 }
 
 .centerer {
@@ -25,6 +27,7 @@ button {
   padding: 0;
   display: inline-block;
   vertical-align: top;
+  z-index: 1;
 }
 
 .live-cell {

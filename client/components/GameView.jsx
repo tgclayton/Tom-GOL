@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
-import { makeRandomMap } from './functions'
 
 class GameView extends Component {
   render () {
@@ -14,7 +13,7 @@ class GameView extends Component {
           })}
         </div>
         <p>Generation: {this.props.gen}</p>
-        <button onClick = {() => this.props.setMap(makeRandomMap())}>Create Random Map</button>
+        <button onClick = {this.props.setMap}>Create Random Map</button>
         <button onClick = {() => this.props.runGame(this.props.mapArr)}>Run Game</button>
         <button onClick = {() => this.props.stopGame(this.props.mapArr)}>Stop Game</button>
       </div>
