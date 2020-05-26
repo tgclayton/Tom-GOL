@@ -38,9 +38,10 @@ class App extends Component {
       } else {
         mapArr[idx] = 1
       }
+      let checkArr = makeCheckArr(mapArr)
       this.setState({
-        mapArr
-      }, () => {
+        mapArr,
+        checkArr
       })
     }
   }
@@ -120,19 +121,20 @@ coordstoidxtest = () => {
 
 neightest = () => {
   let idx = Number(document.getElementById('neightest').value)
-console.log(getNeighbours(idx))
+  console.log(getNeighbours(idx))
 }
 
  showNextGen = (field) => {
+   //  console.log(this.state.checkArr)
    let nextGen = nextGeneration(field, this.state.checkArr)
-   field = nextGen[0]
    let generation = this.state.generation
    generation++
    this.setState({
-     mapArr: field,
+     mapArr: nextGen[0],
      generation: generation,
-     liveCells: nextGen[1]
-   }, () => {})
+     liveCells: nextGen[1],
+     checkArr: nextGen[2]
+   })
  }
 
  render () {

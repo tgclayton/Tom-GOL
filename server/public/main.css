@@ -13,6 +13,7 @@ button {
   width: 800px;
   display: inline-block;
   border: 3px solid black;
+  border-bottom: 4px solid black;
 }
 
 .centerer {

@@ -34,32 +34,30 @@ function updateCheckArr (arr) {
 }
 
 export function nextGeneration (field, checkArr) {
-  console.log('field was:', field)
-  // let target = Number(document.getElementById('neightest').value)
+  // console.log('checkArr in nextgen was:', checkArr)
   let size = 39
-  let nextField = []
   let liveCount = 0
-  // let n = getNeighbours(target, size)
-  // let ln = findLiveNeighbours(field, n)
-  // console.log('target was:', target)
-  // console.log('neighbours:', n)
-  // console.log('live neighbours:', ln)
-  nextField = field.map((cell, idx) => {
+  let newCheck = []
+  let newField = [...field]
+  checkArr.forEach(idx => {
     let n = getNeighbours(idx, size)
     let ln = findLiveNeighbours(field, n)
-    if (cell === 0 && ln === 3) {
-      cell = 1
+    if (field[idx] === 0 && ln === 3) {
+      newField[idx] = 1
       liveCount++
-    } else if (cell === 1 && (ln === 2 || ln === 3)) {
-      cell = 1
+      newCheck = newCheck.concat(n)
+      newCheck.push(idx)
+    } else if (field[idx] === 1 && (ln === 2 || ln === 3)) {
+      newField[idx] = 1
+      newCheck = newCheck.concat(n)
+      newCheck.push(idx)
       liveCount++
     } else {
-      cell = 0
+      newField[idx] = 0
     }
-    return cell
   })
-  // console.log('nextfield was:', nextField)
-  return [nextField, liveCount]
+  newCheck = newCheck.filter(onlyUnique)
+  return [newField, liveCount, newCheck]
 }
 
 export function idxToCoords (idx) {
