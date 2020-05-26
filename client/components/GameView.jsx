@@ -14,8 +14,9 @@ class GameView extends Component {
         </div>
         <p>Generation: {this.props.gen}</p>
         <button onClick = {this.props.setMap}>Create Random Map</button>
-        <button onClick = {() => this.props.runGame(this.props.mapArr)}>Run Game</button>
+        <button onClick = {() => this.props.runGame(false)}>Run Game</button>
         <button onClick = {() => this.props.stopGame(this.props.mapArr)}>Stop Game</button>
+        <button onClick = {() => this.props.runGame(true)}>Run One Generation</button>
       </div>
     )
   }

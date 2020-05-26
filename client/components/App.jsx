@@ -49,9 +49,10 @@ stopGame = () => {
   clearInterval(this.state.game)
 }
 
-runGame = () => {
-  // this.showNextGen(this.state.mapArr)
-  if (this.state.running) {
+runGame = (singleGen) => {
+  if (singleGen) {
+    this.showNextGen(this.state.mapArr)
+  } else if (this.state.running) {
     clearInterval(this.state.game)
     this.setState({
       running: false
@@ -65,7 +66,7 @@ runGame = () => {
 }
 
  showNextGen = (field) => {
-   field = nextGeneration(field)
+   field = nextGeneration(field, this.state.checkArr)
    let generation = this.state.generation
    generation++
    this.setState({
