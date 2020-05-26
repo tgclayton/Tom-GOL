@@ -8,7 +8,7 @@ const Tile = (props) => {
     type = 'dead-cell'
   }
   return (
-    <div className = {`tile ${type}`}></div>
+    <div onClick = {() => props.toggleTile(props.idx)} className = {`tile ${type}`}></div>
   )
 }
 

@@ -9,7 +9,7 @@ class GameView extends Component {
         <div id='tile-container' className = ''>
           {this.props.mapArr.map((tile, idx) => {
             return (
-              <Tile key = {idx} value = {tile}/>
+              <Tile key = {idx} value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
             )
           })}
         </div>

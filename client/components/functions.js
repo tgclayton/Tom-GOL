@@ -21,16 +21,20 @@ function makeCheckArr (field, size) {
     if (cell === 1) {
       let neighbours = getNeighbours(idx, size)
       checkArr = checkArr.concat(neighbours)
+      checkArr.push(idx)
     }
   })
   checkArr = checkArr.filter(onlyUnique)
-  console.log(checkArr)
   return checkArr
 }
 
-export function nextGeneration (field) {
+function updateCheckArr (arr){
+
+}
+
+export function nextGeneration (field, checkArr) {
   let size = Math.sqrt(field.length)
-  console.log('checkArr is:', makeCheckArr(field, size))
+  // console.log('checkArr is:', makeCheckArr(field, size))
   let nextField = []
   for (let i = 0; i < field.length; i++) {
     let f = field[i]

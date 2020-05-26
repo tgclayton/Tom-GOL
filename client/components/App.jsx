@@ -18,6 +18,20 @@ class App extends Component {
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
     this.stopGame = this.stopGame.bind(this)
+    this.toggleTile = this.toggleTile.bind(this)
+  }
+
+  toggleTile = (idx) => {
+    let mapArr = this.state.mapArr
+    if (mapArr[idx] === 1) {
+      mapArr[idx] = 0
+    } else {
+      mapArr[idx] = 1
+    }
+
+    this.setState({
+      mapArr
+    })
   }
 
 setMap = (mapArr) => {
@@ -62,6 +76,7 @@ runGame = () => {
        <h1 id = 'main-title'>The Game of Life</h1>
        <Route exact path = '/' component = {() => <Home/>} />
        <Route exact path = '/game' component = {() => <GameView
+         toggleTile = {this.toggleTile}
          runGame = {this.runGame}
          stopGame = {this.stopGame}
          setMap = {this.setMap}
