@@ -88,8 +88,8 @@ runGame = (singleGen) => {
    return (
      <Router>
        <h1 id = 'main-title'>The Game of Life</h1>
-       <Route exact path = '/' component = {() => <Home/>} />
-       <Route exact path = '/game' component = {() => <GameView
+       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
+       <Route exact path = '/' component = {() => <GameView
          clearGame = {this.clearGame}
          toggleTile = {this.toggleTile}
          runGame = {this.runGame}
