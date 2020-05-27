@@ -1,6 +1,6 @@
 #main-title {
   text-align: center;
-  margin: auto;
+  margin: 1em auto 2em;
 }
 
 button {
@@ -9,11 +9,12 @@ button {
 }
 
 #tile-container {
-  height: 799px;
-  width: 800px;
+  height: 975px;
+  width: 975px;
   display: inline-block;
   border: 3px solid black;
-  border-bottom: 4px solid black;
+  font-size: 0;
+  /* border-bottom: 4px solid black; */
 }
 
 .centerer {
@@ -21,14 +22,15 @@ button {
 }
 
 .tile {
-  height: 20px;
-  width: 20px;
+  height: 15px;
+  width: 15px;
   margin: 0;
   padding: 0;
   display: inline-block;
   vertical-align: top;
-  box-shadow: inset 0px 0px 0px 1px gray;
-  box-sizing: border-box;
+  font-size: 1;
+  /* box-shadow: inset 0px 0px 0px 1px gray; */
+  /* box-sizing: border-box; */
 }
 
 .live-cell {

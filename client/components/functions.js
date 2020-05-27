@@ -1,5 +1,6 @@
-export const makeRandomMap = () => {
-  const field = new Array(1600).fill(0)
+export const makeRandomMap = (size) => {
+  const tileTotal = size*size
+  const field = new Array(tileTotal).fill(0)
   let newField = []
   newField = field.map(tile => {
     let rand = Math.random()
@@ -60,23 +61,23 @@ export function nextGeneration (field, checkArr, size) {
   return [newField, liveCount, newCheck]
 }
 
-export function idxToCoords (idx) {
-  var x = idx % 40
-  var y = Math.floor(idx / 40)
+export function idxToCoords (idx, size) {
+  var x = idx % size
+  var y = Math.floor(idx / size)
   return [x, y]
 }
 
-export function coordsToIdx (coords) {
+export function coordsToIdx (coords, size) {
   let x = coords[0]
-  let y = coords[1] * 40
+  let y = coords[1] * size
   let idx = x + y
   return idx
 }
 
 export function getNeighbours (idx, size) {
-  size = 39
+  size--
   let neighbours = []
-  let targetCoords = idxToCoords(idx)
+  let targetCoords = idxToCoords(idx, size)
   for (let i = 0; i < 9; i++) {
     let itx = Math.floor(i / 3) - 1
     let ity = (i % 3) - 1
@@ -93,7 +94,7 @@ export function getNeighbours (idx, size) {
       newY = 0
     }
     if (i !== 4) {
-      neighbours.push(coordsToIdx([newX, newY]))
+      neighbours.push(coordsToIdx([newX, newY], size))
     }
   }
   return neighbours

@@ -10,14 +10,14 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      mapArr: new Array(1600).fill(0), // change this to be less hardcoded
+      mapArr: new Array(4225).fill(0), // change this to be less hardcoded
       generation: 0,
       gameRunning: false,
       game: null,
       mouseDown: null,
       runSpeed: 150,
       liveCells: 0,
-      size: 40
+      size: 65
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -70,7 +70,7 @@ setLiveCells = (field) => {
 
 clearGame = () => {
   this.stopGame()
-  let mapArr = new Array(1600).fill(0)
+  let mapArr = new Array(this.state.size * this.state.size).fill(0) // this also needs to be less hardcoded
   this.setState({
     generation: 0,
     mapArr: mapArr
@@ -79,7 +79,7 @@ clearGame = () => {
 
 setMap = () => {
   this.stopGame()
-  let mapArr = makeRandomMap()
+  let mapArr = makeRandomMap(this.state.size)
   this.setLiveCells(mapArr)
   let checkArr = makeCheckArr(mapArr)
   this.setState({
