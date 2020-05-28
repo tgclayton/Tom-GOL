@@ -8,7 +8,7 @@ const Tile = (props) => {
     type = 'dead-cell'
   }
   return (
-    <div id = {props.idx} onMouseDown = {() => props.toggleTile(props.idx)} className = {`tile ${type}`}></div>
+    <div id = {props.idx} onMouseDown = {() => props.toggleTile(props.idx)} className = {`tile ${type} tile-border`}></div>
   )
 }
 

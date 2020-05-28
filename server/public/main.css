@@ -29,8 +29,11 @@ button {
   display: inline-block;
   vertical-align: top;
   font-size: 1;
-  /* box-shadow: inset 0px 0px 0px 1px gray; */
-  /* box-sizing: border-box; */
+}
+
+.tile-border {
+  box-shadow: inset 0px 0px 0px 1px gray; 
+  box-sizing: border-box;
 }
 
 .live-cell {
@@ -52,11 +55,6 @@ button {
 
 .pressed-button {
   background-color: rgb(83, 82, 82);
-  /* color: darkred; */
 }
 
-/* .speed-button:hover {
-  background-color: rgb(83, 82, 82);
-  color: darkred;
-} */
 
