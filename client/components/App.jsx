@@ -98,13 +98,15 @@ stopGame = () => {
 }
 
 runGame = (singleGen) => {
-  if (singleGen) {
-    this.showNextGen(this.state.mapArr)
-  } else if (!this.state.gameRunning) {
-    this.setState({
-      game: setInterval(() => this.showNextGen(this.state.mapArr), this.state.runSpeed),
-      gameRunning: true
-    }, () => {})
+  if (!this.state.running) {
+    if (singleGen) {
+      this.showNextGen(this.state.mapArr)
+    } else {
+      this.setState({
+        game: setInterval(() => this.showNextGen(this.state.mapArr), this.state.runSpeed),
+        gameRunning: true
+      }, () => {})
+    }
   }
 }
 

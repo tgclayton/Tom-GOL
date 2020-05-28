@@ -4,7 +4,7 @@ export const makeRandomMap = (size) => {
   let newField = []
   newField = field.map(tile => {
     let rand = Math.random()
-    if (rand > 0.6) {
+    if (rand > 0.8) {
       tile = 1
     }
     return tile
