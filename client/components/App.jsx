@@ -10,7 +10,7 @@ class App extends Component {
   constructor () {
     super()
     this.state = {
-      mapArr: new Array(4225).fill(0), // change this to be less hardcoded
+      mapArr: new Array(4225).fill(0),
       generation: 0,
       gameRunning: false,
       game: null,
@@ -26,7 +26,11 @@ class App extends Component {
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
   }
-
+  // componentDidMount () {
+  //   this.setState({
+  //     mapArr: new Array(this.state.size * this.state.size).fill(0)
+  //   })
+  // }
   toggleTile = (idx) => {
     let mapArr = this.state.mapArr
     let tile = document.getElementById(idx)

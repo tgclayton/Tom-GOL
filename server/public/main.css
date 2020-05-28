@@ -57,4 +57,16 @@ button {
   background-color: rgb(83, 82, 82);
 }
 
+.left-float {
+  float: left;
+  position: absolute;
+}
 
+.right-float {
+  float: right;
+  position: absolute;
+}
+
+#control-panel {
+  width: 400px;
+}

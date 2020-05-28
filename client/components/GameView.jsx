@@ -2,11 +2,20 @@ import React, { Component } from 'react'
 import Tile from './Tile'
 
 class GameView extends Component {
+  consructor () {
+    super()
+    this.setFunctionsMapArr = this.setFunctionsMapArr.bind(this)
+  }
+
 toggleGrid = () => {
   this.props.mapArr.forEach((cell, idx) => {
     const tile = document.getElementById(idx)
     tile.classList.toggle('tile-border')
   })
+}
+
+setFunctionsMapArr = mapArr => {
+
 }
 
 render () {
@@ -30,16 +39,7 @@ render () {
   }
   return (
     <div className = 'centerer'>
-      <div id='tile-container' className = ''>
-        {this.props.mapArr.map((tile, idx) => {
-          return (
-            <Tile key = {idx} value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
-          )
-        })}
-      </div>
-      <p>Generation: {this.props.gen}</p>
-      <p>Living Cells: {this.props.liveCells}</p>
-      <div id = 'control-panel' className = ''>
+      <div id = 'control-panel' className = 'left-float'>
         <button onMouseDown = {this.props.setMap}>Create Random Map</button>
         <button onMouseDown = {() => this.props.runGame(false)}>Run Game</button>
         <button onMouseDown = {() => this.props.stopGame(this.props.mapArr)}>Pause Game</button>
@@ -53,6 +53,17 @@ render () {
           <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(80, 'fast')}>Fast</button>
           {/* <p>Current Speed: {speedLabel}</p> */}
         </div>
+        <div className = 'right-float'>
+          <p>Generation: {this.props.gen}</p>
+          <p>Living Cells: {this.props.liveCells}</p>
+        </div>
+      </div>
+      <div id='tile-container' className = ''>
+        {this.props.mapArr.map((tile, idx) => {
+          return (
+            <Tile key = {idx} value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
+          )
+        })}
       </div>
     </div>
   )
