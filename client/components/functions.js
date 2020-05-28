@@ -36,7 +36,6 @@ function updateCheckArr (arr) {
 
 export function nextGeneration (field, checkArr, size) {
   // console.log('checkArr in nextgen was:', checkArr)
-  size--
   let liveCount = 0
   let newCheck = []
   let newField = [...field]
@@ -75,7 +74,6 @@ export function coordsToIdx (coords, size) {
 }
 
 export function getNeighbours (idx, size) {
-  size--
   let neighbours = []
   let targetCoords = idxToCoords(idx, size)
   for (let i = 0; i < 9; i++) {
@@ -83,14 +81,14 @@ export function getNeighbours (idx, size) {
     let ity = (i % 3) - 1
     let newX = targetCoords[0] + itx
     if (newX < 0) {
-      newX = size
-    } else if (newX > size) {
+      newX = size - 1
+    } else if (newX > size - 1) {
       newX = 0
     }
     let newY = targetCoords[1] + ity
     if (newY < 0) {
-      newY = size
-    } else if (newY > size) {
+      newY = size - 1
+    } else if (newY > size - 1) {
       newY = 0
     }
     if (i !== 4) {
