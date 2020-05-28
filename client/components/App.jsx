@@ -94,7 +94,6 @@ stopGame = () => {
   this.setState({
     gameRunning: false
   })
-  setTimeout(() => {}, 50)
 }
 
 runGame = (singleGen) => {
