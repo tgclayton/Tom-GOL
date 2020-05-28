@@ -1,5 +1,7 @@
+var mapArr
+
 export const makeRandomMap = (size) => {
-  const tileTotal = size*size
+  const tileTotal = size * size
   const field = new Array(tileTotal).fill(0)
   let newField = []
   newField = field.map(tile => {
@@ -10,6 +12,10 @@ export const makeRandomMap = (size) => {
     return tile
   })
   return newField
+}
+
+export function setMapArr (arr) {
+  mapArr = arr
 }
 
 function onlyUnique (value, index, self) {

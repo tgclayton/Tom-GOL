@@ -17,12 +17,14 @@ class App extends Component {
       mouseDown: null,
       runSpeed: 150,
       liveCells: 0,
-      size: 65
+      size: 65,
+      grid: true
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
     this.stopGame = this.stopGame.bind(this)
     this.toggleTile = this.toggleTile.bind(this)
+    this.toggleGrid = this.toggleGrid.bind(this)
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
   }
@@ -113,6 +115,18 @@ runGame = (singleGen) => {
   }
 }
 
+toggleGrid = () => {
+  let g
+  if (this.state.grid) {
+    g = false
+  } else {
+    g = true
+  }
+  this.setState({
+    grid: g
+  })
+}
+
  showNextGen = (field) => {
    //  console.log(this.state.checkArr)
    let nextGen = nextGeneration(field, this.state.checkArr, this.state.size)
@@ -132,7 +146,10 @@ runGame = (singleGen) => {
        <h1 id = 'main-title'>The Game of Life</h1>
        {/* <Route exact path = '/' component = {() => <Home/>} /> */}
        <Route exact path = '/' component = {() => <GameView
+         toggleGrid = {this.toggleGrid}
+         grid = {this.state.grid}
          liveCells= {this.state.liveCells}
+         running = {this.state.gameRunning}
          setSpeed = {this.setSpeed}
          speed = {this.state.runSpeed}
          clearGame = {this.clearGame}

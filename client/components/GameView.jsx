@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
+import { setMapArr } from './functions'
 
 class GameView extends Component {
-  consructor () {
+  constructor () {
     super()
+    this.state = {
+      grid: true
+    }
     this.setFunctionsMapArr = this.setFunctionsMapArr.bind(this)
   }
 
-toggleGrid = () => {
-  this.props.mapArr.forEach((cell, idx) => {
-    const tile = document.getElementById(idx)
-    tile.classList.toggle('tile-border')
-  })
-}
-
-setFunctionsMapArr = mapArr => {
-
+setFunctionsMapArr =() => {
+  const mapArr = this.state.mapArr
+  setMapArr(mapArr)
 }
 
 render () {
@@ -45,13 +43,12 @@ render () {
         <button onMouseDown = {() => this.props.stopGame(this.props.mapArr)}>Pause Game</button>
         <button onMouseDown = {() => this.props.runGame(true)}>Run One Generation</button>
         <button onMouseDown = {() => this.props.clearGame()}>Clear Game</button>
-        <button onMouseDown = {() => this.toggleGrid()}>Toggle Grid</button>
+        <button onMouseDown = {() => this.props.toggleGrid()}>Toggle Grid</button>
         <div id= 'speed-control'>
           <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(600, 'very-slow')}>Very Slow</button>
           <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(300, 'slow')}>Slow</button>
           <button id = 'normal' className = {`speed-button ${nClass}`} onMouseDown = {() => this.props.setSpeed(150, 'normal')}>Normal</button>
           <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(80, 'fast')}>Fast</button>
-          {/* <p>Current Speed: {speedLabel}</p> */}
         </div>
         <div className = 'right-float'>
           <p>Generation: {this.props.gen}</p>
@@ -61,7 +58,7 @@ render () {
       <div id='tile-container' className = ''>
         {this.props.mapArr.map((tile, idx) => {
           return (
-            <Tile key = {idx} value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
+            <Tile key = {idx} value = {tile} idx = {idx} toggleTile = {this.props.toggleTile} grid = {this.props.grid}/>
           )
         })}
       </div>

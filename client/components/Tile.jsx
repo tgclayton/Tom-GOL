@@ -7,8 +7,14 @@ const Tile = (props) => {
   } else {
     type = 'dead-cell'
   }
+
+  let grid = ''
+  if (props.grid === true) {
+    grid = 'tile-border'
+  }
+
   return (
-    <div id = {props.idx} onMouseDown = {() => props.toggleTile(props.idx)} className = {`tile ${type} tile-border`}></div>
+    <div id = {props.idx} onMouseDown = {() => props.toggleTile(props.idx)} className = {`tile ${type} ${grid}`}></div>
   )
 }
 
