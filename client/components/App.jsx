@@ -98,15 +98,18 @@ setMap = () => {
 
 pauseGame = () => {
   clearInterval(this.state.game)
+  let gen = generation
+  let live = workArr.filter(cell => cell === 1)
   this.setState({
     gameRunning: false,
     mapArr: workArr,
-    generation: generation
+    generation: gen,
+    liveCells: live.length
   })
 }
 
 runGame = (singleGen) => {
-  if (!this.state.running) {
+  if (!this.state.gameRunning) {
     if (singleGen) {
       this.showNextGen(workArr)
       this.setState({
@@ -128,8 +131,11 @@ toggleGrid = () => {
   } else {
     g = true
   }
+  document.getElementById('grid-display').classList.toggle('hidden')
   this.setState({
-    grid: g
+    grid: g,
+    mapArr: workArr,
+    generation: generation
   })
 }
 

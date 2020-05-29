@@ -36,7 +36,7 @@ render () {
       break
   }
   return (
-    <div className = 'centerer'>
+    <div className = 'centerer' >
       <div id = 'control-panel' className = 'left-float'>
         <button onMouseDown = {this.props.setMap}>Create Random Map</button>
         <button onMouseDown = {() => this.props.runGame(false)}>Run Game</button>
@@ -55,10 +55,15 @@ render () {
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
         </div>
       </div>
-      <div id='tile-container' className = ''>
+      <div id='tile-container' className = 'game-window'>
+        <div id ='grid-display' className = 'absolute game-window'>
+          { this.props.mapArr.map((cell, idx) => {
+            return <Tile key = {`grid-${idx}`} type = 'grid' idx = {idx} grid = {this.props.grid} toggleTile = {this.props.toggleTile}/>
+          })}
+        </div>
         {this.props.mapArr.map((tile, idx) => {
           return (
-            <Tile key = {idx} value = {tile} idx = {idx} toggleTile = {this.props.toggleTile} grid = {this.props.grid}/>
+            <Tile key = {idx} type = 'display' value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
           )
         })}
       </div>

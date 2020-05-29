@@ -8,13 +8,15 @@ button {
   display: inline-block;
 }
 
-#tile-container {
+.game-window {
   height: 975px;
   width: 975px;
+  font-size: 0;
+}
+
+#tile-container {
   display: inline-block;
   border: 3px solid black;
-  font-size: 0;
-  /* border-bottom: 4px solid black; */
 }
 
 .centerer {
@@ -69,4 +71,16 @@ button {
 
 #control-panel {
   width: 400px;
+}
+
+.transparent {
+  background-color: transparent;
+}
+
+.hidden {
+  display: none;
+}
+
+.absolute {
+  position: absolute;
 }
