@@ -45,25 +45,34 @@ export function nextGeneration (field, checkArr, size) {
   let liveCount = 0
   let newCheck = []
   let newField = [...field]
+  let changed = []
   checkArr.forEach(idx => {
-    let n = getNeighbours(idx, size)
-    let ln = findLiveNeighbours(field, n)
-    if (field[idx] === 0 && ln === 3) {
-      newField[idx] = 1
+    const oldVal = field[idx]
+    const n = getNeighbours(idx, size)
+    const ln = findLiveNeighbours(field, n)
+    let newVal
+    if (oldVal === 0 && ln === 3) {
+      newVal = 1
+      newField[idx] = newVal
       liveCount++
       newCheck = newCheck.concat(n)
       newCheck.push(idx)
-    } else if (field[idx] === 1 && (ln === 2 || ln === 3)) {
-      newField[idx] = 1
+    } else if (oldVal === 1 && (ln === 2 || ln === 3)) {
+      newVal = 1
+      newField[idx] = newVal
       newCheck = newCheck.concat(n)
       newCheck.push(idx)
       liveCount++
     } else {
-      newField[idx] = 0
+      newVal = 0
+      newField[idx] = newVal
+    }
+    if (newVal !== oldVal) {
+      changed.push(idx)
     }
   })
   newCheck = newCheck.filter(onlyUnique)
-  return [newField, liveCount, newCheck]
+  return [newField, liveCount, newCheck, changed]
 }
 
 export function idxToCoords (idx, size) {

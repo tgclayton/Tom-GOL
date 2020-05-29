@@ -31,7 +31,7 @@ render () {
     case 150:
       nClass = 'pressed-button'
       break
-    case 80:
+    case 15:
       fClass = 'pressed-button'
       break
   }
@@ -40,7 +40,7 @@ render () {
       <div id = 'control-panel' className = 'left-float'>
         <button onMouseDown = {this.props.setMap}>Create Random Map</button>
         <button onMouseDown = {() => this.props.runGame(false)}>Run Game</button>
-        <button onMouseDown = {() => this.props.stopGame(this.props.mapArr)}>Pause Game</button>
+        <button onMouseDown = {() => this.props.pauseGame()}>Pause Game</button>
         <button onMouseDown = {() => this.props.runGame(true)}>Run One Generation</button>
         <button onMouseDown = {() => this.props.clearGame()}>Clear Game</button>
         <button onMouseDown = {() => this.props.toggleGrid()}>Toggle Grid</button>
@@ -48,11 +48,11 @@ render () {
           <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(600, 'very-slow')}>Very Slow</button>
           <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(300, 'slow')}>Slow</button>
           <button id = 'normal' className = {`speed-button ${nClass}`} onMouseDown = {() => this.props.setSpeed(150, 'normal')}>Normal</button>
-          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(80, 'fast')}>Fast</button>
+          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(15, 'fast')}>Fast</button>
         </div>
         <div className = 'right-float'>
-          <p>Generation: {this.props.gen}</p>
-          <p>Living Cells: {this.props.liveCells}</p>
+          <p id = 'gen'> Generation: {this.props.gen}</p>
+          <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
         </div>
       </div>
       <div id='tile-container' className = ''>
@@ -69,5 +69,5 @@ render () {
 
 export default GameView
 
-/* <input type="range" defaultValue = {this.props.speed} min = '50' max = '1000'onMouseDown = {this.props.stopGame} onMouseUp = {this.props.setSpeed} />
+/* <input type="range" defaultValue = {this.props.speed} min = '50' max = '1000'onMouseDown = {this.props.pauseGame} onMouseUp = {this.props.setSpeed} />
 <p>Current Speed: {this.props.speed}</p> */
