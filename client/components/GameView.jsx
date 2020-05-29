@@ -31,7 +31,7 @@ render () {
     case 150:
       nClass = 'pressed-button'
       break
-    case 15:
+    case 25:
       fClass = 'pressed-button'
       break
   }
@@ -48,7 +48,7 @@ render () {
           <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(600, 'very-slow')}>Very Slow</button>
           <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(300, 'slow')}>Slow</button>
           <button id = 'normal' className = {`speed-button ${nClass}`} onMouseDown = {() => this.props.setSpeed(150, 'normal')}>Normal</button>
-          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(15, 'fast')}>Fast</button>
+          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(25, 'fast')}>Fast</button>
         </div>
         <div className = 'right-float'>
           <p id = 'gen'> Generation: {this.props.gen}</p>

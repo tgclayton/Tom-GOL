@@ -38,7 +38,7 @@ class App extends Component {
   //   })
   // }
   toggleTile = (idx) => {
-    let tile = document.getElementById(idx)
+    let tile = document.getElementById('display' + idx)
     if (this.state.gameRunning === false) {
       tile.classList.toggle('live-cell')
       tile.classList.toggle('dead-cell')
@@ -78,7 +78,8 @@ clearGame = () => {
   workArr = mapArr
   this.setState({
     generation: 0,
-    mapArr: mapArr
+    mapArr: mapArr,
+    liveCells: 0
   })
 }
 
@@ -161,7 +162,7 @@ showNextGen = (field) => {
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   changeArr.forEach(idx => {
-    const tile = document.getElementById(idx)
+    const tile = document.getElementById('display' + idx)
     tile.classList.toggle('live-cell')
     tile.classList.toggle('dead-cell')
   })
