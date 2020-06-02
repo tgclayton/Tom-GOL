@@ -2,13 +2,20 @@ import React from 'react'
 
 const Tile = (props) => {
   let type
-  if (props.value) {
+  if (props.value === 1) {
     type = 'live-cell'
-  } else {
+  } else if (props.value === 0) {
     type = 'dead-cell'
   }
+
+  let grid = ''
+  if (props.grid === true) {
+    grid = 'tile-border'
+    type = 'transparent'
+  }
+
   return (
-    <div id = {props.idx} onMouseDown = {() => props.toggleTile(props.idx)} className = {`tile ${type}`}></div>
+    <div id = {props.type + props.idx} onMouseDown = {() => props.toggleTile(props.idx)} className = {`tile ${type} ${grid}`}></div>
   )
 }
 
