@@ -19,7 +19,7 @@ class App extends Component {
       gameRunning: false,
       game: null,
       mouseDown: null,
-      runSpeed: 150,
+      runSpeed: 120,
       liveCells: 0,
       size: 65,
       grid: true

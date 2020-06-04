@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import Tile from './Tile'
 import { setMapArr } from './functions'
 
+function toggleGrid() {
+  
+}
+
 class GameView extends Component {
   constructor () {
     super()
@@ -21,17 +25,21 @@ render () {
   let sClass = null
   let nClass = null
   let fClass = null
+  const verySlow = 600
+  const slow = 300
+  const normal = 120
+  const fast = 25
   switch (this.props.speed) {
-    case 600:
+    case verySlow:
       vsClass = 'pressed-button'
       break
-    case 300:
+    case slow:
       sClass = 'pressed-button'
       break
-    case 150:
+    case normal:
       nClass = 'pressed-button'
       break
-    case 25:
+    case fast:
       fClass = 'pressed-button'
       break
   }
@@ -45,10 +53,10 @@ render () {
         <button onMouseDown = {() => this.props.clearGame()}>Clear Game</button>
         <button onMouseDown = {() => this.props.toggleGrid()}>Toggle Grid</button>
         <div id= 'speed-control'>
-          <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(600, 'very-slow')}>Very Slow</button>
-          <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(300, 'slow')}>Slow</button>
-          <button id = 'normal' className = {`speed-button ${nClass}`} onMouseDown = {() => this.props.setSpeed(150, 'normal')}>Normal</button>
-          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(25, 'fast')}>Fast</button>
+          <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(verySlow, 'very-slow')}>Very Slow</button>
+          <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(slow, 'slow')}>Slow</button>
+          <button id = 'normal' className = {`speed-button ${nClass}`} onMouseDown = {() => this.props.setSpeed(normal, 'normal')}>Normal</button>
+          <button id = 'fast' className = {`speed-button ${fClass}`} onMouseDown = {() => this.props.setSpeed(fast, 'fast')}>Fast</button>
         </div>
         <div className = 'right-float'>
           <p id = 'gen'> Generation: {this.props.gen}</p>
@@ -56,9 +64,9 @@ render () {
         </div>
       </div>
       <div id='tile-container' className = 'game-window'>
-        <div id ='grid-display' className = 'absolute game-window'>
+        <div id ='grid-display' className = 'absolute game-window no-click'>
           { this.props.mapArr.map((cell, idx) => {
-            return <Tile key = {`grid-${idx}`} type = 'grid' idx = {idx} grid = {this.props.grid} toggleTile = {this.props.toggleTile}/>
+            return <Tile key = {`grid-${idx}`} type = 'grid' idx = {idx} grid = {this.props.grid}/>
           })}
         </div>
         {this.props.mapArr.map((tile, idx) => {
