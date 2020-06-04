@@ -113,9 +113,9 @@ runGame = (singleGen) => {
   if (!this.state.gameRunning) {
     if (singleGen) {
       this.showNextGen(workArr)
-      this.setState({
-        mapArr: workArr
-      })
+      // this.setState({
+      //   mapArr: workArr
+      // })
     } else {
       this.setState({
         mapArr: workArr,

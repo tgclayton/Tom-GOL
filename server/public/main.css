@@ -2,11 +2,13 @@ body {
   --columns: 65;
   --tile-size: 10px;
   --window-size: calc(var(--columns) * var(--tile-size));
+  height: 100vh;
 }
 
 #main-title {
+  display: inline-block;
+  width: 1600px;
   text-align: center;
-  margin: 1em auto 2em;
 }
 
 button {
@@ -32,8 +34,16 @@ button {
 display: flex;
 }
 
+.center-column {
+  width: 50%;
+}
+
+.side-column {
+  width: 25%;
+}
+
 .flex-column {
-  margin: 0 1em;
+  padding: 0 1em;
   min-width: 400px;
 }
 
@@ -82,9 +92,9 @@ display: flex;
   position: absolute;
 }
 
-#control-panel {
+/* #control-panel {
   width: 400px;
-}
+} */
 
 .transparent {
   background-color: transparent;
@@ -100,4 +110,8 @@ display: flex;
 
 .no-click {
   pointer-events: none;
+}
+
+.center {
+  text-align: center;
 }
