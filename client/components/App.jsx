@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { nextGeneration, makeRandomMap, makeCheckArr } from './functions'
 import Home from './Home'
@@ -21,8 +22,7 @@ class App extends Component {
       mouseDown: null,
       runSpeed: 120,
       liveCells: 0,
-      size: 65,
-      grid: true
+      size: 65
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -118,6 +118,7 @@ runGame = (singleGen) => {
       })
     } else {
       this.setState({
+        mapArr: workArr,
         game: setInterval(() => this.showNextGen(workArr), this.state.runSpeed),
         gameRunning: true
       }, () => {})
@@ -169,13 +170,14 @@ showNextGen = (field) => {
 }
 
 render () {
+  console.log(this.props.grid)
   return (
     <Router>
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
         toggleGrid = {this.toggleGrid}
-        grid = {this.state.grid}
+        grid = {this.props.grid}
         liveCells= {this.state.liveCells}
         running = {this.state.gameRunning}
         setSpeed = {this.setSpeed}
@@ -196,4 +198,10 @@ render () {
 }
 }
 
-export default App
+const mapStateToProps = state => {
+  return {
+    grid: state.map.grid
+  }
+}
+
+export default connect(mapStateToProps)(App)

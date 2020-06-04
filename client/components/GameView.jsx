@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
-import { setMapArr } from './functions'
+import { setMapArr, toggleGrid } from './functions'
 
-function toggleGrid() {
-  
-}
+// function toggleGrid() {
+
+// }
 
 class GameView extends Component {
   constructor () {
@@ -18,6 +18,10 @@ class GameView extends Component {
 setFunctionsMapArr =() => {
   const mapArr = this.state.mapArr
   setMapArr(mapArr)
+}
+
+toggleGrid = () => {
+  this.props.dispatch(toggleGrid())
 }
 
 render () {
