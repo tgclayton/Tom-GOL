@@ -9,8 +9,8 @@ button {
 }
 
 .game-window {
-  height: 975px;
-  width: 975px;
+  height: 650px;
+  width: 650px;
   font-size: 0;
 }
 
@@ -24,8 +24,8 @@ button {
 }
 
 .tile {
-  height: 15px;
-  width: 15px;
+  height: 10px;
+  width: 10px;
   margin: 0;
   padding: 0;
   display: inline-block;
