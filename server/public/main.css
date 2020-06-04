@@ -19,8 +19,12 @@ button {
   border: 3px solid black;
 }
 
-.centerer {
-  text-align: center;
+.flex-container {
+display: flex;
+}
+
+.flex-column {
+  margin: 0 1em;
 }
 
 .tile {

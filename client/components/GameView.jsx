@@ -48,8 +48,9 @@ render () {
       break
   }
   return (
-    <div className = 'centerer' >
-      <div id = 'control-panel' className = 'left-float'>
+  <>
+    <div className = 'flex-container' >
+      <div id = 'control-panel' className = 'flex-column'>
         <button onMouseDown = {this.props.setMap}>Create Random Map</button>
         <button onMouseDown = {() => this.props.runGame(false)}>Run Game</button>
         <button onMouseDown = {() => this.props.pauseGame()}>Pause Game</button>
@@ -67,7 +68,7 @@ render () {
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
         </div>
       </div>
-      <div id='tile-container' className = 'game-window'>
+      <div id='tile-container' className = 'game-window flex-column'>
         <div id ='grid-display' className = 'absolute game-window no-click'>
           { this.props.mapArr.map((cell, idx) => {
             return <Tile key = {`grid-${idx}`} type = 'grid' idx = {idx} grid = {this.props.grid}/>
@@ -80,6 +81,7 @@ render () {
         })}
       </div>
     </div>
+  </>
   )
 }
 }
