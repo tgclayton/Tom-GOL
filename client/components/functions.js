@@ -81,6 +81,13 @@ export function idxToCoords (idx, size) {
   return [x, y]
 }
 
+export function canvasCoords (idx, size, tileSize) {
+  const coords = idxToCoords(idx, size)
+  coords[0] *= tileSize
+  coords[1] *= tileSize
+  return coords
+}
+
 export function coordsToIdx (coords, size) {
   let x = coords[0]
   let y = coords[1] * size

@@ -32,11 +32,18 @@ class App extends Component {
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
   }
-  // componentDidMount () {
-  //   this.setState({
-  //     mapArr: new Array(this.state.size * this.state.size).fill(0)
-  //   })
-  // }
+
+  canvas () {
+    const canvas = document.getElementById('game-canvas')
+    if (canvas.getContext) {
+      const ctx = canvas.getContext('2d')
+      workArr.forEach((cell, idx) => {
+        cell?
+        ctx.fillRect()
+      })
+    }
+  }
+
   toggleTile = (idx) => {
     let tile = document.getElementById('display' + idx)
     if (this.state.gameRunning === false) {

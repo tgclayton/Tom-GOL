@@ -10,9 +10,13 @@ body {
   width: 100%;
 } */
 
-canvas {
+#game-canvas {
   border: 2px solid black;
   background-color: rgb(224, 224, 224);
+  min-height: var(--window-size);
+  height: var(--window-size);
+  min-width: var(--window-size);
+  width: var(--window-size);
 }
 
 #main-title {
