@@ -81,7 +81,16 @@ export function idxToCoords (idx, size) {
   return [x, y]
 }
 
-export function canvasCoords (idx, size, tileSize) {
+export function canvasTileCoords (idx, size, tileSize) {
+  const coords = idxToCoords(idx, size)
+  coords[0] *= tileSize
+  coords[0]++
+  coords[1] *= tileSize
+  coords[1]++
+  return coords
+}
+
+export function canvasGridCoords (idx, size, tileSize) {
   const coords = idxToCoords(idx, size)
   coords[0] *= tileSize
   coords[1] *= tileSize

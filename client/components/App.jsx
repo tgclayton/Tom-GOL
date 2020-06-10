@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, makeCheckArr, canvasCoords } from './functions'
+import { nextGeneration, makeRandomMap, makeCheckArr, canvasGridCoords, canvasTileCoords } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
@@ -39,9 +39,17 @@ class App extends Component {
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
       map.forEach((cell, idx) => {
-        const crds = canvasCoords(idx, this.state.size, tileSize)
-        cell ? ctx.fillRect(crds[0], crds[1], tileSize, tileSize)
-          : ctx.clearRect(crds[0], crds[1], tileSize, tileSize)
+        const gcrds = canvasGridCoords(idx, this.state.size, tileSize)
+        const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
+        ctx.clearRect(gcrds[0], gcrds[1], tileSize, tileSize)
+        ctx.fillStyle = '#000000'
+        ctx.fillRect(gcrds[0], gcrds[1], tileSize, tileSize)
+        if (cell) {
+          ctx.fillStyle = '#008000'
+        } else {
+          ctx.fillStyle = 'rgb(224, 224, 224)'
+        }
+        ctx.fillRect(tcrds[0], tcrds[1], tileSize - 1, tileSize - 1)
       })
     }
   }
@@ -55,10 +63,6 @@ class App extends Component {
     }
     let check = makeCheckArr(workArr)
     checkArr = check
-  }
-
-  componentDidMount () {
-
   }
 
 setSpeed = (speed, id) => {
@@ -202,7 +206,6 @@ render () {
       />
       <Route exact path = '/instructions' component = {() => <Instructions/>} />
       <Route exact path = '/load' component = {() => <LoadStart/>} />
-      <button onClick = {() => this.setMap()}>Canvas Test</button>
     </Router>
   )
 }
