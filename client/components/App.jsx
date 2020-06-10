@@ -10,6 +10,7 @@ import LoadStart from './LoadStart'
 var workArr = new Array(4225).fill(0)
 var checkArr = []
 var generation = 0
+var grid = true
 
 class App extends Component {
   constructor () {
@@ -33,8 +34,13 @@ class App extends Component {
     this.setSpeed = this.setSpeed.bind(this)
   }
 
+  componentDidMount () {
+    this.canvasDraw(workArr)
+  }
+
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
+    canvas.classList.add('canvas-grid-border')
     const tileSize = 10 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
@@ -141,18 +147,23 @@ runGame = (singleGen) => {
 }
 
 toggleGrid = () => {
-  let g
-  if (this.state.grid) {
-    g = false
-  } else {
-    g = true
-  }
-  document.getElementById('grid-display').classList.toggle('hidden')
-  this.setState({
-    grid: g,
-    mapArr: workArr,
-    generation: generation
-  })
+  grid ? grid = false : grid = true
+  const canvas = document.getElementById('game-canvas')
+  canvas.classList.toggle('canvas-grid-border')
+  canvas.classList.toggle('canvas-border')
+  this.canvasDraw(workArr)
+  // let g
+  // if (this.state.grid) {
+  //   g = false
+  // } else {
+  //   g = true
+  // }
+  // document.getElementById('grid-display').classList.toggle('hidden')
+  // this.setState({
+  //   grid: g,
+  //   mapArr: workArr,
+  //   generation: generation
+  // })
 }
 
 //  showNextGen = (field) => { // old version kept in case
