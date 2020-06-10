@@ -2,12 +2,16 @@ body {
   --columns: 65;
   --tile-size: 10px;
   --window-size: calc(var(--columns) * var(--tile-size));
+  --vh: calc(100vw * 1);
   height: 100vh;
 }
 
+/* #app {
+  width: 100%;
+} */
+
 #main-title {
-  display: inline-block;
-  width: 1600px;
+  width: 100%;
   text-align: center;
 }
 

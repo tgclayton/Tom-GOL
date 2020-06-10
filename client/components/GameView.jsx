@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Tile from './Tile'
 import { setMapArr, toggleGrid } from './functions'
+import GameCanvas from './GameCanvas'
 
 // function toggleGrid() {
 
@@ -69,7 +70,8 @@ render () {
         </div>
       </div>
       <div className = 'center-column center'>
-        <div id='tile-container' className = 'game-window flex-column center-column'>
+        <GameCanvas/>
+        {/* <div id='tile-container' className = 'game-window flex-column center-column'>
           <div id ='grid-display' className = 'absolute game-window no-click'>
             { this.props.mapArr.map((cell, idx) => {
               return <Tile key = {`grid-${idx}`} type = 'grid' idx = {idx} grid = {this.props.grid}/>
@@ -80,7 +82,7 @@ render () {
               <Tile key = {idx} type = 'display' value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
             )
           })}
-        </div>
+        </div> */}
       </div>
       <div className= 'side-column'></div>
     </div>
