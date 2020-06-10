@@ -1,7 +1,9 @@
 import React from 'react'
 
-export const GameCanvas = () => {
+const GameCanvas = () => {
   return (
-    <canvas id = "game-canvas" className = ""></canvas>
+    <canvas id = "game-canvas" height = "500" width = "500" className = ""></canvas>
   )
 }
+
+export default GameCanvas
