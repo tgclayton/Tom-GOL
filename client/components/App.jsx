@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, makeCheckArr } from './functions'
+import { nextGeneration, makeRandomMap, makeCheckArr, canvasCoords } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
@@ -33,13 +33,15 @@ class App extends Component {
     this.setSpeed = this.setSpeed.bind(this)
   }
 
-  canvas () {
+  canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
+    const tileSize = 10 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
-      workArr.forEach((cell, idx) => {
-        cell?
-        ctx.fillRect()
+      map.forEach((cell, idx) => {
+        const crds = canvasCoords(idx, this.state.size, tileSize)
+        cell ? ctx.fillRect(crds[0], crds[1], tileSize, tileSize)
+          : ctx.clearRect(crds[0], crds[1], tileSize, tileSize)
       })
     }
   }
@@ -91,17 +93,18 @@ clearGame = () => {
 }
 
 setMap = () => {
-  this.pauseGame()
+  // this.pauseGame()
   let mapArr = makeRandomMap(this.state.size)
-  this.setLiveCells(mapArr)
-  checkArr = makeCheckArr(mapArr)
-  workArr = mapArr
-  generation = 0
-  this.setState({
-    generation: 0,
-    mapArr: mapArr,
-    checkArr: checkArr
-  })
+  this.canvasDraw(mapArr)
+  // this.setLiveCells(mapArr)
+  // checkArr = makeCheckArr(mapArr)
+  // workArr = mapArr
+  // generation = 0
+  // this.setState({
+  //   generation: 0,
+  //   mapArr: mapArr,
+  //   checkArr: checkArr
+  // })
 }
 
 pauseGame = () => {
@@ -177,7 +180,6 @@ showNextGen = (field) => {
 }
 
 render () {
-  console.log(this.props.grid)
   return (
     <Router>
       <h1 id = 'main-title'>The Game of Life</h1>
@@ -200,6 +202,7 @@ render () {
       />
       <Route exact path = '/instructions' component = {() => <Instructions/>} />
       <Route exact path = '/load' component = {() => <LoadStart/>} />
+      <button onClick = {() => this.setMap()}>Canvas Test</button>
     </Router>
   )
 }
