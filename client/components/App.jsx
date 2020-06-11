@@ -40,7 +40,7 @@ class App extends Component {
 
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
-    canvas.classList.add('canvas-grid-border')
+    if (grid) canvas.classList.add('canvas-border')
     const tileSize = 10 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
@@ -106,6 +106,7 @@ setMap = () => {
   // this.pauseGame()
   let mapArr = makeRandomMap(this.state.size)
   this.canvasDraw(mapArr)
+  workArr = mapArr
   // this.setLiveCells(mapArr)
   // checkArr = makeCheckArr(mapArr)
   // workArr = mapArr
@@ -149,7 +150,7 @@ runGame = (singleGen) => {
 toggleGrid = () => {
   grid ? grid = false : grid = true
   const canvas = document.getElementById('game-canvas')
-  canvas.classList.toggle('canvas-grid-border')
+  // canvas.classList.toggle('canvas-grid-border')
   canvas.classList.toggle('canvas-border')
   this.canvasDraw(workArr)
   // let g
