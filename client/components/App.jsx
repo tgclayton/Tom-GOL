@@ -38,6 +38,10 @@ class App extends Component {
     this.canvasDraw(workArr)
   }
 
+  componentDidUpdate () {
+    this.canvasDraw(workArr)
+  }
+
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
     const tileSize = 10 // change final value to not be hardcoded

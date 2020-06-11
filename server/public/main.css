@@ -20,13 +20,13 @@ body {
 } */
 
 #game-canvas {
-  background-color: black;
+  background-color: rgb(224, 224, 224);
   min-height: var(--window-size);
   height: var(--window-size);
   min-width: var(--window-size);
   width: var(--window-size);
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border: 2px solid black;
+  /* border-bottom: 1px solid black; */
   /* margin: 2px; */
 }
 
