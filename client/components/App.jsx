@@ -40,22 +40,23 @@ class App extends Component {
 
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
-    if (grid) canvas.classList.add('canvas-border')
     const tileSize = 10 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
+      // if (grid) {
+
+      // }
       map.forEach((cell, idx) => {
-        const gcrds = canvasGridCoords(idx, this.state.size, tileSize)
+        // const gcrds = canvasGridCoords(idx, this.state.size, tileSize)
         const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
-        ctx.clearRect(gcrds[0], gcrds[1], tileSize, tileSize)
-        ctx.fillStyle = '#000000'
-        ctx.fillRect(gcrds[0], gcrds[1], tileSize, tileSize)
+        // ctx.clearRect(gcrds[0], gcrds[1], tileSize, tileSize)
+
         if (cell) {
           ctx.fillStyle = '#008000'
         } else {
           ctx.fillStyle = 'rgb(224, 224, 224)'
         }
-        ctx.fillRect(tcrds[0], tcrds[1], tileSize - 1, tileSize - 1)
+        ctx.fillRect(tcrds[0], tcrds[1], tileSize, tileSize)
       })
     }
   }
@@ -108,9 +109,9 @@ setMap = () => {
   this.canvasDraw(mapArr)
   workArr = mapArr
   // this.setLiveCells(mapArr)
-  // checkArr = makeCheckArr(mapArr)
+  checkArr = makeCheckArr(workArr)
   // workArr = mapArr
-  // generation = 0
+  generation = 0
   // this.setState({
   //   generation: 0,
   //   mapArr: mapArr,
@@ -180,19 +181,23 @@ toggleGrid = () => {
 //  }
 
 showNextGen = (field) => {
+  console.log('workarr was:', workArr)
   let nextGen = nextGeneration(field, checkArr, this.state.size)
   generation++
   workArr = nextGen[0]
-  let changeArr = nextGen[3]
+  // let changeArr = nextGen[3]
   let liveCells = nextGen[1]
   checkArr = nextGen[2]
+  console.log('checkArr is:', checkArr)
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
-  changeArr.forEach(idx => {
-    const tile = document.getElementById('display' + idx)
-    tile.classList.toggle('live-cell')
-    tile.classList.toggle('dead-cell')
-  })
+  console.log(workArr)
+  this.canvasDraw(workArr)
+  // changeArr.forEach(idx => {
+  //   const tile = document.getElementById('display' + idx)
+  //   tile.classList.toggle('live-cell')
+  //   tile.classList.toggle('dead-cell')
+  // })
 }
 
 render () {
