@@ -23,7 +23,7 @@ class App extends Component {
       mouseDown: null,
       runSpeed: 120,
       liveCells: 0,
-      size: 65
+      size: 90
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -44,7 +44,7 @@ class App extends Component {
 
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 10 // change final value to not be hardcoded
+    const tileSize = 7 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
       // if (grid) {

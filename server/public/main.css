@@ -1,7 +1,8 @@
 body {
-  --columns: 65;
-  --tile-size: 10px;
+  --columns: 80;
+  --tile-size: 7px;
   --window-size: calc(var(--columns) * var(--tile-size));
+  /* --window-size: 500; */
   --vh: calc(100vw * 1);
   height: 100vh;
 }
