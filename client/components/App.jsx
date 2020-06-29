@@ -73,8 +73,6 @@ class App extends Component {
       tile.classList.toggle('dead-cell')
       workArr[idx] === 1 ? workArr[idx] = 0 : workArr[idx] = 1
     }
-    let check = makeCheckArr(workArr)
-    checkArr = check
   }
 
 setSpeed = (speed, id) => {
