@@ -22,7 +22,7 @@ class App extends Component {
       mouseDown: null,
       runSpeed: 120,
       liveCells: 0,
-      size: 80
+      size: 65
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -35,7 +35,6 @@ class App extends Component {
 
   componentDidMount () {
     this.canvasDraw(workArr)
-    // console.log(workArr)
   }
 
   componentDidUpdate () {
@@ -44,7 +43,7 @@ class App extends Component {
 
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 7 // change final value to not be hardcoded
+    const tileSize = 10 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
       // if (grid) {
@@ -185,7 +184,6 @@ showNextGen = (field) => {
   let liveCells = nextGen[1]
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
-  console.log(workArr)
   this.canvasDraw(workArr)
 }
 

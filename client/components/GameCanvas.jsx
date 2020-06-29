@@ -2,7 +2,7 @@ import React from 'react'
 
 const GameCanvas = () => {
   return (
-    <canvas id = "game-canvas" height = "500" width = "500" className = ""></canvas>
+    <canvas id = "game-canvas" height = "650" width = "650" className = ""></canvas>
   )
 }
 
