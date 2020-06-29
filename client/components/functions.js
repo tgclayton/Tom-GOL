@@ -38,8 +38,7 @@ export function nextGeneration (field, size) {
   // console.log('checkArr in nextgen was:', checkArr)
   let liveCount = 0
   let newField = [...field]
-  field.forEach(idx => {
-    const oldVal = field[idx]
+  field.forEach((oldVal, idx) => {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
     let newVal

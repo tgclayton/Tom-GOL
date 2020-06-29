@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, makeCheckArr, canvasGridCoords, canvasTileCoords } from './functions'
+import { nextGeneration, makeRandomMap, canvasGridCoords, canvasTileCoords } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
 
 var workArr = new Array(4225).fill(0)
-// var checkArr = []
 var generation = 0
 var grid = true
 
@@ -175,23 +174,19 @@ toggleGrid = () => {
 //  }
 
 showNextGen = (field) => {
-  // console.log('workarr was:', workArr)
-  let nextGen = nextGeneration(field, checkArr, this.state.size)
+  let nextGen = nextGeneration(field, this.state.size)
   generation++
+  // workArr.forEach((n, i) => {
+  //   if (n !== nextGen[0][i]) {
+  //     console.log('Change detected')
+  //   }
+  // })
   workArr = nextGen[0]
-  // let changeArr = nextGen[3]
   let liveCells = nextGen[1]
-  checkArr = nextGen[2]
-  // console.log('checkArr is:', checkArr)
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
-  // console.log(workArr)
+  console.log(workArr)
   this.canvasDraw(workArr)
-  // changeArr.forEach(idx => {
-  //   const tile = document.getElementById('display' + idx)
-  //   tile.classList.toggle('live-cell')
-  //   tile.classList.toggle('dead-cell')
-  // })
 }
 
 render () {
