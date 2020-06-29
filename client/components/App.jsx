@@ -8,7 +8,7 @@ import Instructions from './Instructions'
 import LoadStart from './LoadStart'
 
 var workArr = new Array(4225).fill(0)
-var checkArr = []
+// var checkArr = []
 var generation = 0
 var grid = true
 
@@ -36,10 +36,11 @@ class App extends Component {
 
   componentDidMount () {
     this.canvasDraw(workArr)
+    // console.log(workArr)
   }
 
   componentDidUpdate () {
-    this.canvasDraw(workArr)
+    this.canvasDraw(JSON.stringify(workArr))
   }
 
   canvasDraw (map) {
@@ -185,17 +186,17 @@ toggleGrid = () => {
 //  }
 
 showNextGen = (field) => {
-  console.log('workarr was:', workArr)
+  // console.log('workarr was:', workArr)
   let nextGen = nextGeneration(field, checkArr, this.state.size)
   generation++
   workArr = nextGen[0]
   // let changeArr = nextGen[3]
   let liveCells = nextGen[1]
   checkArr = nextGen[2]
-  console.log('checkArr is:', checkArr)
+  // console.log('checkArr is:', checkArr)
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
-  console.log(workArr)
+  // console.log(workArr)
   this.canvasDraw(workArr)
   // changeArr.forEach(idx => {
   //   const tile = document.getElementById('display' + idx)

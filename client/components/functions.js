@@ -1,5 +1,3 @@
-var mapArr
-
 export const makeRandomMap = (size) => {
   const tileTotal = size * size
   const field = new Array(tileTotal).fill(0)
@@ -14,39 +12,33 @@ export const makeRandomMap = (size) => {
   return newField
 }
 
-export function setMapArr (arr) {
-  mapArr = arr
-}
+// function onlyUnique (value, index, self) {
+//   return self.indexOf(value) === index
+// }
 
-function onlyUnique (value, index, self) {
-  return self.indexOf(value) === index
-}
+// export function makeCheckArr (field) {
+//   let size = Math.sqrt(field.length)
+//   let checkArr = []
+//   field.forEach((cell, idx) => {
+//     if (cell === 1) {
+//       let neighbours = getNeighbours(idx, size)
+//       checkArr = checkArr.concat(neighbours)
+//       checkArr.push(idx)
+//     }
+//   })
+//   checkArr = checkArr.filter(onlyUnique)
+//   return checkArr
+// }
 
-export function makeCheckArr (field) {
-  let size = Math.sqrt(field.length)
-  let checkArr = []
-  field.forEach((cell, idx) => {
-    if (cell === 1) {
-      let neighbours = getNeighbours(idx, size)
-      checkArr = checkArr.concat(neighbours)
-      checkArr.push(idx)
-    }
-  })
-  checkArr = checkArr.filter(onlyUnique)
-  return checkArr
-}
+// function updateCheckArr (arr) {
 
-function updateCheckArr (arr) {
+// }
 
-}
-
-export function nextGeneration (field, checkArr, size) {
+export function nextGeneration (field, size) {
   // console.log('checkArr in nextgen was:', checkArr)
   let liveCount = 0
-  let newCheck = []
   let newField = [...field]
-  let changed = []
-  checkArr.forEach(idx => {
+  field.forEach(idx => {
     const oldVal = field[idx]
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
@@ -55,24 +47,16 @@ export function nextGeneration (field, checkArr, size) {
       newVal = 1
       newField[idx] = newVal
       liveCount++
-      newCheck = newCheck.concat(n)
-      newCheck.push(idx)
     } else if (oldVal === 1 && (ln === 2 || ln === 3)) {
       newVal = 1
       newField[idx] = newVal
-      newCheck = newCheck.concat(n)
-      newCheck.push(idx)
       liveCount++
     } else {
       newVal = 0
       newField[idx] = newVal
     }
-    if (newVal !== oldVal) {
-      changed.push(idx)
-    }
   })
-  newCheck = newCheck.filter(onlyUnique)
-  return [newField, liveCount, newCheck, changed]
+  return [newField, liveCount]
 }
 
 export function idxToCoords (idx, size) {

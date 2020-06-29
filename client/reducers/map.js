@@ -4,7 +4,7 @@ const initial = {
   grid: true
 }
 
-export default function addFoodReducer (state = initial, action) {
+export default function toggleGrid (state = initial, action) {
   let g
   switch (action.type) {
     case TOGGLE_GRID:
