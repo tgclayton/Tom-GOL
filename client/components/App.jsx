@@ -107,19 +107,10 @@ clearGame = () => {
 }
 
 setMap = () => {
-  // this.pauseGame()
   let mapArr = makeRandomMap(this.state.size)
   this.canvasDraw(mapArr)
   workArr = mapArr
-  // this.setLiveCells(mapArr)
-  checkArr = makeCheckArr(workArr)
-  // workArr = mapArr
   generation = 0
-  // this.setState({
-  //   generation: 0,
-  //   mapArr: mapArr,
-  //   checkArr: checkArr
-  // })
 }
 
 pauseGame = () => {
