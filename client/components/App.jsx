@@ -22,7 +22,7 @@ class App extends Component {
       mouseDown: null,
       runSpeed: 120,
       liveCells: 0,
-      size: 90
+      size: 80
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
