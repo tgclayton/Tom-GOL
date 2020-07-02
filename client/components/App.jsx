@@ -38,7 +38,7 @@ class App extends Component {
   }
 
   componentDidUpdate () {
-    this.canvasDraw(JSON.stringify(workArr))
+    this.canvasDraw(workArr)
   }
 
   canvasDraw (map) {
@@ -46,14 +46,8 @@ class App extends Component {
     const tileSize = 10 // change final value to not be hardcoded
     if (canvas.getContext) {
       const ctx = canvas.getContext('2d')
-      // if (grid) {
-
-      // }
       map.forEach((cell, idx) => {
-        // const gcrds = canvasGridCoords(idx, this.state.size, tileSize)
         const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
-        // ctx.clearRect(gcrds[0], gcrds[1], tileSize, tileSize)
-
         if (cell) {
           ctx.fillStyle = '#008000'
         } else {
@@ -65,7 +59,7 @@ class App extends Component {
   }
 
   toggleTile = (idx) => {
-    let tile = document.getElementById('display' + idx)
+    var tile = document.getElementById('display' + idx)
     if (this.state.gameRunning === false) {
       tile.classList.toggle('live-cell')
       tile.classList.toggle('dead-cell')
@@ -74,7 +68,7 @@ class App extends Component {
   }
 
 setSpeed = (speed, id) => {
-  let wasRunning = this.state.gameRunning
+  var wasRunning = this.state.gameRunning
   this.pauseGame()
   this.setState({
     runSpeed: speed
@@ -86,7 +80,7 @@ setSpeed = (speed, id) => {
 }
 
 setLiveCells = (field) => {
-  let live = field.filter(cell => cell === 1)
+  var live = field.filter(cell => cell === 1)
   this.setState({
     liveCells: live.length
   })
@@ -94,7 +88,7 @@ setLiveCells = (field) => {
 
 clearGame = () => {
   this.pauseGame()
-  let mapArr = new Array(this.state.size * this.state.size).fill(0) // this also needs to be less hardcoded
+  var mapArr = new Array(this.state.size * this.state.size).fill(0) // this also needs to be less hardcoded
   generation = 0
   workArr = mapArr
   this.setState({
@@ -105,7 +99,7 @@ clearGame = () => {
 }
 
 setMap = () => {
-  let mapArr = makeRandomMap(this.state.size)
+  var mapArr = makeRandomMap(this.state.size)
   this.canvasDraw(mapArr)
   workArr = mapArr
   generation = 0
@@ -113,8 +107,8 @@ setMap = () => {
 
 pauseGame = () => {
   clearInterval(this.state.game)
-  let gen = generation
-  let live = workArr.filter(cell => cell === 1)
+  var gen = generation
+  var live = workArr.filter(cell => cell === 1)
   this.setState({
     gameRunning: false,
     mapArr: workArr,
@@ -127,9 +121,6 @@ runGame = (singleGen) => {
   if (!this.state.gameRunning) {
     if (singleGen) {
       this.showNextGen(workArr)
-      // this.setState({
-      //   mapArr: workArr
-      // })
     } else {
       this.setState({
         mapArr: workArr,
@@ -173,7 +164,7 @@ toggleGrid = () => {
 //  }
 
 showNextGen = (field) => {
-  let nextGen = nextGeneration(field, this.state.size)
+  var nextGen = nextGeneration(field, this.state.size)
   generation++
   // workArr.forEach((n, i) => {
   //   if (n !== nextGen[0][i]) {
@@ -181,7 +172,7 @@ showNextGen = (field) => {
   //   }
   // })
   workArr = nextGen[0]
-  let liveCells = nextGen[1]
+  var liveCells = nextGen[1]
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
