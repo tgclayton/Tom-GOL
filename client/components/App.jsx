@@ -10,6 +10,11 @@ import LoadStart from './LoadStart'
 var workArr = new Array(4225).fill(0)
 var generation = 0
 var grid = true
+var gameRun = []
+
+function checkGame () {
+console.log(gameRun)
+}
 
 class App extends Component {
   constructor () {
@@ -129,6 +134,7 @@ runGame = (singleGen) => {
       }, () => {})
     }
   }
+
 }
 
 toggleGrid = () => {
@@ -172,6 +178,7 @@ showNextGen = (field) => {
   //   }
   // })
   workArr = nextGen[0]
+  gameRun.push(workArr)
   var liveCells = nextGen[1]
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
@@ -199,6 +206,7 @@ render () {
         gen = {this.state.generation}
       />}
       />
+      <button onMouseDown = {() => checkGame()}>Check gameRun</button>
       <Route exact path = '/instructions' component = {() => <Instructions/>} />
       <Route exact path = '/load' component = {() => <LoadStart/>} />
     </Router>
