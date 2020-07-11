@@ -13,7 +13,7 @@ var grid = true
 var gameRun = []
 
 function checkGame () {
-console.log(gameRun)
+  console.log(gameRun)
 }
 
 class App extends Component {
@@ -134,49 +134,18 @@ runGame = (singleGen) => {
       }, () => {})
     }
   }
-
 }
 
 toggleGrid = () => {
   grid ? grid = false : grid = true
   const canvas = document.getElementById('game-canvas')
-  // canvas.classList.toggle('canvas-grid-border')
   canvas.classList.toggle('canvas-border')
   this.canvasDraw(workArr)
-  // let g
-  // if (this.state.grid) {
-  //   g = false
-  // } else {
-  //   g = true
-  // }
-  // document.getElementById('grid-display').classList.toggle('hidden')
-  // this.setState({
-  //   grid: g,
-  //   mapArr: workArr,
-  //   generation: generation
-  // })
 }
-
-//  showNextGen = (field) => { // old version kept in case
-//    let nextGen = nextGeneration(field, this.state.checkArr, this.state.size)
-//    let generation = this.state.generation
-//    generation++
-//    this.setState({
-//      mapArr: nextGen[0],
-//      generation: generation,
-//      liveCells: nextGen[1],
-//      checkArr: nextGen[2]
-//    })
-//  }
 
 showNextGen = (field) => {
   var nextGen = nextGeneration(field, this.state.size)
   generation++
-  // workArr.forEach((n, i) => {
-  //   if (n !== nextGen[0][i]) {
-  //     console.log('Change detected')
-  //   }
-  // })
   workArr = nextGen[0]
   gameRun.push(workArr)
   var liveCells = nextGen[1]

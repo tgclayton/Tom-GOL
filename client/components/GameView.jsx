@@ -71,18 +71,6 @@ render () {
       </div>
       <div className = 'center-column center'>
         <GameCanvas/>
-        {/* <div id='tile-container' className = 'game-window flex-column center-column'>
-          <div id ='grid-display' className = 'absolute game-window no-click'>
-            { this.props.mapArr.map((cell, idx) => {
-              return <Tile key = {`grid-${idx}`} type = 'grid' idx = {idx} grid = {this.props.grid}/>
-            })}
-          </div>
-          {this.props.mapArr.map((tile, idx) => {
-            return (
-              <Tile key = {idx} type = 'display' value = {tile} idx = {idx} toggleTile = {this.props.toggleTile}/>
-            )
-          })}
-        </div> */}
       </div>
       <div className= 'side-column'></div>
     </div>
