@@ -6,18 +6,7 @@ body {
   height: 100vh;
 }
 
-/* #app {
-  width: 100%;
-} */
 
-/* #canvas-container {
-  min-height: calc(var(--window-size) + 4px);
-  height: calc(var(--window-size) + 4px);
-  min-width: calc(var(--window-size) + 4px);
-  width: calc(var(--window-size) + 4px);
-  background-color: black;
-  text-align: center;
-} */
 
 #game-canvas {
   background-color: rgb(224, 224, 224);
@@ -25,7 +14,7 @@ body {
   height: var(--window-size);
   min-width: var(--window-size);
   width: var(--window-size);
-  border: 2px solid black;
+  /* border: 2px solid black; */
   /* border-bottom: 1px solid black; */
   /* margin: 2px; */
 }
