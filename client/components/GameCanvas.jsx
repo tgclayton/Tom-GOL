@@ -18,20 +18,15 @@ function relMouseCoords (event, canvas) {
   return { x: canvasX, y: canvasY }
 }
 
-function handleCanvasClick (e) {
-  const canvas = document.getElementById('game-canvas')
-  const rect = canvas.getBoundingClientRect()
-  const x = e.clientX - rect.left
-  const y = e.clientY - rect.top
-  // const context = canvas.getContex('2d')
+const GameCanvas = (props) => {
+  function handleCanvasClick (e) {
+    const canvas = document.getElementById('game-canvas')
+    const crds = relMouseCoords(e, canvas)
+    props.toggleTile(crds)
+  }
 
-  console.log('y:', y)
-  // console.log('')
-}
-
-const GameCanvas = () => {
   return (
-    <canvas id = "game-canvas" height = "650" width = "650" className = "" onClick = {(e) => relMouseCoords(e)}></canvas>
+    <canvas id = "game-canvas" height = "650" width = "650" className = "" onClick = {(e) => handleCanvasClick(e)}></canvas>
   )
 }
 

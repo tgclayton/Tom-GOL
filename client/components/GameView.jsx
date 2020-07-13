@@ -70,7 +70,7 @@ render () {
         </div>
       </div>
       <div className = 'center-column center'>
-        <GameCanvas/>
+        <GameCanvas toggleTile = {this.props.toggleTile}/>
       </div>
       <div className= 'side-column'></div>
     </div>

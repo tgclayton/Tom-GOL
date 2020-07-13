@@ -63,13 +63,11 @@ class App extends Component {
     }
   }
 
-  toggleTile = (idx) => {
-    var tile = document.getElementById('display' + idx)
+  toggleTile = (crds) => {
     if (this.state.gameRunning === false) {
-      tile.classList.toggle('live-cell')
-      tile.classList.toggle('dead-cell')
-      workArr[idx] === 1 ? workArr[idx] = 0 : workArr[idx] = 1
+      workArr[0] === 1 ? workArr[0] = 0 : workArr[0] = 1
     }
+    this.canvasDraw(workArr)
   }
 
 setSpeed = (speed, id) => {
