@@ -15,7 +15,7 @@ function relMouseCoords (event, canvas) {
   canvasX = event.pageX - totalOffsetX
   canvasY = event.pageY - totalOffsetY
 
-  return { x: canvasX, y: canvasY }
+  return { x: Math.floor(canvasX / 10), y: Math.floor(canvasY / 10) }
 }
 
 const GameCanvas = (props) => {

@@ -81,9 +81,8 @@ export function canvasGridCoords (idx, size, tileSize) {
 }
 
 export function coordsToIdx (coords, size) {
-  let x = coords[0]
-  let y = coords[1] * size
-  let idx = x + y
+  const y = coords.y * size
+  const idx = coords.x + y
   return idx
 }
 
@@ -106,7 +105,7 @@ export function getNeighbours (idx, size) {
       newY = 0
     }
     if (i !== 4) {
-      neighbours.push(coordsToIdx([newX, newY], size))
+      neighbours.push(coordsToIdx({ x: newX, y: newY }, size))
     }
   }
   return neighbours

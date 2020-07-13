@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
-import { nextGeneration, makeRandomMap, canvasGridCoords, canvasTileCoords } from './functions'
+import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './functions'
 import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
@@ -64,8 +64,10 @@ class App extends Component {
   }
 
   toggleTile = (crds) => {
+    const idx = coordsToIdx(crds, this.state.size)
+    console.log(idx)
     if (this.state.gameRunning === false) {
-      workArr[0] === 1 ? workArr[0] = 0 : workArr[0] = 1
+      workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
     }
     this.canvasDraw(workArr)
   }
