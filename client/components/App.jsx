@@ -11,9 +11,11 @@ let workArr = new Array(4225).fill(0)
 let generation = 0
 let grid = true
 let gameRun = []
+let liveCheck = []
 
 function checkGame () {
-  console.log(gameRun)
+  // console.log(gameRun)
+  console.log(liveCheck)
 }
 
 class App extends Component {
@@ -49,7 +51,7 @@ class App extends Component {
 
   handleKey (e) {
     e.preventDefault()
-    console.log(e)
+    // console.log(e)
     switch (e.code) {
       case 'Space':
         this.state.gameRunning
@@ -106,7 +108,6 @@ class App extends Component {
   }
 
 setSpeed = (speed) => {
-  console.log('setspeed ran, speed was:', speed)
   let wasRunning = this.state.gameRunning
   this.pauseGame()
   this.setState({
@@ -185,14 +186,25 @@ showNextGen = (field) => {
   workArr = nextGen[0]
   gameRun.push(workArr)
   let liveCells = nextGen[1]
+  if (liveCheck.length < 4) {
+    liveCheck.unshift(liveCells)
+  } else {
+    liveCheck.pop()
+    liveCheck.unshift(liveCells)
+  }
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
+  const allEqual = liveCheck.every((val, i) => val === liveCheck[0])
+  if (liveCheck.length === 4 && allEqual) {
+    // console.log('livecheck:', liveCheck, 'allEqual:', allEqual)
+    this.pauseGame()
+  }
 }
 
 showPrevGen () {
-  console.log(generation)
   if (generation >= 1) {
+    liveCheck = []
     const prevGen = gameRun[gameRun.length - 2] || gameRun[0]
     workArr = prevGen
     generation--
