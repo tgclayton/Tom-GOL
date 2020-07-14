@@ -56,17 +56,17 @@ export function nextGeneration (field, size, checkGen) {
 }
 
 export function idxToCoords (idx, size) {
-  var x = idx % size
-  var y = Math.floor(idx / size)
-  return [x, y]
+  const x = idx % size
+  const y = Math.floor(idx / size)
+  return { x: x, y: y }
 }
 
 export function canvasTileCoords (idx, size, tileSize) {
   const coords = idxToCoords(idx, size)
-  coords[0] *= tileSize
-  coords[0]++
-  coords[1] *= tileSize
-  coords[1]++
+  coords.x *= tileSize
+  coords.x++
+  coords.y *= tileSize
+  coords.y++
   return coords
 }
 
@@ -89,13 +89,13 @@ export function getNeighbours (idx, size) {
   for (let i = 0; i < 9; i++) {
     let itx = Math.floor(i / 3) - 1
     let ity = (i % 3) - 1
-    let newX = targetCoords[0] + itx
+    let newX = targetCoords.x + itx
     if (newX < 0) {
       newX = size - 1
     } else if (newX > size - 1) {
       newX = 0
     }
-    let newY = targetCoords[1] + ity
+    let newY = targetCoords.y + ity
     if (newY < 0) {
       newY = size - 1
     } else if (newY > size - 1) {

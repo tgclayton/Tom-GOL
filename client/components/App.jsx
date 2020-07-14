@@ -13,8 +13,7 @@ let grid = true
 let gameRun = []
 
 function checkGame () {
-  // console.log(gameRun)
-  console.log(liveCheck)
+  console.log(gameRun)
 }
 
 class App extends Component {
@@ -93,7 +92,7 @@ class App extends Component {
         } else {
           ctx.fillStyle = 'rgb(224, 224, 224)'
         }
-        ctx.fillRect(tcrds[0], tcrds[1], tileSize, tileSize)
+        ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
       })
     }
   }
@@ -198,7 +197,6 @@ showNextGen = (field) => {
 
 showPrevGen () {
   if (generation >= 1) {
-    liveCheck = []
     const prevGen = gameRun[gameRun.length - 2] || gameRun[0]
     workArr = prevGen
     generation--
