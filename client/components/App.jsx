@@ -7,10 +7,10 @@ import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
 
-var workArr = new Array(4225).fill(0)
-var generation = 0
-var grid = true
-var gameRun = []
+let workArr = new Array(4225).fill(0)
+let generation = 0
+let grid = true
+let gameRun = []
 
 function checkGame () {
   console.log(gameRun)
@@ -49,16 +49,33 @@ class App extends Component {
 
   handleKey (e) {
     e.preventDefault()
-    // console.log(e)
+    console.log(e)
     switch (e.code) {
       case 'Space':
-        this.pauseGame()
+        this.state.gameRunning
+          ? this.pauseGame()
+          : this.runGame()
         break
       case 'ArrowLeft':
         this.showPrevGen()
         break
       case 'ArrowRight':
         this.showNextGen(workArr)
+        break
+      case 'Digit1':
+        this.setSpeed(600)
+        break
+      case 'Digit2':
+        this.setSpeed(300)
+        break
+      case 'Digit3':
+        this.setSpeed(120)
+        break
+      case 'Digit4':
+        this.setSpeed(30)
+        break
+      case 'Digit5':
+        this.setSpeed(1)
         break
     }
   }
@@ -88,8 +105,9 @@ class App extends Component {
     this.canvasDraw(workArr)
   }
 
-setSpeed = (speed, id) => {
-  var wasRunning = this.state.gameRunning
+setSpeed = (speed) => {
+  console.log('setspeed ran, speed was:', speed)
+  let wasRunning = this.state.gameRunning
   this.pauseGame()
   this.setState({
     runSpeed: speed
