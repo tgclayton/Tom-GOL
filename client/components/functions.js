@@ -35,7 +35,6 @@ export const makeRandomMap = (size) => {
 // }
 
 export function nextGeneration (field, size) {
-  // console.log('checkArr in nextgen was:', checkArr)
   let liveCount = 0
   let newField = [...field]
   field.forEach((oldVal, idx) => {

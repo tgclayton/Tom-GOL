@@ -49,12 +49,13 @@ class App extends Component {
 
   handleKey (e) {
     e.preventDefault()
-    console.log(e)
+    // console.log(e)
     switch (e.code) {
       case 'Space':
         this.pauseGame()
         break
       case 'ArrowLeft':
+        this.showPrevGen()
         break
       case 'ArrowRight':
         this.showNextGen(workArr)
@@ -122,6 +123,7 @@ clearGame = () => {
 setMap = () => {
   var mapArr = makeRandomMap(this.state.size)
   this.canvasDraw(mapArr)
+  gameRun.push(mapArr)
   workArr = mapArr
   generation = 0
 }
@@ -160,14 +162,28 @@ toggleGrid = () => {
 }
 
 showNextGen = (field) => {
-  var nextGen = nextGeneration(field, this.state.size)
+  let nextGen = nextGeneration(field, this.state.size)
   generation++
   workArr = nextGen[0]
   gameRun.push(workArr)
-  var liveCells = nextGen[1]
+  let liveCells = nextGen[1]
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
+}
+
+showPrevGen () {
+  console.log(generation)
+  if (generation >= 1) {
+    const prevGen = gameRun[gameRun.length - 2] || gameRun[0]
+    workArr = prevGen
+    generation--
+    gameRun.pop()
+    const liveCells = prevGen.filter(val => val === 1)
+    document.getElementById('gen').innerHTML = `Generation: ${generation}`
+    document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells.length}`
+    this.canvasDraw(prevGen)
+  }
 }
 
 render () {
