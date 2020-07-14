@@ -40,10 +40,26 @@ class App extends Component {
 
   componentDidMount () {
     this.canvasDraw(workArr)
+    window.addEventListener('keydown', e => this.handleKey(e))
   }
 
   componentDidUpdate () {
     this.canvasDraw(workArr)
+  }
+
+  handleKey (e) {
+    e.preventDefault()
+    console.log(e)
+    switch (e.code) {
+      case 'Space':
+        this.pauseGame()
+        break
+      case 'ArrowLeft':
+        break
+      case 'ArrowRight':
+        this.showNextGen(workArr)
+        break
+    }
   }
 
   canvasDraw (map) {
