@@ -65,7 +65,6 @@ class App extends Component {
 
   toggleTile = (crds) => {
     const idx = coordsToIdx(crds, this.state.size)
-    console.log(idx)
     if (this.state.gameRunning === false) {
       workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
     }
@@ -96,6 +95,7 @@ clearGame = () => {
   var mapArr = new Array(this.state.size * this.state.size).fill(0) // this also needs to be less hardcoded
   generation = 0
   workArr = mapArr
+  gameRun = []
   this.setState({
     generation: 0,
     mapArr: mapArr,
