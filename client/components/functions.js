@@ -34,27 +34,25 @@ export const makeRandomMap = (size) => {
 
 // }
 
-export function nextGeneration (field, size) {
+export function nextGeneration (field, size, checkGen) {
   let liveCount = 0
-  let newField = [...field]
-  field.forEach((oldVal, idx) => {
+  let result = false
+  const newField = field.map((oldVal, idx) => {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
     let newVal
     if (oldVal === 0 && ln === 3) {
       newVal = 1
-      newField[idx] = newVal
       liveCount++
     } else if (oldVal === 1 && (ln === 2 || ln === 3)) {
       newVal = 1
-      newField[idx] = newVal
       liveCount++
     } else {
       newVal = 0
-      newField[idx] = newVal
     }
+    return newVal
   })
-  return [newField, liveCount]
+  return { arr: newField, live: liveCount, equil: result }
 }
 
 export function idxToCoords (idx, size) {

@@ -11,7 +11,6 @@ let workArr = new Array(4225).fill(0)
 let generation = 0
 let grid = true
 let gameRun = []
-let liveCheck = []
 
 function checkGame () {
   // console.log(gameRun)
@@ -181,22 +180,17 @@ toggleGrid = () => {
 }
 
 showNextGen = (field) => {
-  let nextGen = nextGeneration(field, this.state.size)
+  let checkGen
+  gameRun.length > 3 ? checkGen = gameRun[gameRun.length - 2] : checkGen = null
+  let nextGen = nextGeneration(field, this.state.size, checkGen)
   generation++
-  workArr = nextGen[0]
+  workArr = nextGen.arr
   gameRun.push(workArr)
-  let liveCells = nextGen[1]
-  if (liveCheck.length < 4) {
-    liveCheck.unshift(liveCells)
-  } else {
-    liveCheck.pop()
-    liveCheck.unshift(liveCells)
-  }
+  let liveCells = nextGen.live
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
-  const allEqual = liveCheck.every((val, i) => val === liveCheck[0])
-  if (liveCheck.length === 4 && allEqual) {
+  if (nextGen.equil) {
     // console.log('livecheck:', liveCheck, 'allEqual:', allEqual)
     this.pauseGame()
   }
