@@ -11,6 +11,7 @@ let workArr = new Array(4225).fill(0)
 let generation = 0
 let grid = true
 let gameRun = []
+let liveCheck = []
 
 function checkGame () {
   console.log(gameRun)
@@ -186,6 +187,10 @@ showNextGen = (field) => {
   workArr = nextGen.arr
   gameRun.push(workArr)
   let liveCells = nextGen.live
+  liveCheck.length < 4
+    ? liveCheck.unshift(liveCells)
+    : liveCheck.pop(); liveCheck.unshift(liveCells)
+    console.log(nextGen.changed)
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
