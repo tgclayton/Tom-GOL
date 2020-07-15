@@ -12,9 +12,11 @@ let generation = 0
 let grid = true
 let gameRun = []
 let liveCheck = []
+let changed = []
 
 function checkGame () {
-  console.log(gameRun)
+  console.log(changed)
+  console.log(liveCheck)
 }
 
 class App extends Component {
@@ -51,31 +53,33 @@ class App extends Component {
   handleKey (e) {
     e.preventDefault()
     // console.log(e)
-    switch (e.code) {
-      case 'Space':
+    switch (e.key) {
+      case ' ':
         this.state.gameRunning
           ? this.pauseGame()
           : this.runGame()
         break
       case 'ArrowLeft':
+      case 'a':
         this.showPrevGen()
         break
       case 'ArrowRight':
+      case 'd':
         this.showNextGen(workArr)
         break
-      case 'Digit1':
+      case '1':
         this.setSpeed(600)
         break
-      case 'Digit2':
+      case '2':
         this.setSpeed(300)
         break
-      case 'Digit3':
+      case '3':
         this.setSpeed(120)
         break
-      case 'Digit4':
+      case '4':
         this.setSpeed(30)
         break
-      case 'Digit5':
+      case '5':
         this.setSpeed(1)
         break
     }
@@ -187,16 +191,23 @@ showNextGen = (field) => {
   workArr = nextGen.arr
   gameRun.push(workArr)
   let liveCells = nextGen.live
-  liveCheck.length < 4
-    ? liveCheck.unshift(liveCells)
-    : liveCheck.pop(); liveCheck.unshift(liveCells)
-    console.log(nextGen.changed)
+  if (liveCheck.length < 3) {
+    liveCheck.unshift(liveCells)
+    changed.unshift(nextGen.changed)
+  } else {
+    liveCheck.pop(); liveCheck.unshift(liveCells)
+    changed.pop(); changed.unshift(nextGen.changed)
+  }
+
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
-  if (nextGen.equil) {
-    // console.log('livecheck:', liveCheck, 'allEqual:', allEqual)
-    this.pauseGame()
+  const allEqual = liveCheck.every(v => v === liveCheck[0])
+  if (allEqual) {
+    const equil = changed[0].every((v, i) => v === changed[1][i])
+    if (equil) {
+      this.pauseGame()
+    }
   }
 }
 
