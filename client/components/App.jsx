@@ -202,8 +202,8 @@ showNextGen = (field) => {
   document.getElementById('gen').innerHTML = `Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
-  const allEqual = liveCheck.every(v => v === liveCheck[0])
-  if (allEqual) {
+  // const allEqual = liveCheck.every(v => v === liveCheck[0])
+  if (Math.abs(liveCheck[2] - liveCheck[1] < 4)) {
     const equil = changed[0].every((v, i) => v === changed[1][i])
     if (equil) {
       this.pauseGame()
