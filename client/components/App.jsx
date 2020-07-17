@@ -69,6 +69,9 @@ class App extends Component {
       case 'd':
         this.showNextGen(workArr)
         break
+      case 'ArrowDown':
+        this.setMap()
+        break
       case '1':
         this.setSpeed(600)
         break
