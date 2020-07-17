@@ -95,27 +95,15 @@ export function coordsToIdx (coords, size) {
 
 export function getNeighbours (idx, size) {
   let neighbours = []
-  const targetCoords = idxToCoords(idx, size)
-  for (let i = 0; i < 9; i++) {
-    const itx = Math.floor(i / 3) - 1
-    const ity = (i % 3) - 1
-    // console.log('itx:', itx, 'ity:', ity)
-    let newX = targetCoords.x + itx
-    if (newX < 0) {
-      newX = size - 1
-    } else if (newX > size - 1) {
-      newX = 0
-    }
-    let newY = targetCoords.y + ity
-    if (newY < 0) {
-      newY = size - 1
-    } else if (newY > size - 1) {
-      newY = 0
-    }
-    if (i !== 4) {
-      neighbours.push(coordsToIdx({ x: newX, y: newY }, size))
-    }
-  }
+  const crds = idxToCoords(idx, size)
+  neighbours.push(coordsToIdx({ x: crds.x - 1, y: crds.y - 1 }, size))
+  neighbours.push(coordsToIdx({ x: crds.x - 1, y: crds.y }, size))
+  neighbours.push(coordsToIdx({ x: crds.x - 1, y: crds.y + 1 }, size))
+  neighbours.push(coordsToIdx({ x: crds.x, y: crds.y - 1 }, size))
+  neighbours.push(coordsToIdx({ x: crds.x, y: crds.y + 1 }, size))
+  neighbours.push(coordsToIdx({ x: crds.x + 1, y: crds.y - 1 }, size))
+  neighbours.push(coordsToIdx({ x: crds.x + 1, y: crds.y }, size))
+  neighbours.push(coordsToIdx({ x: crds.x + 1, y: crds.y + 1 }, size))
   return neighbours
 }
 
