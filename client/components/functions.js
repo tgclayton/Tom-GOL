@@ -1,3 +1,28 @@
+const genObj = {
+  0: {
+    0: 0,
+    1: 0,
+    2: 0,
+    3: 1,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0
+  },
+  1: {
+    0: 0,
+    1: 0,
+    2: 1,
+    3: 1,
+    4: 0,
+    5: 0,
+    6: 0,
+    7: 0,
+    8: 0
+  }
+}
+
 export const makeRandomMap = (size) => {
   const tileTotal = size * size
   const field = new Array(tileTotal).fill(0)
@@ -12,44 +37,22 @@ export const makeRandomMap = (size) => {
   return newField
 }
 
-// function onlyUnique (value, index, self) {
-//   return self.indexOf(value) === index
-// }
-
-// export function makeCheckArr (field) {
-//   let size = Math.sqrt(field.length)
-//   let checkArr = []
-//   field.forEach((cell, idx) => {
-//     if (cell === 1) {
-//       let neighbours = getNeighbours(idx, size)
-//       checkArr = checkArr.concat(neighbours)
-//       checkArr.push(idx)
-//     }
-//   })
-//   checkArr = checkArr.filter(onlyUnique)
-//   return checkArr
-// }
-
-// function updateCheckArr (arr) {
-
-// }
-
 export function nextGeneration (field, size, checkGen) {
   let liveCount = 0
   let changedIdx = []
   const newField = field.map((oldVal, idx) => {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
-    let newVal
-    if (oldVal === 0 && ln === 3) {
-      newVal = 1
-      liveCount++
-    } else if (oldVal === 1 && (ln === 2 || ln === 3)) {
-      newVal = 1
-      liveCount++
-    } else {
-      newVal = 0
-    }
+    const newVal = genObj[oldVal][ln]
+    // if (oldVal === 0 && ln === 3) {
+    //   newVal = 1
+    //   liveCount++
+    // } else if (oldVal === 1 && (ln === 2 || ln === 3)) {
+    //   newVal = 1
+    //   liveCount++
+    // } else {
+    //   newVal = 0
+    // }
     if (oldVal !== newVal) {
       changedIdx.push(idx)
     }
