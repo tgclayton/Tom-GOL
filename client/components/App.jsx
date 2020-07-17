@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Route, BrowserRouter as Router } from 'react-router-dom'
 import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './functions'
-import Home from './Home'
+// import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
+import { saveMap } from './db'
 
 let workArr = new Array(4225).fill(0)
 let generation = 0
@@ -39,6 +40,7 @@ class App extends Component {
     this.toggleGrid = this.toggleGrid.bind(this)
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
+    this.save = this.save.bind(this)
   }
 
   componentDidMount () {
@@ -120,6 +122,10 @@ setSpeed = (speed) => {
       this.runGame(false)
     }
   })
+}
+
+save = () => {
+  saveMap(workArr)
 }
 
 setLiveCells = (field) => {
@@ -230,6 +236,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        save = {this.save}
         toggleGrid = {this.toggleGrid}
         grid = {this.props.grid}
         liveCells= {this.state.liveCells}

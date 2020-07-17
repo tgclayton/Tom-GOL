@@ -58,6 +58,7 @@ render () {
         <button onMouseDown = {() => this.props.runGame(true)}>Run One Generation</button>
         <button onMouseDown = {() => this.props.clearGame()}>Clear Game</button>
         <button onMouseDown = {() => this.props.toggleGrid()}>Toggle Grid</button>
+        <button onMouseDown = {() => this.props.save()}>Save Current Map</button>
         <div id= 'speed-control'>
           <button id = 'very-slow' className = {`speed-button ${vsClass}`} onMouseDown = {() => this.props.setSpeed(verySlow, 'very-slow')}>Very Slow</button>
           <button id = 'slow' className = {`speed-button ${sClass}`} onMouseDown = {() => this.props.setSpeed(slow, 'slow')}>Slow</button>

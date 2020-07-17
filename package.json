@@ -1,7 +1,7 @@
 {
   "name": "game-of-life",
   "version": "0.2.2",
-  "description": "A webpack React starter",
+  "description": "An implementation of Conway's Game of Life",
   "repository": "https://github.com/tgclayton/Tom-GOL.git",
   "main": "server/index.js",
   "author": "Tom",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "knex": "^0.21.1",
+    "knex": "^0.21.2",
     "npm-run-all": "^4.1.5",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.2.0",
