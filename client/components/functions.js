@@ -29,7 +29,7 @@ export const makeRandomMap = (size) => {
   let newField = []
   newField = field.map(tile => {
     let rand = Math.random()
-    if (rand > 0.8) {
+    if (rand > 0.85) {
       tile = 1
     }
     return tile
@@ -44,22 +44,12 @@ export function nextGeneration (field, size, checkGen) {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
     const newVal = genObj[oldVal][ln]
-    // if (oldVal === 0 && ln === 3) {
-    //   newVal = 1
-    //   liveCount++
-    // } else if (oldVal === 1 && (ln === 2 || ln === 3)) {
-    //   newVal = 1
-    //   liveCount++
-    // } else {
-    //   newVal = 0
-    // }
     if (oldVal !== newVal) {
       changedIdx.push(idx)
     }
-    // if cell changes, add index to array
-    // return that array
-    // if number of livecells doesnt change for three generations, check to see if changing indexes are the same
-    // if they are === to 2 generationas ago pause the game
+    if (newVal === 1) {
+      liveCount++
+    }
     return newVal
   })
   return { arr: newField, live: liveCount, changed: changedIdx }
