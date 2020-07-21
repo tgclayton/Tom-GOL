@@ -44,11 +44,10 @@ export function nextGeneration (field, size, checkGen) {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
     if (oldVal) {
-      // let ns = []
-      // n.forEach(n => {
-      //   ns.push(idxToCoords(n, size))
-      // })
-      console.log(n)
+      n.forEach(n => {
+        console.log(idxToCoords(n, size))
+      })
+      console.log(' ')
     }
     const newVal = genObj[oldVal][ln]
     if (oldVal !== newVal) {
@@ -63,7 +62,7 @@ export function nextGeneration (field, size, checkGen) {
 }
 
 export function idxToCoords (idx, size) {
-  const x = idx % size + 1
+  const x = idx % size
   const y = Math.floor(idx / size)
   return { x: x, y: y }
 }
