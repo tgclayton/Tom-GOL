@@ -6,9 +6,9 @@ import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
-import { saveMap } from './db'
+// const db = require('../../db/db')
 
-let workArr = new Array(4225).fill(0)
+let workArr = new Array(1).fill(0)
 let generation = 0
 let grid = true
 let gameRun = []
@@ -70,6 +70,9 @@ class App extends Component {
         this.showNextGen(workArr)
         break
       case 'ArrowDown':
+        this.clearGame()
+        break
+      case 'ArrowUp':
         this.setMap()
         break
       case '1':
@@ -109,6 +112,7 @@ class App extends Component {
 
   toggleTile = (crds) => {
     const idx = coordsToIdx(crds, this.state.size)
+    console.log('idx:', idx, 'coords:', crds)
     if (this.state.gameRunning === false) {
       workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
     }
@@ -152,7 +156,7 @@ clearGame = () => {
 }
 
 setMap = () => {
-  var mapArr = makeRandomMap(this.state.size)
+  const mapArr = makeRandomMap(this.state.size)
   this.canvasDraw(mapArr)
   gameRun.push(mapArr)
   workArr = mapArr

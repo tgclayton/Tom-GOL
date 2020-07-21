@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { setMapArr, toggleGrid } from './functions'
+// import { setMapArr } from './functions'
 import GameCanvas from './GameCanvas'
 
 class GameView extends Component {
@@ -8,47 +8,47 @@ class GameView extends Component {
     this.state = {
       grid: true
     }
-    this.setFunctionsMapArr = this.setFunctionsMapArr.bind(this)
+    // this.setFunctionsMapArr = this.setFunctionsMapArr.bind(this)
   }
 
-setFunctionsMapArr =() => {
-  const mapArr = this.state.mapArr
-  setMapArr(mapArr)
-}
+  // setFunctionsMapArr =() => {
+  //   const mapArr = this.state.mapArr
+  //   setMapArr(mapArr)
+  // }
 
-toggleGrid = () => {
-  this.props.dispatch(toggleGrid())
-}
+  // toggleGrid = () => {
+  //   this.props.dispatch(toggleGrid())
+  // }
 
-render () {
-  let vsClass = null
-  let sClass = null
-  let nClass = null
-  let fClass = null
-  let ftClass = null
-  const verySlow = 600
-  const slow = 300
-  const normal = 120
-  const fast = 30
-  const fastest = 1
-  switch (this.props.speed) {
-    case verySlow:
-      vsClass = 'pressed-button'
-      break
-    case slow:
-      sClass = 'pressed-button'
-      break
-    case normal:
-      nClass = 'pressed-button'
-      break
-    case fast:
-      fClass = 'pressed-button'
-      break
-    case fastest:
-      ftClass = 'pressed-button'
-      break
-  }
-  return (
+  render () {
+    let vsClass = null
+    let sClass = null
+    let nClass = null
+    let fClass = null
+    let ftClass = null
+    const verySlow = 600
+    const slow = 300
+    const normal = 120
+    const fast = 30
+    const fastest = 1
+    switch (this.props.speed) {
+      case verySlow:
+        vsClass = 'pressed-button'
+        break
+      case slow:
+        sClass = 'pressed-button'
+        break
+      case normal:
+        nClass = 'pressed-button'
+        break
+      case fast:
+        fClass = 'pressed-button'
+        break
+      case fastest:
+        ftClass = 'pressed-button'
+        break
+    }
+    return (
   <>
     <div className = 'flex-container' >
       <div id = 'control-panel' className = 'flex-column side-column'>
@@ -77,8 +77,8 @@ render () {
       <div className= 'side-column'></div>
     </div>
   </>
-  )
-}
+    )
+  }
 }
 
 export default GameView

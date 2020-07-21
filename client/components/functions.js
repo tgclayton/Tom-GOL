@@ -43,6 +43,13 @@ export function nextGeneration (field, size, checkGen) {
   const newField = field.map((oldVal, idx) => {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
+    if (oldVal) {
+      // let ns = []
+      // n.forEach(n => {
+      //   ns.push(idxToCoords(n, size))
+      // })
+      console.log(n)
+    }
     const newVal = genObj[oldVal][ln]
     if (oldVal !== newVal) {
       changedIdx.push(idx)
@@ -56,7 +63,7 @@ export function nextGeneration (field, size, checkGen) {
 }
 
 export function idxToCoords (idx, size) {
-  const x = idx % size
+  const x = idx % size + 1
   const y = Math.floor(idx / size)
   return { x: x, y: y }
 }
@@ -78,6 +85,16 @@ export function canvasGridCoords (idx, size, tileSize) {
 }
 
 export function coordsToIdx (coords, size) {
+  if (coords.x > size) {
+    coords.x = 0
+  } else if (coords.x < 0) {
+    coords.x = size
+  }
+  if (coords.y > size) {
+    coords.y = 0
+  } else if (coords.x < 0) {
+    coords.y = size
+  }
   const y = coords.y * size
   const idx = coords.x + y
   return idx

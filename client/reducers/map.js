@@ -1,4 +1,4 @@
-import { TOGGLE_GRID } from '../actions/toggleGrid'
+// import { TOGGLE_GRID } from '../actions/toggleGrid'
 
 const initial = {
   grid: true
@@ -7,7 +7,7 @@ const initial = {
 export default function toggleGrid (state = initial, action) {
   let g
   switch (action.type) {
-    case TOGGLE_GRID:
+    case 'TOGGLE_GRID':
       if (state.grid) {
         g = false
       } else {
