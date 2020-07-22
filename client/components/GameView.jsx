@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 // import { setMapArr } from './functions'
 import GameCanvas from './GameCanvas'
+import saves from './Saves'
 
 class GameView extends Component {
   constructor () {
@@ -48,6 +49,8 @@ class GameView extends Component {
         ftClass = 'pressed-button'
         break
     }
+
+
     return (
   <>
     <div className = 'flex-container' >

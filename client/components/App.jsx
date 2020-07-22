@@ -42,6 +42,7 @@ class App extends Component {
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
     this.save = this.save.bind(this)
+    this.loadSave = this.save.bind(this)
   }
 
   componentDidMount () {
@@ -54,10 +55,18 @@ class App extends Component {
     this.canvasDraw(workArr)
   }
 
+  loadSave (arr) {
+    workArr = arr
+    this.canvasDraw(workArr)
+  }
+
   getSaves () {
     return getSaves()
       .then(saves => {
-        console.log(saves)
+        // console.log(saves)
+        this.setState({
+          saves: saves
+        })
       })
   }
 
@@ -121,7 +130,7 @@ class App extends Component {
 
   toggleTile = (crds) => {
     const idx = coordsToIdx(crds, this.state.size)
-    console.log('idx:', idx, 'coords:', crds)
+    // console.log('idx:', idx, 'coords:', crds)
     if (this.state.gameRunning === false) {
       workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
     }
