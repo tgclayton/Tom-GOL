@@ -14,4 +14,13 @@ router.get('/', (req, res) => {
     })
 })
 
+// POST /saves
+router.post('/', (req, res) => {
+  console.log(req.body)
+  db.saveMap(req.body)
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 module.exports = router

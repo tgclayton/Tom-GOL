@@ -7,19 +7,23 @@ class GameView extends Component {
   constructor () {
     super()
     this.state = {
-      grid: true
+      grid: true,
+      saveName: null,
+      saveDesc: null
     }
-    // this.setFunctionsMapArr = this.setFunctionsMapArr.bind(this)
   }
 
-  // setFunctionsMapArr =() => {
-  //   const mapArr = this.state.mapArr
-  //   setMapArr(mapArr)
-  // }
+  nameHandler (e) {
+    this.setState({
+      saveName: e.target.value
+    })
+  }
 
-  // toggleGrid = () => {
-  //   this.props.dispatch(toggleGrid())
-  // }
+  descHandler (e) {
+    this.setState({
+      saveDesc: e.target.value
+    })
+  }
 
   render () {
     let vsClass = null
@@ -74,9 +78,10 @@ class GameView extends Component {
         </div>
         <div id = 'save-game-window'>Save this map
           <br/>
-          <p>Name:</p> <input type="text" name="" id="save-name"/>
+          <p>Name:</p> <input type="text" name="" id="save-name" onChange = {e => this.nameHandler(e)}/>
           <br/>
-          <p>Description</p> <input type="text" name="" id="save-description"/>
+          <p >Description:</p> <input type="text" name="" id="save-description" onChange = {e => this.descHandler(e)}/>
+          <button onClick = {() => this.props.saveField(this.state.saveName, this.state.saveDesc)}>Save</button>
         </div>
       </div>
       <div className = 'center-column center'>

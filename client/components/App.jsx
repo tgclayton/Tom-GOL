@@ -5,7 +5,7 @@ import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './
 // import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
-import { getSaves } from '../api'
+import { getSaves, saveField } from '../api'
 
 let workArr = new Array(1).fill(0)
 let generation = 0
@@ -40,13 +40,13 @@ class App extends Component {
     this.toggleGrid = this.toggleGrid.bind(this)
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
-    this.save = this.save.bind(this)
     this.loadSave = this.loadSave.bind(this)
+    this.saveMap = this.saveMap.bind(this)
   }
 
   componentDidMount () {
     this.canvasDraw(workArr)
-    window.addEventListener('keydown', e => this.handleKey(e))
+    // window.addEventListener('keydown', e => this.handleKey(e))
     this.getSaves()
   }
 
@@ -62,6 +62,20 @@ class App extends Component {
     this.canvasDraw(workArr)
   }
 
+  saveMap (name, desc) {
+    const save = {
+      id: null,
+      name: name,
+      description: desc,
+      fieldData: workArr
+    }
+    console.log(save)
+    saveField(save)
+      .then(x => {
+        this.getSaves()
+      })
+  }
+
   getSaves () {
     return getSaves()
       .then(saves => {
@@ -73,7 +87,6 @@ class App extends Component {
   }
 
   handleKey (e) {
-    e.preventDefault()
     // console.log(e)
     switch (e.key) {
       case ' ':
@@ -82,17 +95,19 @@ class App extends Component {
           : this.runGame()
         break
       case 'ArrowLeft':
-      case 'a':
+      // case 'a':
         this.showPrevGen()
         break
       case 'ArrowRight':
-      case 'd':
+      // case 'd':
         this.showNextGen(workArr)
         break
       case 'ArrowDown':
+        e.preventDefault()
         this.clearGame()
         break
       case 'ArrowUp':
+        e.preventDefault()
         this.setMap()
         break
       case '1':
@@ -149,10 +164,6 @@ setSpeed = (speed) => {
       this.runGame(false)
     }
   })
-}
-
-save = () => {
-  // saveMap(workArr)
 }
 
 setLiveCells = (field) => {
@@ -263,6 +274,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        saveField = {this.saveMap}
         loadSave = {this.loadSave}
         saves = {this.state.saves}
         toggleGrid = {this.toggleGrid}

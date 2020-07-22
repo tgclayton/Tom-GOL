@@ -30,12 +30,16 @@ button {
 }
 
 .save-box {
-  background-color: dimgray;
+  text-align: center;
+  background-color: rgb(184, 184, 184);
+  padding: 3pt;
+  border: 2pt solid black;
+  max-width: 70%;
 }
 
 #save-game-window {
   position: absolute;
-  bottom: 0;
+  top: 25em;
   border: 2pt solid black;
   padding: 3pt;
 }
