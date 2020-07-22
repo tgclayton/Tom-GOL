@@ -1,9 +1,13 @@
 const config = require('../../knexfile').development
 const connection = require('knex')(config)
 
-// export function getStarts (db = connection) {
-//   return db('starts').select()
-// }
+module.exports = {
+  getSaves
+}
+
+function getSaves (db = connection) {
+  return db('saves').select()
+}
 
 // export function saveMap (arr, db = connection) {
 //   const data = {

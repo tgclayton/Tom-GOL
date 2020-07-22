@@ -6,7 +6,7 @@ import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
-// const db = require('../../db/db')
+import { getSaves } from '../../server/db/db'
 
 let workArr = new Array(1).fill(0)
 let generation = 0

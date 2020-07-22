@@ -1,6 +1,6 @@
 const path = require('path')
 const express = require('express')
-const saves = require('routes/saves')
+const saves = require('./routes/saves')
 const server = express()
 
 server.use(express.json())
