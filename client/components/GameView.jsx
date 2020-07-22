@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { setMapArr } from './functions'
 import GameCanvas from './GameCanvas'
-import saves from './Saves'
+import Saves from './Saves'
 
 class GameView extends Component {
   constructor () {
@@ -50,7 +50,6 @@ class GameView extends Component {
         break
     }
 
-
     return (
   <>
     <div className = 'flex-container' >
@@ -77,7 +76,9 @@ class GameView extends Component {
       <div className = 'center-column center'>
         <GameCanvas toggleTile = {this.props.toggleTile}/>
       </div>
-      <div className= 'side-column'></div>
+      <div className= 'side-column'>
+        <Saves saves = {this.props.saves}></Saves>
+      </div>
     </div>
   </>
     )

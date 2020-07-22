@@ -261,7 +261,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
-        save = {this.save}
+        saves = {this.state.saves}
         toggleGrid = {this.toggleGrid}
         grid = {this.props.grid}
         liveCells= {this.state.liveCells}
