@@ -77,7 +77,7 @@ class GameView extends Component {
         <GameCanvas toggleTile = {this.props.toggleTile}/>
       </div>
       <div className= 'side-column'>
-        <Saves saves = {this.props.saves}></Saves>
+        <Saves saves = {this.props.saves} loadSave = {this.props.loadSave}></Saves>
       </div>
     </div>
   </>
@@ -86,6 +86,3 @@ class GameView extends Component {
 }
 
 export default GameView
-
-/* <input type="range" defaultValue = {this.props.speed} min = '50' max = '1000'onMouseDown = {this.props.pauseGame} onMouseUp = {this.props.setSpeed} />
-<p>Current Speed: {this.props.speed}</p> */

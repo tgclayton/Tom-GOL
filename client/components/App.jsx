@@ -5,7 +5,6 @@ import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './
 // import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
-import LoadStart from './LoadStart'
 import { getSaves } from '../api'
 
 let workArr = new Array(1).fill(0)
@@ -32,7 +31,7 @@ class App extends Component {
       runSpeed: 120,
       liveCells: 0,
       size: 65,
-      saves: null
+      saves: []
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -42,7 +41,7 @@ class App extends Component {
     this.clearGame = this.clearGame.bind(this)
     this.setSpeed = this.setSpeed.bind(this)
     this.save = this.save.bind(this)
-    this.loadSave = this.save.bind(this)
+    this.loadSave = this.loadSave.bind(this)
   }
 
   componentDidMount () {
@@ -56,16 +55,19 @@ class App extends Component {
   }
 
   loadSave (arr) {
-    workArr = arr
+    const display = (arr.length === this.state.size * this.state.size)
+      ? arr
+      : makeRandomMap(this.state.size); alert('No data found, making random map')
+    workArr = display
     this.canvasDraw(workArr)
   }
 
   getSaves () {
     return getSaves()
       .then(saves => {
-        // console.log(saves)
+        // console.log(saves.saves)
         this.setState({
-          saves: saves
+          saves: saves.saves
         })
       })
   }
@@ -150,7 +152,7 @@ setSpeed = (speed) => {
 }
 
 save = () => {
-  saveMap(workArr)
+  // saveMap(workArr)
 }
 
 setLiveCells = (field) => {
@@ -261,6 +263,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        loadSave = {this.loadSave}
         saves = {this.state.saves}
         toggleGrid = {this.toggleGrid}
         grid = {this.props.grid}
@@ -279,7 +282,6 @@ render () {
       />
       <button onMouseDown = {() => checkGame()}>Check gameRun</button>
       <Route exact path = '/instructions' component = {() => <Instructions/>} />
-      <Route exact path = '/load' component = {() => <LoadStart/>} />
     </Router>
   )
 }

@@ -29,6 +29,10 @@ button {
   display: inline-block;
 }
 
+.save-box {
+  background-color: dimgray;
+}
+
 .game-window {
   min-height: var(--window-size);
   height: var(--window-size);

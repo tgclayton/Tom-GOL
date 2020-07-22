@@ -2,9 +2,11 @@ import React from 'react'
 
 export default function SaveBox (props) {
   return (
-    <div id = {`save-${props.id}`} className = '' onClick = {props.loadSave}>
-      <p>{props.name}</p>
-      <p>{props.description}</p>
+    <div id = {`save-${props.id}`} className = 'save-box' >
+      <p>Name: {props.name}</p>
+      <p>Description: {props.description}</p>
+      <button onClick = {() => props.loadSave(props.data)}>Load Save</button>
     </div>
+
   )
 }
