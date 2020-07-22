@@ -16,8 +16,10 @@ router.get('/', (req, res) => {
 
 // POST /saves
 router.post('/', (req, res) => {
-  console.log(req.body)
   db.saveMap(req.body)
+    .then(x => {
+      res.send('Ok')
+    })
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })

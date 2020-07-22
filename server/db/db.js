@@ -7,15 +7,16 @@ module.exports = {
 }
 
 function getSaves (db = connection) {
-  return db('saves').select()
+  return db('Saves').select()
 }
 
 function saveMap (data, db = connection) {
+  const { name, description, fieldData } = data
   const save = {
-    id: null,
-    name: 'test 1',
-    description: 'a test',
-    field: arr
+    name: name,
+    description: description,
+    fieldData: JSON.stringify(fieldData)
   }
-  return db('saves').insert(save)
+  return db('Saves')
+    .insert(save)
 }

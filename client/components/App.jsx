@@ -7,7 +7,7 @@ import GameView from './GameView'
 import Instructions from './Instructions'
 import { getSaves, saveField } from '../api'
 
-let workArr = new Array(1).fill(0)
+let workArr = null
 let generation = 0
 let grid = true
 let gameRun = []
@@ -45,6 +45,7 @@ class App extends Component {
   }
 
   componentDidMount () {
+    workArr = new Array(this.state.size * this.state.size).fill(0)
     this.canvasDraw(workArr)
     // window.addEventListener('keydown', e => this.handleKey(e))
     this.getSaves()
@@ -55,11 +56,13 @@ class App extends Component {
   }
 
   loadSave (arr) {
-    const display = (arr.length === this.state.size * this.state.size)
-      ? arr
-      : makeRandomMap(this.state.size); alert('No data found, making random map')
-    workArr = display
-    this.canvasDraw(workArr)
+    arr = JSON.parse(arr)
+    if (arr.length === this.state.size * this.state.size) {
+      workArr = arr
+      this.canvasDraw(workArr)
+    } else {
+      makeRandomMap(this.state.size); alert('Bad save file')
+    }
   }
 
   saveMap (name, desc) {
@@ -69,7 +72,6 @@ class App extends Component {
       description: desc,
       fieldData: workArr
     }
-    console.log(save)
     saveField(save)
       .then(x => {
         this.getSaves()

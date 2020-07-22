@@ -8,11 +8,10 @@ export function getSaves () {
 }
 
 export function saveField (save) {
-  console.log(save)
-  console.log('got into saveField')
+  // console.log(save)
   return request.post('/saves')
     .send(save)
     .then(res => {
-      return res.body
+      // console.log(res.body)
     })
 }
