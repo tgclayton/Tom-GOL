@@ -6,7 +6,7 @@ import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './
 import GameView from './GameView'
 import Instructions from './Instructions'
 import LoadStart from './LoadStart'
-import { getSaves } from '../../server/db/db'
+import { getSaves } from '../api'
 
 let workArr = new Array(1).fill(0)
 let generation = 0
@@ -31,7 +31,8 @@ class App extends Component {
       mouseDown: null,
       runSpeed: 120,
       liveCells: 0,
-      size: 65
+      size: 65,
+      saves: null
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -46,10 +47,18 @@ class App extends Component {
   componentDidMount () {
     this.canvasDraw(workArr)
     window.addEventListener('keydown', e => this.handleKey(e))
+    this.getSaves()
   }
 
   componentDidUpdate () {
     this.canvasDraw(workArr)
+  }
+
+  getSaves () {
+    return getSaves()
+      .then(saves => {
+        console.log(saves)
+      })
   }
 
   handleKey (e) {

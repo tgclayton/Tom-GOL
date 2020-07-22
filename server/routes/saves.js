@@ -3,11 +3,11 @@ const db = require('../db/db')
 
 const router = express.Router()
 
-// GET saves
+// GET /saves
 router.get('/', (req, res) => {
-  db.getUsers()
-    .then(users => {
-      res.json({ users: users })
+  db.getSaves()
+    .then(saves => {
+      res.json({ saves: saves })
     })
     .catch(err => {
       res.status(500).send('DATABASE ERROR: ' + err.message)
