@@ -33,6 +33,13 @@ button {
   background-color: dimgray;
 }
 
+#save-game-window {
+  position: absolute;
+  bottom: 0;
+  border: 2pt solid black;
+  padding: 3pt;
+}
+
 .game-window {
   min-height: var(--window-size);
   height: var(--window-size);

@@ -72,6 +72,12 @@ class GameView extends Component {
           <p id = 'gen'> Generation: {this.props.gen}</p>
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
         </div>
+        <div id = 'save-game-window'>Save this map
+          <br/>
+          <p>Name:</p> <input type="text" name="" id="save-name"/>
+          <br/>
+          <p>Description</p> <input type="text" name="" id="save-description"/>
+        </div>
       </div>
       <div className = 'center-column center'>
         <GameCanvas toggleTile = {this.props.toggleTile}/>
