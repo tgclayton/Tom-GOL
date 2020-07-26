@@ -210,8 +210,10 @@ setMap = () => {
   this.canvasDraw(res.map)
   gameRun.push(res.map)
   workArr = res.map
-  generation = 0
-  document.getElementById('live-cells').innerText = `Living Cells: ${res.liveCells}`
+  this.setState({
+    generation: 0,
+    liveCells: res.liveCells
+  })
 }
 
 pauseGame = () => {
@@ -231,6 +233,7 @@ runGame = (singleGen) => {
     if (singleGen) {
       this.showNextGen(workArr)
     } else {
+      generation = this.state.generation
       this.setState({
         mapArr: workArr,
         game: setInterval(() => this.showNextGen(workArr), this.state.runSpeed),
