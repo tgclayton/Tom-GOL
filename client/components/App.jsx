@@ -111,6 +111,7 @@ class App extends Component {
   handleKey (e) {
     if (!saving) {
     // console.log(e)
+      e.preventDefault()
       switch (e.key) {
         case ' ':
           this.state.gameRunning
@@ -126,10 +127,11 @@ class App extends Component {
           this.showNextGen(workArr)
           break
         case 'ArrowDown':
-          e.preventDefault()
+        case 's':
           this.clearGame()
           break
         case 'ArrowUp':
+        case 'w':
           e.preventDefault()
           this.setMap()
           break
@@ -170,14 +172,13 @@ class App extends Component {
   }
 13
   toggleTile = (crds) => {
-    const liveDisp = document.getElementById('live-cells')
-    let liveCellText = liveDisp.innerText
-    let liveCells = Number(liveCellText.substring(13))
-    liveCells++
-    this.setLiveCells(null, liveCells)
     const idx = coordsToIdx(crds, this.state.size)
     if (this.state.gameRunning === false) {
-      workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
+      const liveDisp = document.getElementById('live-cells')
+      let liveCellText = liveDisp.innerText
+      let liveCells = Number(liveCellText.substring(13))
+      workArr[idx] ? workArr[idx] = 0 && liveCells++ : workArr[idx] = 1 && liveCells--
+      this.setLiveCells(null, liveCells)
     }
     this.canvasDraw(workArr)
   }

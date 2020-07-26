@@ -75,11 +75,13 @@ class GameView extends Component {
         <div className = 'right-float'>
           <p id = 'gen'> Generation: {this.props.gen}</p>
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
+          <button>Jump to Generation</button><input type="number" min = '0' max = '1000' name="set-gen" id="set-gen"/>
         </div>
         <button id = 'save-button' onClick = {() => this.props.saveWindow()}>Save Map</button>
         <div id = 'save-game-window' className = 'hidden'>Save this map
           <br/>
           <p>Name:</p> <input type="text" name="" id="save-name" onChange = {e => this.nameHandler(e)}/>
+          <button onClick = {() => this.props.saveWindow()}>Cancel</button>
           <br/>
           <p >Description:</p> <input type="text" name="" id="save-description" onChange = {e => this.descHandler(e)}/>
           <button onClick = {() => this.props.saveField(this.state.saveName, this.state.saveDesc)}>Save</button>
