@@ -155,10 +155,14 @@ class App extends Component {
       })
     }
   }
-
+13
   toggleTile = (crds) => {
+    const liveDisp = document.getElementById('live-cells')
+    let liveCellText = liveDisp.innerText
+    let liveCells = Number(liveCellText.substring(13))
+    liveCells++
+    liveDisp.innerText = `Living Cells: ${liveCells}`
     const idx = coordsToIdx(crds, this.state.size)
-    // console.log('idx:', idx, 'coords:', crds)
     if (this.state.gameRunning === false) {
       workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
     }
