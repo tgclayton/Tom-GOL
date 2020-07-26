@@ -28,7 +28,7 @@ router.post('/', (req, res) => {
 // DEL /saves
 
 router.delete('/', (req, res) => {
-  db.delMap(req.body)
+  db.delSave(req.params.id)
     .then(x => {
       res.send('Deleted')
     })

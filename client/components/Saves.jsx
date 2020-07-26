@@ -11,6 +11,7 @@ export default function Saves (props) {
           loadSave = {props.loadSave}
           name = {save.name}
           description = {save.description}
+          id = {save.id}
           data = {save.fieldData}>
         </SaveBox>
       })}

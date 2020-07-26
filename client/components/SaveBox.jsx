@@ -1,12 +1,13 @@
 import React from 'react'
 
 export default function SaveBox (props) {
+  const { id, data, deleteSave, loadSave, name, description } = props
   return (
-    <div id = {`save-${props.id}`} className = 'save-box' >
-      <p>Name: {props.name}</p>
-      <p>Description: {props.description}</p>
-      <button onClick = {() => props.loadSave(props.data)}>Load Save</button>
-      <button onClick = {() => props.deleteSave(props.id)}>Delete Save</button>
+    <div id = {`save-${id}`} className = 'save-box' >
+      <p>Name: {name}</p>
+      <p>Description: {description}</p>
+      <button onClick = {() => loadSave(data)}>Load Save</button>
+      <button onClick = {() => deleteSave(id)}>Delete Save</button>
     </div>
 
   )
