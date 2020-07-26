@@ -13,6 +13,7 @@ let grid = true
 let gameRun = []
 let liveCheck = []
 let changed = []
+let saving = false
 
 function checkGame () {
   console.log(changed)
@@ -48,12 +49,18 @@ class App extends Component {
   componentDidMount () {
     workArr = new Array(this.state.size * this.state.size).fill(0)
     this.canvasDraw(workArr)
-    // window.addEventListener('keydown', e => this.handleKey(e))
+    window.addEventListener('keydown', e => this.handleKey(e))
     this.getSaves()
   }
 
   componentDidUpdate () {
     this.canvasDraw(workArr)
+  }
+
+  saveWindow () {
+    document.getElementById('save-game-window').classList.toggle('hidden')
+    document.getElementById('save-button').classList.toggle('hidden')
+    saving = !saving
   }
 
   loadSave (arr) {
@@ -86,6 +93,9 @@ class App extends Component {
       .then(x => {
         this.getSaves()
       })
+      .then(x => {
+        this.saveWindow()
+      })
   }
 
   getSaves () {
@@ -99,44 +109,46 @@ class App extends Component {
   }
 
   handleKey (e) {
+    if (!saving) {
     // console.log(e)
-    switch (e.key) {
-      case ' ':
-        this.state.gameRunning
-          ? this.pauseGame()
-          : this.runGame()
-        break
-      case 'ArrowLeft':
-      // case 'a':
-        this.showPrevGen()
-        break
-      case 'ArrowRight':
-      // case 'd':
-        this.showNextGen(workArr)
-        break
-      case 'ArrowDown':
-        e.preventDefault()
-        this.clearGame()
-        break
-      case 'ArrowUp':
-        e.preventDefault()
-        this.setMap()
-        break
-      case '1':
-        this.setSpeed(600)
-        break
-      case '2':
-        this.setSpeed(300)
-        break
-      case '3':
-        this.setSpeed(120)
-        break
-      case '4':
-        this.setSpeed(30)
-        break
-      case '5':
-        this.setSpeed(1)
-        break
+      switch (e.key) {
+        case ' ':
+          this.state.gameRunning
+            ? this.pauseGame()
+            : this.runGame()
+          break
+        case 'ArrowLeft':
+        case 'a':
+          this.showPrevGen()
+          break
+        case 'ArrowRight':
+        case 'd':
+          this.showNextGen(workArr)
+          break
+        case 'ArrowDown':
+          e.preventDefault()
+          this.clearGame()
+          break
+        case 'ArrowUp':
+          e.preventDefault()
+          this.setMap()
+          break
+        case '1':
+          this.setSpeed(600)
+          break
+        case '2':
+          this.setSpeed(300)
+          break
+        case '3':
+          this.setSpeed(120)
+          break
+        case '4':
+          this.setSpeed(30)
+          break
+        case '5':
+          this.setSpeed(1)
+          break
+      }
     }
   }
 
@@ -297,6 +309,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        saveWindow = {this.saveWindow}
         deleteSave = {this.deleteSave}
         saveField = {this.saveMap}
         loadSave = {this.loadSave}

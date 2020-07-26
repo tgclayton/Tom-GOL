@@ -39,9 +39,14 @@ button {
 
 #save-game-window {
   position: absolute;
-  top: 25em;
+  top: 26em;
   border: 2pt solid black;
   padding: 3pt;
+}
+
+#save-button {
+  position: absolute;
+  top: 26em;
 }
 
 .game-window {

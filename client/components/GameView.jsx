@@ -76,7 +76,8 @@ class GameView extends Component {
           <p id = 'gen'> Generation: {this.props.gen}</p>
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
         </div>
-        <div id = 'save-game-window'>Save this map
+        <button id = 'save-button' onClick = {() => this.props.saveWindow()}>Save Map</button>
+        <div id = 'save-game-window' className = 'hidden'>Save this map
           <br/>
           <p>Name:</p> <input type="text" name="" id="save-name" onChange = {e => this.nameHandler(e)}/>
           <br/>
