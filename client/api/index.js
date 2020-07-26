@@ -17,7 +17,6 @@ export function saveField (save) {
 }
 
 export function delSave (id) {
-  console.log('id:', id)
   return request.del(`/saves/${id}`)
     .send(id)
     .then(res => {
