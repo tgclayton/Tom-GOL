@@ -61,6 +61,7 @@ class App extends Component {
     arr = JSON.parse(arr)
     if (arr.length === this.state.size * this.state.size) {
       workArr = arr
+      this.setLiveCells(arr)
       this.canvasDraw(workArr)
     } else {
       makeRandomMap(this.state.size); alert('Bad save file')
@@ -161,7 +162,7 @@ class App extends Component {
     let liveCellText = liveDisp.innerText
     let liveCells = Number(liveCellText.substring(13))
     liveCells++
-    liveDisp.innerText = `Living Cells: ${liveCells}`
+    this.setLiveCells(null, liveCells)
     const idx = coordsToIdx(crds, this.state.size)
     if (this.state.gameRunning === false) {
       workArr[idx] ? workArr[idx] = 0 : workArr[idx] = 1
@@ -181,10 +182,13 @@ setSpeed = (speed) => {
   })
 }
 
-setLiveCells = (field) => {
-  var live = field.filter(cell => cell === 1)
+setLiveCells = (field, val) => {
+  let live
+  if (field) {
+    live = field.filter(cell => cell === 1)
+  }
   this.setState({
-    liveCells: live.length
+    liveCells: val || live.length
   })
 }
 
