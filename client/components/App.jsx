@@ -202,11 +202,12 @@ clearGame = () => {
 }
 
 setMap = () => {
-  const mapArr = makeRandomMap(this.state.size)
-  this.canvasDraw(mapArr)
-  gameRun.push(mapArr)
-  workArr = mapArr
+  const res = makeRandomMap(this.state.size)
+  this.canvasDraw(res.map)
+  gameRun.push(res.map)
+  workArr = res.map
   generation = 0
+  document.getElementById('live-cells').innerText = `Living Cells: ${res.liveCells}`
 }
 
 pauseGame = () => {
