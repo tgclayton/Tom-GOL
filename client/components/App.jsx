@@ -57,6 +57,7 @@ class App extends Component {
   }
 
   loadSave (arr) {
+    this.clearGame()
     arr = JSON.parse(arr)
     if (arr.length === this.state.size * this.state.size) {
       workArr = arr
