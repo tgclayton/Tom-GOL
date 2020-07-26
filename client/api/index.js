@@ -12,6 +12,14 @@ export function saveField (save) {
   return request.post('/saves')
     .send(save)
     .then(res => {
-      // console.log(res.body)
+      return res.body
+    })
+}
+
+export function delSave (id) {
+  return request.del('/saves')
+    .send(id)
+    .then(res => {
+      return res.body
     })
 }

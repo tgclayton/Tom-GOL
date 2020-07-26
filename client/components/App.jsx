@@ -5,7 +5,7 @@ import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords } from './
 // import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
-import { getSaves, saveField } from '../api'
+import { getSaves, saveField, delSave } from '../api'
 
 let workArr = null
 let generation = 0
@@ -42,6 +42,7 @@ class App extends Component {
     this.setSpeed = this.setSpeed.bind(this)
     this.loadSave = this.loadSave.bind(this)
     this.saveMap = this.saveMap.bind(this)
+    this.deleteSave = this.deleteSave.bind(this)
   }
 
   componentDidMount () {
@@ -63,6 +64,13 @@ class App extends Component {
     } else {
       makeRandomMap(this.state.size); alert('Bad save file')
     }
+  }
+
+  deleteSave (id) {
+    delSave(id)
+      .then(x => {
+        this.getSaves()
+      })
   }
 
   saveMap (name, desc) {
@@ -276,6 +284,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        deleteSave = {this.deleteSave}
         saveField = {this.saveMap}
         loadSave = {this.loadSave}
         saves = {this.state.saves}

@@ -3,7 +3,8 @@ const connection = require('knex')(config)
 
 module.exports = {
   getSaves,
-  saveMap
+  saveMap,
+  delSave
 }
 
 function getSaves (db = connection) {
@@ -19,4 +20,10 @@ function saveMap (data, db = connection) {
   }
   return db('Saves')
     .insert(save)
+}
+
+function delSave (id, db = connection) {
+  return db('Saves')
+    .where('id', id)
+    .delete()
 }

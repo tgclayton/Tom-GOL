@@ -25,4 +25,16 @@ router.post('/', (req, res) => {
     })
 })
 
+// DEL /saves
+
+router.delete('/', (req, res) => {
+  db.delMap(req.body)
+    .then(x => {
+      res.send('Deleted')
+    })
+    .catch(err => {
+      res.status(500).send('DATABASE ERROR: ' + err.message)
+    })
+})
+
 module.exports = router

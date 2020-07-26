@@ -7,6 +7,7 @@ export default function Saves (props) {
       <p>Saves:</p>
       {props.saves.map(save => {
         return <SaveBox key = {`save-${save.id}`}
+          deleteSave = {props.deleteSave}
           loadSave = {props.loadSave}
           name = {save.name}
           description = {save.description}

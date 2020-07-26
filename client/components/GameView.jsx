@@ -88,7 +88,10 @@ class GameView extends Component {
         <GameCanvas toggleTile = {this.props.toggleTile}/>
       </div>
       <div className= 'side-column'>
-        <Saves saves = {this.props.saves} loadSave = {this.props.loadSave}></Saves>
+        <Saves saves = {this.props.saves}
+          loadSave = {this.props.loadSave}
+          deleteSave = {this.props.deleteSave}
+        ></Saves>
       </div>
     </div>
   </>
