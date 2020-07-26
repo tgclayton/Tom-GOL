@@ -177,7 +177,13 @@ class App extends Component {
       const liveDisp = document.getElementById('live-cells')
       let liveCellText = liveDisp.innerText
       let liveCells = Number(liveCellText.substring(13))
-      workArr[idx] ? workArr[idx] = 0 && liveCells++ : workArr[idx] = 1 && liveCells--
+      if (workArr[idx]) {
+        workArr[idx] = 0
+        liveCells--
+      } else {
+        workArr[idx] = 1
+        liveCells++
+      }
       this.setLiveCells(null, liveCells)
     }
     this.canvasDraw(workArr)
