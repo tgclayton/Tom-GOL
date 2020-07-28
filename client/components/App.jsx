@@ -266,10 +266,11 @@ runGame = (singleGen) => {
 }
 
 toggleGrid = () => {
-  grid ? grid = false : grid = true
-  const canvas = document.getElementById('game-canvas')
-  canvas.classList.toggle('canvas-border')
-  this.canvasDraw(workArr)
+  alert('Unimplemented, sorry')
+  // grid ? grid = false : grid = true
+  // const canvas = document.getElementById('game-canvas')
+  // canvas.classList.toggle('canvas-border')
+  // this.canvasDraw(workArr)
 }
 
 showNextGen = (field) => {
