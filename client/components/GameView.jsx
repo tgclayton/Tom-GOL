@@ -64,7 +64,8 @@ class GameView extends Component {
           <button id = 'fastest' className = {`speed-button ${ftClass}`} onMouseDown = {() => this.props.setSpeed(fastest, 'fastest')}>Fastest</button>
         </div>
         <div className = 'right-float'>
-          <p id = 'gen'> Generation: {this.props.gen}</p>
+          <p id = 'gen'>Current Generation: {this.props.gen}</p>
+          <p id = 'gen-reached'>Generation Reached: {this.props.genReached}</p>
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
           <button onClick = {() => this.props.setGen()}>Jump to Generation:</button><input type="number" min = {0} max = {this.props.gen} name="set-gen" id="set-gen"/>
         </div>

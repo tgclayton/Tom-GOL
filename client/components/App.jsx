@@ -31,6 +31,7 @@ class App extends Component {
       runSpeed: 120,
       liveCells: 0,
       size: 65,
+      genReached: 0,
       saves: []
     }
     this.setMap = this.setMap.bind(this)
@@ -59,13 +60,22 @@ class App extends Component {
 
   setGen () {
     const gen = document.getElementById('set-gen').value
-    workArr = gameRun[gen]
-    // console.log(document.getElementById('set-gen').value)
-    generation = gen
-    this.canvasDraw(workArr)
-    // this.setState({
-    //   generation: gen
-    // })
+    if (gen > generation || gen < 0) {
+      alert('That generation does not exist')
+    } else {
+      workArr = gameRun[gen]
+      generation = gen
+      this.canvasDraw(workArr)
+      this.setState({
+        generation: gen
+      })
+    }
+  }
+
+  setGenReached () {
+    this.setState({
+      genReached: gameRun.length - 1
+    })
   }
 
   saveWindow () {
@@ -232,7 +242,8 @@ clearGame = () => {
   this.setState({
     generation: 0,
     mapArr: mapArr,
-    liveCells: 0
+    liveCells: 0,
+    genReached: 0
   })
 }
 
@@ -251,11 +262,13 @@ pauseGame = () => {
   clearInterval(this.state.game)
   const gen = generation
   const live = workArr.filter(cell => cell === 1)
+  const genReached = gameRun.length - 1 >= 0 ? gameRun.length - 1 : 0
   this.setState({
     gameRunning: false,
     mapArr: workArr,
     generation: gen,
-    liveCells: live.length
+    liveCells: live.length,
+    genReached: genReached
   })
 }
 
@@ -298,7 +311,7 @@ showNextGen = (field) => {
     changed.pop(); changed.unshift(nextGen.changed)
   }
 
-  document.getElementById('gen').innerHTML = `Generation: ${generation}`
+  document.getElementById('gen').innerHTML = `Current Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
   this.canvasDraw(workArr)
   // const allEqual = liveCheck.every(v => v === liveCheck[0])
@@ -317,7 +330,7 @@ showPrevGen () {
     generation--
     gameRun.pop()
     const liveCells = prevGen.filter(val => val === 1)
-    document.getElementById('gen').innerHTML = `Generation: ${generation}`
+    document.getElementById('gen').innerHTML = `Current Generation: ${generation}`
     document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells.length}`
     this.canvasDraw(prevGen)
   }
@@ -329,6 +342,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        genReached = {this.state.genReached}
         setGen = {this.setGen}
         saveWindow = {this.saveWindow}
         deleteSave = {this.deleteSave}
