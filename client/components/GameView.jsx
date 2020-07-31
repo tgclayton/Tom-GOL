@@ -4,15 +4,6 @@ import GameCanvas from './GameCanvas'
 import Saves from './Saves'
 
 class GameView extends Component {
-  constructor () {
-    super()
-    this.state = {
-      grid: true,
-      saveName: null,
-      saveDesc: null
-    }
-  }
-
   nameHandler (e) {
     this.setState({
       saveName: e.target.value
@@ -75,7 +66,7 @@ class GameView extends Component {
         <div className = 'right-float'>
           <p id = 'gen'> Generation: {this.props.gen}</p>
           <p id = 'live-cells'>Living Cells: {this.props.liveCells}</p>
-          <button>Jump to Generation</button><input type="number" min = '0' max = '1000' name="set-gen" id="set-gen"/>
+          <button onClick = {() => this.props.setGen()}>Jump to Generation:</button><input type="number" min = {0} max = {this.props.gen} name="set-gen" id="set-gen"/>
         </div>
         <button id = 'save-button' onClick = {() => this.props.saveWindow()}>Save Map</button>
         <div id = 'save-game-window' className = 'hidden'>Save this map

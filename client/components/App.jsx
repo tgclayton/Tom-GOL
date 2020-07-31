@@ -9,7 +9,6 @@ import { getSaves, saveField, delSave } from '../api'
 
 let workArr = null
 let generation = 0
-let grid = true
 let gameRun = []
 let liveCheck = []
 let changed = []
@@ -44,6 +43,7 @@ class App extends Component {
     this.loadSave = this.loadSave.bind(this)
     this.saveMap = this.saveMap.bind(this)
     this.deleteSave = this.deleteSave.bind(this)
+    this.setGen = this.setGen.bind(this)
   }
 
   componentDidMount () {
@@ -55,6 +55,17 @@ class App extends Component {
 
   componentDidUpdate () {
     this.canvasDraw(workArr)
+  }
+
+  setGen () {
+    const gen = document.getElementById('set-gen').value
+    workArr = gameRun[gen]
+    // console.log(document.getElementById('set-gen').value)
+    generation = gen
+    this.canvasDraw(workArr)
+    // this.setState({
+    //   generation: gen
+    // })
   }
 
   saveWindow () {
@@ -174,9 +185,6 @@ class App extends Component {
 
   toggleTile = (crds) => {
     const idx = coordsToIdx(crds, this.state.size)
-    console.log('index:', idx)
-    console.log('neighbours:', getNeighbours(idx, this.state.size))
-    console.log(' ')
     if (this.state.gameRunning === false) {
       const liveDisp = document.getElementById('live-cells')
       let liveCellText = liveDisp.innerText
@@ -241,8 +249,8 @@ setMap = () => {
 
 pauseGame = () => {
   clearInterval(this.state.game)
-  var gen = generation
-  var live = workArr.filter(cell => cell === 1)
+  const gen = generation
+  const live = workArr.filter(cell => cell === 1)
   this.setState({
     gameRunning: false,
     mapArr: workArr,
@@ -321,6 +329,7 @@ render () {
       <h1 id = 'main-title'>The Game of Life</h1>
       {/* <Route exact path = '/' component = {() => <Home/>} /> */}
       <Route exact path = '/' component = {() => <GameView
+        setGen = {this.setGen}
         saveWindow = {this.saveWindow}
         deleteSave = {this.deleteSave}
         saveField = {this.saveMap}
