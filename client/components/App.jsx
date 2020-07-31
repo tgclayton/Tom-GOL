@@ -109,8 +109,9 @@ class App extends Component {
   }
 
   handleKey (e) {
-    if (!saving) {
-    // console.log(e)
+    const focus = (document.activeElement === document.getElementById('set-gen'))
+    if (!focus && !saving) {
+      // console.log(e)
       e.preventDefault()
       switch (e.key) {
         case ' ':
