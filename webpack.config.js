@@ -17,16 +17,6 @@ module.exports = {
       }
     ]
   },
-  externals: {
-    'mariasql': 'mariasql',
-    'mssql': 'mssql',
-    'mysql': 'mysql',
-    'oracle': 'oracle',
-    'strong-oracle': 'strong-oracle',
-    'oracledb': 'oracledb',
-    'pg': 'pg',
-    'pg-query-stream': 'pg-query-stream'
-  },
   resolve: {
     extensions: ['.js', '.jsx']
   },
