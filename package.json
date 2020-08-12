@@ -12,10 +12,12 @@
     "dev:client": "webpack --watch",
     "dev:server": "nodemon server",
     "start": "run-s build server",
-    "build": "webpack",
+    "build": "run-s db:migrate db:seed webpack",
     "server": "node server",
     "test": "jest --watchAll",
-    "knex": "knex --knexfile knexfile.js"
+    "knex": "knex --knexfile knexfile.js",
+    "db:migrate": "npx knex migrate:latest",
+    "db:seed": "npx knex seed:run"
   },
   "babel": {
     "presets": [
