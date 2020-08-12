@@ -16,8 +16,8 @@
     "server": "node server",
     "test": "jest --watchAll",
     "knex": "knex --knexfile knexfile.js",
-    "db:migrate": "npx run knex migrate:latest",
-    "db:seed": "npx run knex seed:run",
+    "db:migrate": "npm run knex migrate:latest",
+    "db:seed": "npm run knex seed:run",
     "db:delete": "rm -f server/db/dev.sqlite3",
     "postinstall": "run-s db:delete db:migrate db:seed build"
   },
