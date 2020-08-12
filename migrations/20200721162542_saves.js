@@ -3,7 +3,7 @@ exports.up = function (knex) {
     table.increments().primary()
     table.string('name')
     table.string('description')
-    table.string('fieldData')
+    table.string('fieldData', 100000)
   })
 }
 
