@@ -35,7 +35,6 @@ class App extends Component {
       genReached: 0,
       saves: [],
       saving: false
-
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -48,6 +47,7 @@ class App extends Component {
     this.saveMap = this.saveMap.bind(this)
     this.deleteSave = this.deleteSave.bind(this)
     this.setGen = this.setGen.bind(this)
+    this.saveWindow = this.saveWindow.bind(this)
   }
 
   componentDidMount () {
@@ -84,8 +84,9 @@ class App extends Component {
   saveWindow () {
     document.getElementById('save-game-window').classList.toggle('hidden')
     document.getElementById('save-button').classList.toggle('hidden')
+    const saving = this.state.saving
     this.setState({
-      saving: !this.state.saving
+      saving: !saving
     })
     // saving = !saving
   }
@@ -358,6 +359,7 @@ render () {
         <Route path = '/game' component = {() => <GameView
           genReached = {this.state.genReached}
           setGen = {this.setGen}
+          saving = {this.state.saving}
           saveWindow = {this.saveWindow}
           deleteSave = {this.deleteSave}
           saveField = {this.saveMap}

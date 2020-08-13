@@ -17,6 +17,7 @@ class GameView extends Component {
   }
 
   render () {
+    const saving = !this.props.saving ? 'hidden' : ''
     let vsClass = null
     let sClass = null
     let nClass = null
@@ -70,7 +71,7 @@ class GameView extends Component {
           <button onClick = {() => this.props.setGen()}>Jump to Generation:</button><input type="number" min = {0} max = {this.props.gen} name="set-gen" id="set-gen"/>
         </div>
         <button id = 'save-button' onClick = {() => this.props.saveWindow()}>Save Map</button>
-        <div id = 'save-game-window' className = 'hidden'>Save this map
+        <div id = 'save-game-window' className = {`${saving}`} >Save this map
           <br/>
           <p>Name:</p> <input type="text" name="" id="save-name" onChange = {e => this.nameHandler(e)}/>
           <button onClick = {() => this.props.saveWindow()}>Cancel</button>
