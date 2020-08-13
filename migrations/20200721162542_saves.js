@@ -1,9 +1,9 @@
 exports.up = function (knex) {
   return knex.schema.createTable('Saves', function (table) {
     table.increments().primary()
-    table.string('name')
-    table.string('description')
-    table.string('fieldData', 500)
+    table.text('name')
+    table.text('description')
+    table.text('fieldData')
   })
 }
 
