@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Route, BrowserRouter as Router } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch, Link } from 'react-router-dom'
 import { nextGeneration, makeRandomMap, coordsToIdx, canvasTileCoords, getNeighbours } from './functions'
 // import Home from './Home'
 import GameView from './GameView'
 import Instructions from './Instructions'
+import Home from './Home'
 import { getSaves, saveField, delSave } from '../api'
 
 let workArr = null
@@ -179,7 +180,7 @@ class App extends Component {
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
     const tileSize = 10 // change final value to not be hardcoded
-    if (canvas.getContext) {
+    if (canvas) {
       const ctx = canvas.getContext('2d')
       map.forEach((cell, idx) => {
         const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
@@ -340,32 +341,48 @@ render () {
   return (
     <Router>
       <h1 id = 'main-title'>The Game of Life</h1>
-      {/* <Route exact path = '/' component = {() => <Home/>} /> */}
-      <Route exact path = '/' component = {() => <GameView
-        genReached = {this.state.genReached}
-        setGen = {this.setGen}
-        saveWindow = {this.saveWindow}
-        deleteSave = {this.deleteSave}
-        saveField = {this.saveMap}
-        loadSave = {this.loadSave}
-        saves = {this.state.saves}
-        toggleGrid = {this.toggleGrid}
-        grid = {this.props.grid}
-        liveCells= {this.state.liveCells}
-        running = {this.state.gameRunning}
-        setSpeed = {this.setSpeed}
-        speed = {this.state.runSpeed}
-        clearGame = {this.clearGame}
-        toggleTile = {this.toggleTile}
-        runGame = {this.runGame}
-        pauseGame = {this.pauseGame}
-        setMap = {this.setMap}
-        mapArr ={this.state.mapArr}
-        gen = {this.state.generation}
-      />}
-      />
-      <button onMouseDown = {() => checkGame()}>Check gameRun</button>
-      <Route exact path = '/instructions' component = {() => <Instructions/>} />
+      <div>
+        <ul>
+          <li>
+            <Link to="/home">Home</Link>
+          </li>
+          <li>
+            <Link to="/instructions">Instructions</Link>
+          </li>
+          <li>
+            <Link to="/game">Game</Link>
+          </li>
+        </ul>
+      </div>
+      <hr></hr>
+      <Switch>
+        <Route exact path = '/' component = {() => <Home/>} />
+        <Route path = '/game' component = {() => <GameView
+          genReached = {this.state.genReached}
+          setGen = {this.setGen}
+          saveWindow = {this.saveWindow}
+          deleteSave = {this.deleteSave}
+          saveField = {this.saveMap}
+          loadSave = {this.loadSave}
+          saves = {this.state.saves}
+          toggleGrid = {this.toggleGrid}
+          grid = {this.props.grid}
+          liveCells= {this.state.liveCells}
+          running = {this.state.gameRunning}
+          setSpeed = {this.setSpeed}
+          speed = {this.state.runSpeed}
+          clearGame = {this.clearGame}
+          toggleTile = {this.toggleTile}
+          runGame = {this.runGame}
+          pauseGame = {this.pauseGame}
+          setMap = {this.setMap}
+          mapArr ={this.state.mapArr}
+          gen = {this.state.generation}
+        />}
+        />
+        {/* <button onMouseDown = {() => checkGame()}>Check gameRun</button> */}
+        <Route path = '/instructions' component = {() => <Instructions/>} />
+      </Switch>
     </Router>
   )
 }

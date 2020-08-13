@@ -1,11 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 
 const Home = () => {
   return (
-    <Link to ='/game'>
-      <button>Go to Game</button>
-    </Link>
+    <div>
+      <h2>Home</h2>
+    </div>
   )
 }
 
