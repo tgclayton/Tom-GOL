@@ -33,6 +33,10 @@ button {
   display: inline-block;
 }
 
+.nav-button {
+margin: 0 1em;
+}
+
 .save-box {
   text-align: center;
   background-color: rgb(184, 184, 184);
@@ -47,6 +51,7 @@ button {
   top: 29em;
   border: 2pt solid black;
   padding: 3pt;
+  background-color: white;
 }
 
 #save-button {

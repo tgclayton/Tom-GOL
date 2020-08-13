@@ -33,7 +33,9 @@ class App extends Component {
       liveCells: 0,
       size: 65,
       genReached: 0,
-      saves: []
+      saves: [],
+      saving: false
+
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -82,7 +84,10 @@ class App extends Component {
   saveWindow () {
     document.getElementById('save-game-window').classList.toggle('hidden')
     document.getElementById('save-button').classList.toggle('hidden')
-    saving = !saving
+    this.setState({
+      saving: !this.state.saving
+    })
+    // saving = !saving
   }
 
   loadSave (arr) {
@@ -132,7 +137,7 @@ class App extends Component {
 
   handleKey (e) {
     const focus = (document.activeElement === document.getElementById('set-gen'))
-    if (!focus && !saving) {
+    if (!focus && !this.state.saving) {
       // console.log(e)
       e.preventDefault()
       switch (e.key) {
@@ -341,18 +346,11 @@ render () {
   return (
     <Router>
       <h1 id = 'main-title'>The Game of Life</h1>
+      <br></br><br></br>
       <div>
-        <ul>
-          <li>
-            <Link to="/home">Home</Link>
-          </li>
-          <li>
-            <Link to="/instructions">Instructions</Link>
-          </li>
-          <li>
-            <Link to="/game">Game</Link>
-          </li>
-        </ul>
+        <Link to="/"><sp className = 'nav-button'>Home</sp></Link>
+        <Link to="/instructions"><sp className = 'nav-button'>Instructions</sp></Link>
+        <Link to="/game"><sp className = 'nav-button'>Game</sp></Link>
       </div>
       <hr></hr>
       <Switch>
