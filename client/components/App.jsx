@@ -346,43 +346,44 @@ showPrevGen () {
 render () {
   return (
     <Router>
-      <h1 id = 'main-title'>The Game of Life</h1>
-      <br></br><br></br>
-      <div>
-        <Link to="/"><sp className = 'nav-button'>Home</sp></Link>
-        <Link to="/instructions"><sp className = 'nav-button'>Instructions</sp></Link>
-        <Link to="/game"><sp className = 'nav-button'>Game</sp></Link>
+      <div id ='whole-page' className = 'flexbox'>
+        <h1 id = 'main-title'>The Game of Life</h1>
+        <div className = 'navbar'>
+          <Link to="/"><sp className = 'nav-button'>Home</sp></Link>
+          <Link to="/instructions"><sp className = 'nav-button'>Instructions</sp></Link>
+          <Link to="/game"><sp className = 'nav-button'>Game</sp></Link>
+        </div>
+        <hr></hr>
+        <Switch>
+          <Route exact path = '/' component = {() => <Home/>} />
+          <Route path = '/game' component = {() => <GameView
+            genReached = {this.state.genReached}
+            setGen = {this.setGen}
+            saving = {this.state.saving}
+            saveWindow = {this.saveWindow}
+            deleteSave = {this.deleteSave}
+            saveField = {this.saveMap}
+            loadSave = {this.loadSave}
+            saves = {this.state.saves}
+            toggleGrid = {this.toggleGrid}
+            grid = {this.props.grid}
+            liveCells= {this.state.liveCells}
+            running = {this.state.gameRunning}
+            setSpeed = {this.setSpeed}
+            speed = {this.state.runSpeed}
+            clearGame = {this.clearGame}
+            toggleTile = {this.toggleTile}
+            runGame = {this.runGame}
+            pauseGame = {this.pauseGame}
+            setMap = {this.setMap}
+            mapArr ={this.state.mapArr}
+            gen = {this.state.generation}
+          />}
+          />
+          {/* <button onMouseDown = {() => checkGame()}>Check gameRun</button> */}
+          <Route path = '/instructions' component = {() => <Instructions/>} />
+        </Switch>
       </div>
-      <hr></hr>
-      <Switch>
-        <Route exact path = '/' component = {() => <Home/>} />
-        <Route path = '/game' component = {() => <GameView
-          genReached = {this.state.genReached}
-          setGen = {this.setGen}
-          saving = {this.state.saving}
-          saveWindow = {this.saveWindow}
-          deleteSave = {this.deleteSave}
-          saveField = {this.saveMap}
-          loadSave = {this.loadSave}
-          saves = {this.state.saves}
-          toggleGrid = {this.toggleGrid}
-          grid = {this.props.grid}
-          liveCells= {this.state.liveCells}
-          running = {this.state.gameRunning}
-          setSpeed = {this.setSpeed}
-          speed = {this.state.runSpeed}
-          clearGame = {this.clearGame}
-          toggleTile = {this.toggleTile}
-          runGame = {this.runGame}
-          pauseGame = {this.pauseGame}
-          setMap = {this.setMap}
-          mapArr ={this.state.mapArr}
-          gen = {this.state.generation}
-        />}
-        />
-        {/* <button onMouseDown = {() => checkGame()}>Check gameRun</button> */}
-        <Route path = '/instructions' component = {() => <Instructions/>} />
-      </Switch>
     </Router>
   )
 }
