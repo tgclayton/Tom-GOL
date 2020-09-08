@@ -1,4 +1,4 @@
-#Game of Life
+# Game of Life
 
 ```sh
 git clone https://github.com/[your-account]/[your-app].git
