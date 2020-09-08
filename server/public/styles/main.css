@@ -19,6 +19,14 @@ body {
   align-items: center;
 }
 
+.flex-center {
+  align-items: center;
+}
+
+.align-top {
+  justify-content: flex-start;
+}
+
 #game-canvas {
   background-color: rgb(224, 224, 224);
   min-height: var(--window-size);
@@ -56,6 +64,11 @@ margin: 0 1em;
 
 .page {
   height: 85%;
+}
+
+#landing-description {
+  text-align: center;
+  width: 60%;
 }
 
 .save-box {
