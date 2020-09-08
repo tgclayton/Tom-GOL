@@ -1,5 +1,6 @@
 # Game of Life
 
+## To Run
 ```sh
 git clone https://github.com/[your-account]/[your-app].git
 cd [your-app] && npm i
