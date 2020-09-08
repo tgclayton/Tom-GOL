@@ -15,6 +15,7 @@ body {
 .flexbox {
   display: flex;
   flex-direction: column;
+  justify-content: center;
 }
 
 #game-canvas {
@@ -29,11 +30,12 @@ body {
 }
 
 #main-title {
+  height: 10%;
   width: 100%;
   text-align: center;
   margin: 0em;
   position: relative;
-  top: 1em;
+  /* top: 1em; */
 }
 
 button {
@@ -42,11 +44,15 @@ button {
 }
 
 .navbar {
-
+  height: 5%;
 }
 
 .nav-button {
 margin: 0 1em;
+}
+
+.page {
+  height: 75%;
 }
 
 .save-box {
