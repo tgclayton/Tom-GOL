@@ -48,7 +48,7 @@ class GameView extends Component {
 
     return (
   <>
-    <div className = 'page' >
+    <div className = 'page flex-container' >
       <div id = 'control-panel' className = 'flex-column side-column'>
         <button onMouseDown = {this.props.setMap}>Create Random Map</button>
         <button onMouseDown = {() => this.props.runGame(false)}>Run Game</button>
