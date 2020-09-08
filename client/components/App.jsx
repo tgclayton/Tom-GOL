@@ -346,9 +346,9 @@ showPrevGen () {
 render () {
   return (
     <Router>
-      <div id ='whole-page' className = 'flexbox'>
-        <h1 id = 'main-title'>The Game of Life</h1>
-        <div className = 'navbar'>
+      <div id ='whole-page' className = 'flex'>
+        <h1 id = 'main-title flex'>The Game of Life</h1>
+        <div className = 'navbar flex'>
           <Link to="/"><sp className = 'nav-button'>Home</sp></Link>
           <Link to="/instructions"><sp className = 'nav-button'>Instructions</sp></Link>
           <Link to="/game"><sp className = 'nav-button'>Game</sp></Link>

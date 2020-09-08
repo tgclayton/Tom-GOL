@@ -12,10 +12,11 @@ body {
   width: 100vw;
 }
 
-.flexbox {
+.flex {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 }
 
 #game-canvas {
@@ -45,6 +46,8 @@ button {
 
 .navbar {
   height: 5%;
+  align-items: center;
+  flex-direction: row ;
 }
 
 .nav-button {
@@ -52,7 +55,7 @@ margin: 0 1em;
 }
 
 .page {
-  height: 75%;
+  height: 85%;
 }
 
 .save-box {
