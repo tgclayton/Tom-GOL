@@ -54,7 +54,7 @@ class GameView extends Component {
               <GameCanvas toggleTile={this.props.toggleTile} />
             </div>
             <div>
-              <SpeedPanel speed={this.props.speed}/>
+              <SpeedPanel speed={this.props.speed} setSpeed={this.props.setSpeed}/>
             </div>
           </div>
 
