@@ -1,4 +1,4 @@
-export const generationTruthTable = {
+const generationTruthTable = {
   0: {
     0: 0,
     1: 0,
@@ -23,45 +23,41 @@ export const generationTruthTable = {
   }
 }
 
-export const makeRandomMap = (size) => {
+function getNextGenWithMap (field, size) {
+  const newField = field.map((oldVal, idx) => {
+    const n = getNeighbours(idx, size)
+    const ln = findLiveNeighbours(field, n)
+    if (oldVal) {
+      n.forEach(n => {
+      })
+    }
+    const newVal = generationTruthTable[oldVal][ln]
+    return newVal
+  })
+  return newField
+}
+
+const makeRandomMap = (size) => {
   const tileTotal = size * size
   const field = new Array(tileTotal).fill(0)
   let newField = []
-  let liveCount = 0
   newField = field.map(tile => {
     let rand = Math.random()
     if (rand > 0.85) {
       tile = 1
-      liveCount++
     }
     return tile
   })
-  return { map: newField, liveCells: liveCount }
+  return newField
 }
 
-export function idxToCoords (idx, size) {
+function idxToCoords (idx, size) {
   const x = idx % size
   const y = Math.floor(idx / size)
   return { x: x, y: y }
 }
 
-export function canvasTileCoords (idx, size, tileSize) {
-  const coords = idxToCoords(idx, size)
-  coords.x *= tileSize
-  coords.x++
-  coords.y *= tileSize
-  coords.y++
-  return coords
-}
-
-export function canvasGridCoords (idx, size, tileSize) {
-  const coords = idxToCoords(idx, size)
-  coords[0] *= tileSize
-  coords[1] *= tileSize
-  return coords
-}
-
-export function coordsToIdx (coords, size) {
+function coordsToIdx (coords, size) {
   // console.log(size)
   if (coords.x > (size - 1)) {
     coords.x = 0
@@ -79,7 +75,7 @@ export function coordsToIdx (coords, size) {
   return idx
 }
 
-export function getNeighbours (idx, size) {
+function getNeighbours (idx, size) {
   let neighbours = []
   const crds = idxToCoords(idx, size)
   // console.log(crds)
@@ -94,7 +90,7 @@ export function getNeighbours (idx, size) {
   return neighbours
 }
 
-export function findLiveNeighbours (field, neighbours) {
+function findLiveNeighbours (field, neighbours) {
   let ln = 0
   neighbours.forEach(idx => {
     if (field[idx] === 1) {
@@ -102,4 +98,10 @@ export function findLiveNeighbours (field, neighbours) {
     }
   })
   return ln
+}
+
+module.exports = {
+  generationTruthTable,
+  makeRandomMap,
+  getNextGenWithMap
 }
