@@ -27,13 +27,20 @@ function getNextGenWithMap (field, size) {
   const newField = field.map((oldVal, idx) => {
     const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
-    if (oldVal) {
-      n.forEach(n => {
-      })
-    }
     const newVal = generationTruthTable[oldVal][ln]
     return newVal
   })
+  return newField
+}
+
+function getNextGenWithLoop (field, size) {
+  let newField = []
+  for (let i = 0; i < field.length; i++) {
+    const n = getNeighbours(i, size)
+    const ln = findLiveNeighbours(field, n)
+    const newVal = generationTruthTable[field[i]][ln]
+    newField.push(newVal)
+  }
   return newField
 }
 
@@ -103,5 +110,6 @@ function findLiveNeighbours (field, neighbours) {
 module.exports = {
   generationTruthTable,
   makeRandomMap,
-  getNextGenWithMap
+  getNextGenWithMap,
+  getNextGenWithLoop
 }

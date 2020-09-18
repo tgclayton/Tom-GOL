@@ -1,10 +1,10 @@
-const { makeRandomMap, getNextGenWithMap } = require('./game.js')
+const { makeRandomMap, getNextGenWithMap, getNextGenWithLoop } = require('./game.js')
 
 function runTest () {
   const start = Date.now()
   let field = makeRandomMap(65)
 
-  for (let i = 1; i < 1000; i++) {
+  for (let i = 1; i < 15000; i++) {
     field = getNextGenWithMap(field, 65)
   }
 
