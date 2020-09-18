@@ -39,27 +39,48 @@ export const makeRandomMap = (size) => {
   return { map: newField, liveCells: liveCount }
 }
 
-export function nextGeneration (field, size, checkGen) {
+// export function nextGeneration (field, size, checkGen) {
+//   let liveCount = 0
+//   let changedIdx = []
+//   const newField = field.map((oldVal, idx) => {
+//     const n = getNeighbours(idx, size)
+//     const ln = findLiveNeighbours(field, n)
+//     if (oldVal) {
+//       n.forEach(n => {
+//         // console.log(idxToCoords(n, size))
+//       })
+//       // console.log(' ')
+//     }
+//     const newVal = genObj[oldVal][ln]
+//     if (oldVal !== newVal) {
+//       changedIdx.push(idx)
+//     }
+//     if (newVal === 1) {
+//       liveCount++
+//     }
+//     return newVal
+//   })
+//   return { arr: newField, live: liveCount, changed: changedIdx }
+// }
+
+// new next generation function using loop instead of map
+export function nextGeneration (field, size) {
+  let newField = []
   let liveCount = 0
   let changedIdx = []
-  const newField = field.map((oldVal, idx) => {
-    const n = getNeighbours(idx, size)
+  for (let i = 0; i < field.length; i++) {
+    const oldVal = field[i]
+    const n = getNeighbours(i, size)
     const ln = findLiveNeighbours(field, n)
-    if (oldVal) {
-      n.forEach(n => {
-        // console.log(idxToCoords(n, size))
-      })
-      // console.log(' ')
-    }
     const newVal = genObj[oldVal][ln]
+    newField.push(newVal)
     if (oldVal !== newVal) {
-      changedIdx.push(idx)
+      changedIdx.push(i)
     }
     if (newVal === 1) {
       liveCount++
     }
-    return newVal
-  })
+  }
   return { arr: newField, live: liveCount, changed: changedIdx }
 }
 
