@@ -15,23 +15,24 @@ let liveCheck = []
 let changed = []
 let saving = false
 
-function checkGame () {
-  console.log(changed)
-  console.log(liveCheck)
-}
+// function checkGame () {
+//   console.log(changed)
+//   console.log(liveCheck)
+// }
 
 class App extends Component {
   constructor () {
     super()
+    const size = 200
     this.state = {
-      mapArr: new Array(4225).fill(0), // still need to make this less hardcoded
+      mapArr: new Array(size * size).fill(0),
       generation: 0,
       gameRunning: false,
       game: null,
       mouseDown: null,
       runSpeed: 120,
       liveCells: 0,
-      size: 65,
+      size: size,
       genReached: 0,
       saves: [],
       saving: false
@@ -185,18 +186,29 @@ class App extends Component {
 
   canvasDraw (map) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 10 // change final value to not be hardcoded
+    const tileSize = 3 // change final value to not be hardcoded
     if (canvas) {
       const ctx = canvas.getContext('2d')
-      map.forEach((cell, idx) => {
-        const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
-        if (cell) {
+
+      for (let i = 0; i < this.state.size * this.state.size; i++) {
+        const tcrds = canvasTileCoords(i, this.state.size, tileSize)
+        if (map[i]) {
           ctx.fillStyle = '#008000'
         } else {
           ctx.fillStyle = 'rgb(224, 224, 224)'
         }
         ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
-      })
+      }
+
+      // map.forEach((cell, idx) => {
+      //   const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
+      //   if (cell) {
+      //     ctx.fillStyle = '#008000'
+      //   } else {
+      //     ctx.fillStyle = 'rgb(224, 224, 224)'
+      //   }
+      //   ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
+      // })
     }
   }
 
@@ -242,7 +254,7 @@ setLiveCells = (field, val) => {
 
 clearGame = () => {
   this.pauseGame()
-  var mapArr = new Array(this.state.size * this.state.size).fill(0) // this also needs to be less hardcoded
+  var mapArr = new Array(this.state.size * this.state.size).fill(0)
   generation = 0
   workArr = mapArr
   gameRun = []
