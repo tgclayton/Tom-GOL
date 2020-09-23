@@ -268,13 +268,15 @@ clearGame = () => {
 }
 
 setMap = () => {
-  const res = makeRandomMap(this.state.size)
-  this.canvasDraw(res.map)
-  gameRun.push(res.map)
-  workArr = res.map
+  const newMap = makeRandomMap(this.state.size)
+  this.canvasDraw(newMap.map)
+  gameRun.push(newMap.map)
+  workArr = newMap.map
+  checkArray = newMap.checkArray
+  console.log(checkArray)
   this.setState({
     generation: 0,
-    liveCells: res.liveCells
+    liveCells: newMap.liveCells
   })
 }
 
@@ -322,7 +324,6 @@ showNextGen = (field) => {
   generation++
   workArr = nextGen.arr
   gameRun.push(workArr)
-  console.log(nextGen.checkArray)
   let liveCells = nextGen.live
   if (liveCheck.length < 3) {
     liveCheck.unshift(liveCells)

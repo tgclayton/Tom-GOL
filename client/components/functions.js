@@ -28,15 +28,18 @@ export const makeRandomMap = (size) => {
   const field = new Array(tileTotal).fill(0)
   let newField = []
   let liveCount = 0
-  newField = field.map(tile => {
+  let checkArray = new Set()
+  newField = field.map((tile, idx) => {
     let rand = Math.random()
     if (rand > 0.85) {
+      let neighbours = getNeighbours(idx, size)
       tile = 1
       liveCount++
+      checkArray.add(...neighbours, idx)
     }
     return tile
   })
-  return { map: newField, liveCells: liveCount }
+  return { map: newField, liveCells: liveCount, checkArray: checkArray }
 }
 
 // export function nextGeneration (field, size, checkGen) {
