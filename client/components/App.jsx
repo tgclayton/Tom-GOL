@@ -319,7 +319,8 @@ toggleGrid = () => {
 showNextGen = (field) => {
   let checkGen
   gameRun.length > 3 ? checkGen = gameRun[gameRun.length - 2] : checkGen = null
-  let nextGen = nextGeneration(field, this.state.size, checkGen)
+  let nextGen = nextGeneration(field, this.state.size, checkSet)
+  checkSet = nextGen.checkSet
   generation++
   workArr = nextGen.arr
   gameRun.push(workArr)

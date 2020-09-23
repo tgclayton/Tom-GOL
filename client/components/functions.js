@@ -31,11 +31,11 @@ export const makeRandomMap = (size) => {
   let checkSet = new Set()
   newField = field.map((tile, idx) => {
     let rand = Math.random()
-    if (rand > 0.85) {
+    if (rand > 0.9) {
       let neighbours = getNeighbours(idx, size)
       tile = 1
       liveCount++
-      checkSet.add(...neighbours, idx)
+      checkSet = new Set([...checkSet, ...neighbours])
     }
     return tile
   })
@@ -66,27 +66,56 @@ export const makeRandomMap = (size) => {
 //   return { arr: newField, live: liveCount, changed: changedIdx }
 // }
 
+// pre check set version
+// export function nextGeneration (field, size) {
+//   let newField = []
+//   let liveCount = 0
+//   let changedIdx = []
+//   for (let i = 0; i < field.length; i++) {
+//     const oldVal = field[i]
+//     const n = getNeighbours(i, size)
+//     const ln = findLiveNeighbours(field, n)
+//     const newVal = genObj[oldVal][ln]
+//     newField.push(newVal)
+//     if (oldVal !== newVal) {
+//       changedIdx.push(i)
+//     }
+//     if (newVal === 1) {
+//       liveCount++
+//     }
+//   }
+//   return { arr: newField, live: liveCount, changed: changedIdx }
+// }
+
 // new next generation function using loop instead of map
-export function nextGeneration (field, size) {
-  let newField = []
+export function nextGeneration (field, size, checkSet) {
+  let newField = new Array(size * size).fill(0)
   let liveCount = 0
   let changedIdx = []
-  let newCheckArray = new Set()
-  for (let i = 0; i < field.length; i++) {
-    const oldVal = field[i]
-    const n = getNeighbours(i, size)
+  let newCheckSet = new Set()
+  for (let idx of checkSet) {
+    const oldVal = field[idx]
+    const n = getNeighbours(idx, size)
     const ln = findLiveNeighbours(field, n)
     const newVal = genObj[oldVal][ln]
-    newField.push(newVal)
+    // console.log(` idx: ${idx}`)
+    // console.log(`oldval: ${oldVal}`)
+    // console.log(`n: ${n}`)
+    // console.log(`ln: ${ln}`)
+    // console.log(`newVal: ${newVal}`)
+    // console.log(` `)
+    newField[idx] = newVal
     if (oldVal !== newVal) {
-      changedIdx.push(i)
+      changedIdx.push(idx)
     }
     if (newVal === 1) {
       liveCount++
-      newCheckArray.add(...n, i)
+      newCheckSet = new Set([...newCheckSet, ...n])
+      newCheckSet.add(...n, idx)
     }
   }
-  return { arr: newField, live: liveCount, changed: changedIdx, checkArray: newCheckArray }
+  // console.log(newField)
+  return { arr: newField, live: liveCount, changed: changedIdx, checkSet: newCheckSet }
 }
 
 export function idxToCoords (idx, size) {
