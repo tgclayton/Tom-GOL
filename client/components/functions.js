@@ -68,6 +68,7 @@ export function nextGeneration (field, size) {
   let newField = []
   let liveCount = 0
   let changedIdx = []
+  let newCheckArray = new Set()
   for (let i = 0; i < field.length; i++) {
     const oldVal = field[i]
     const n = getNeighbours(i, size)
@@ -79,9 +80,10 @@ export function nextGeneration (field, size) {
     }
     if (newVal === 1) {
       liveCount++
+      newCheckArray.add(...n, i)
     }
   }
-  return { arr: newField, live: liveCount, changed: changedIdx }
+  return { arr: newField, live: liveCount, changed: changedIdx, checkArray: newCheckArray }
 }
 
 export function idxToCoords (idx, size) {

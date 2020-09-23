@@ -14,6 +14,7 @@ let gameRun = []
 let liveCheck = []
 let changed = []
 let saving = false
+let checkArray = null
 
 // function checkGame () {
 //   console.log(changed)
@@ -321,6 +322,7 @@ showNextGen = (field) => {
   generation++
   workArr = nextGen.arr
   gameRun.push(workArr)
+  console.log(nextGen.checkArray)
   let liveCells = nextGen.live
   if (liveCheck.length < 3) {
     liveCheck.unshift(liveCells)
