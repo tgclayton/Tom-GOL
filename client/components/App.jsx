@@ -14,7 +14,7 @@ let gameRun = []
 let liveCheck = []
 let changed = []
 let saving = false
-let checkArray = null
+let checkSet = null
 
 // function checkGame () {
 //   console.log(changed)
@@ -272,8 +272,7 @@ setMap = () => {
   this.canvasDraw(newMap.map)
   gameRun.push(newMap.map)
   workArr = newMap.map
-  checkArray = newMap.checkArray
-  console.log(checkArray)
+  checkSet = newMap.checkSet
   this.setState({
     generation: 0,
     liveCells: newMap.liveCells
