@@ -35,7 +35,8 @@ export const makeRandomMap = (size) => {
       let neighbours = getNeighbours(idx, size)
       tile = 1
       liveCount++
-      checkSet = new Set([...checkSet, ...neighbours])
+      neighbours.forEach(n => checkSet.add(n))
+      // checkSet = new Set([...checkSet, ...neighbours])
     }
     return tile
   })
@@ -110,11 +111,12 @@ export function nextGeneration (field, size, checkSet) {
     }
     if (newVal === 1) {
       liveCount++
-      newCheckSet = new Set([...newCheckSet, ...n])
-      newCheckSet.add(...n, idx)
+      newCheckSet.add(idx)
+      n.forEach(n => checkSet.add(n))
+      // newCheckSet = new Set([...newCheckSet, ...n])
     }
   }
-  // console.log(newField)
+  console.log(newCheckSet)
   return { arr: newField, live: liveCount, changed: changedIdx, checkSet: newCheckSet }
 }
 
