@@ -115,13 +115,14 @@ export function coordsToIdx (coords, size) {
   return idx
 }
 
-export function getNeighbours (idx, size) {
-  let neighbours = []
+export function getNeighbours (idx, size, knownNeighbours) {
+  let neighbours = knownNeighbours ? [...knownNeighbours] : []
   const crds = idxToCoords(idx, size)
   // console.log(crds)
   neighbours.push(coordsToIdx({ x: crds.x - 1, y: crds.y - 1 }, size))
   neighbours.push(coordsToIdx({ x: crds.x - 1, y: crds.y }, size))
   neighbours.push(coordsToIdx({ x: crds.x - 1, y: crds.y + 1 }, size))
+
   neighbours.push(coordsToIdx({ x: crds.x, y: crds.y - 1 }, size))
   neighbours.push(coordsToIdx({ x: crds.x, y: crds.y + 1 }, size))
   neighbours.push(coordsToIdx({ x: crds.x + 1, y: crds.y - 1 }, size))
