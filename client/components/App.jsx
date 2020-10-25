@@ -16,15 +16,18 @@ let changed = []
 let saving = false
 let checkSet = null
 
-// function checkGame () {
-//   console.log(changed)
-//   console.log(liveCheck)
-// }
+function createField (size) {
+  const field = {}
+  for (let i = 0; i < size * size; i++) {
+    field[i] = { wrappedNeighbours: getNeighbours(i, size) }
+  }
+  return field
+}
 
 class App extends Component {
   constructor () {
     super()
-    const size = 200
+    const size = 60
     this.state = {
       mapArr: new Array(size * size).fill(0),
       generation: 0,
@@ -36,7 +39,9 @@ class App extends Component {
       size: size,
       genReached: 0,
       saves: [],
-      saving: false
+      saving: false,
+      field: createField(size)
+
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -57,6 +62,7 @@ class App extends Component {
     this.canvasDraw(workArr)
     window.addEventListener('keydown', e => this.handleKey(e))
     this.getSaves()
+    // console.log(this.state.field)
   }
 
   componentDidUpdate () {

@@ -44,15 +44,15 @@ export const makeRandomMap = (size) => {
 }
 
 // new next generation function using loop instead of map
-export function nextGeneration (field, size, checkSet) {
-  let newField = new Array(size * size).fill(0)
+export function nextGeneration (map, size, checkSet) {
+  let newMap = new Array(size * size).fill(0)
   let liveCount = 0
   let changedIdx = []
   let newCheckSet = new Set()
   for (let idx of checkSet) {
-    const oldVal = field[idx]
+    const oldVal = map[idx]
     const n = getNeighbours(idx, size)
-    const ln = findLiveNeighbours(field, n)
+    const ln = findLiveNeighbours(map, n)
     const newVal = cellTruthTable[oldVal][ln]
     // console.log(` idx: ${idx}`)
     // console.log(`oldval: ${oldVal}`)
@@ -60,7 +60,7 @@ export function nextGeneration (field, size, checkSet) {
     // console.log(`ln: ${ln}`)
     // console.log(`newVal: ${newVal}`)
     // console.log(` `)
-    newField[idx] = newVal
+    newMap[idx] = newVal
     if (oldVal !== newVal) {
       changedIdx.push(idx)
     }
@@ -72,7 +72,7 @@ export function nextGeneration (field, size, checkSet) {
     }
   }
   // console.log(newCheckSet)
-  return { arr: newField, live: liveCount, changed: changedIdx, checkSet: newCheckSet }
+  return { arr: newMap, live: liveCount, changed: changedIdx, checkSet: newCheckSet }
 }
 
 export function idxToCoords (idx, size) {
