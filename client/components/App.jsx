@@ -18,16 +18,24 @@ let checkSet = null
 
 function createField (size) {
   const field = {}
+  const tileSize = 3
   for (let i = 0; i < size * size; i++) {
-    field[i] = { wrappedNeighbours: getNeighbours(i, size) }
+    field[i] = {
+      wrappedNeighbours: getNeighbours(i, size),
+      canvasTileCrds: canvasTileCoords(i, size, tileSize)
+    }
   }
   return field
+}
+
+function getCanvasContext () {
+
 }
 
 class App extends Component {
   constructor () {
     super()
-    const size = 60
+    const size = 200
     this.state = {
       mapArr: new Array(size * size).fill(0),
       generation: 0,
@@ -40,8 +48,8 @@ class App extends Component {
       genReached: 0,
       saves: [],
       saving: false,
-      field: createField(size)
-
+      field: createField(size),
+      canvasContext: getCanvasContext()
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -191,20 +199,21 @@ class App extends Component {
     }
   }
 
-  canvasDraw (map) {
+  canvasDraw (map, context) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 3 // change final value to not be hardcoded
+    const tileSize = 3
     if (canvas) {
       const ctx = canvas.getContext('2d')
 
       for (let i = 0; i < this.state.size * this.state.size; i++) {
-        const tcrds = canvasTileCoords(i, this.state.size, tileSize)
+        const tcrds = this.state.field[i].canvasTileCrds
         if (map[i]) {
           ctx.fillStyle = '#008000'
+          ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
         } else {
-          ctx.fillStyle = 'rgb(224, 224, 224)'
+          ctx.clearRect(tcrds.x, tcrds.y, tileSize, tileSize)
         }
-        ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
+        // ctx.fillstyle = map[i] ? ctx.fillStyle = '#008000' : ctx.fillStyle = 'rgb(224, 224, 224)'
       }
 
       // map.forEach((cell, idx) => {
@@ -325,7 +334,7 @@ toggleGrid = () => {
 showNextGen = (field) => {
   let checkGen
   gameRun.length > 3 ? checkGen = gameRun[gameRun.length - 2] : checkGen = null
-  let nextGen = nextGeneration(field, this.state.size, checkSet)
+  let nextGen = nextGeneration(field, this.state.size, checkSet, this.state.field)
   checkSet = nextGen.checkSet
   generation++
   workArr = nextGen.arr

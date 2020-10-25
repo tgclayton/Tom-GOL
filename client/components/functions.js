@@ -44,14 +44,14 @@ export const makeRandomMap = (size) => {
 }
 
 // new next generation function using loop instead of map
-export function nextGeneration (map, size, checkSet) {
+export function nextGeneration (map, size, checkSet, field) {
   let newMap = new Array(size * size).fill(0)
   let liveCount = 0
   let changedIdx = []
   let newCheckSet = new Set()
   for (let idx of checkSet) {
     const oldVal = map[idx]
-    const n = getNeighbours(idx, size)
+    const n = field[idx].wrappedNeighbours
     const ln = findLiveNeighbours(map, n)
     const newVal = cellTruthTable[oldVal][ln]
     // console.log(` idx: ${idx}`)
