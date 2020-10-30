@@ -199,22 +199,20 @@ class App extends Component {
     }
   }
 
-  canvasDraw (map, context) {
+  canvasDraw (cells, context) {
     const canvas = document.getElementById('game-canvas')
     const tileSize = 3
     if (canvas) {
       const ctx = canvas.getContext('2d')
-
-      for (let i = 0; i < this.state.size * this.state.size; i++) {
-        const tcrds = this.state.field[i].canvasTileCrds
-        if (map[i]) {
-          ctx.fillStyle = '#008000'
-          ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
-        } else {
-          ctx.clearRect(tcrds.x, tcrds.y, tileSize, tileSize)
-        }
-        // ctx.fillstyle = map[i] ? ctx.fillStyle = '#008000' : ctx.fillStyle = 'rgb(224, 224, 224)'
-      }
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      cells.forEach(cell => {
+        const tcrds = this.state.field[cell].canvasTileCrds
+        ctx.fillStyle = '#008000'
+        ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
+      })
+      // for (let i = 0; i < this.state.size * this.state.size; i++) {
+      //   ctx.fillstyle = map[i] ? ctx.fillStyle = '#008000' : ctx.fillStyle = 'rgb(224, 224, 224)'
+      // }
 
       // map.forEach((cell, idx) => {
       //   const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
@@ -284,7 +282,13 @@ clearGame = () => {
 
 setMap = () => {
   const newMap = makeRandomMap(this.state.size)
-  this.canvasDraw(newMap.map)
+  const liveCells = []
+  newMap.map.forEach((cell, idx) => {
+    if (cell) {
+      liveCells.push(idx)
+    }
+  })
+  this.canvasDraw(liveCells)
   gameRun.push(newMap.map)
   workArr = newMap.map
   checkSet = newMap.checkSet
@@ -350,11 +354,11 @@ showNextGen = (field) => {
 
   document.getElementById('gen').innerHTML = `Current Generation: ${generation}`
   document.getElementById('live-cells').innerHTML = `Living Cells: ${liveCells}`
-  this.canvasDraw(workArr)
+  this.canvasDraw(nextGen.liveCells)
   // const allEqual = liveCheck.every(v => v === liveCheck[0])
   if (Math.abs(liveCheck[2] - liveCheck[1] < 4)) {
-    const equil = changed[0].every((v, i) => v === changed[1][i])
-    if (equil) {
+    const equal = changed[0].every((v, i) => v === changed[1][i])
+    if (equal) {
       this.pauseGame()
     }
   }

@@ -49,6 +49,7 @@ export function nextGeneration (map, size, checkSet, field) {
   let liveCount = 0
   let changedIdx = []
   let newCheckSet = new Set()
+  let liveCellIdxs = []
   for (let idx of checkSet) {
     const oldVal = map[idx]
     const n = field[idx].wrappedNeighbours
@@ -65,6 +66,7 @@ export function nextGeneration (map, size, checkSet, field) {
       changedIdx.push(idx)
     }
     if (newVal === 1) {
+      liveCellIdxs.push(idx)
       liveCount++
       newCheckSet.add(idx)
       n.forEach(n => checkSet.add(n))
@@ -72,7 +74,7 @@ export function nextGeneration (map, size, checkSet, field) {
     }
   }
   // console.log(newCheckSet)
-  return { arr: newMap, live: liveCount, changed: changedIdx, checkSet: newCheckSet }
+  return { arr: newMap, live: liveCount, changed: changedIdx, checkSet: newCheckSet, liveCells: liveCellIdxs }
 }
 
 export function idxToCoords (idx, size) {
