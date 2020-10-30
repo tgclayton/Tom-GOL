@@ -31,7 +31,7 @@ export const makeRandomMap = (size) => {
   let checkSet = new Set()
   newField = field.map((tile, idx) => {
     let rand = Math.random()
-    if (rand > 0.9) {
+    if (rand > 0.8) {
       let neighbours = getNeighbours(idx, size)
       tile = 1
       liveCount++

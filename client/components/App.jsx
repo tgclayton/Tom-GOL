@@ -48,7 +48,7 @@ class App extends Component {
       genReached: 0,
       saves: [],
       saving: false,
-      field: createField(size),
+      field: createField(size)
       // canvasContext: getCanvasContext()
     }
     this.setMap = this.setMap.bind(this)
@@ -90,7 +90,7 @@ class App extends Component {
     } else {
       workArr = gameRun[gen]
       generation = gen
-      this.canvasDraw(workArr) 
+      this.canvasDraw(workArr)
       this.setState({
         generation: gen
       })
@@ -287,6 +287,7 @@ clearGame = () => {
 }
 
 setMap = () => {
+  const wasRunning = this.state.gameRunning
   this.clearGame()
   const newMap = makeRandomMap(this.state.size)
   const liveCells = []
@@ -300,11 +301,7 @@ setMap = () => {
   gameRun.push(newMap.map)
   workArr = newMap.map
   checkSet = newMap.checkSet
-  // this.setState({
-  //   generation: 0,
-  //   liveCells: newMap.liveCells,
-  //   genReached: 0
-  // })
+  this.runGame(null, wasRunning)
 }
 
 pauseGame = () => {
@@ -321,8 +318,10 @@ pauseGame = () => {
   })
 }
 
-runGame = (singleGen) => {
-  if (!this.state.gameRunning) {
+runGame = (singleGen, wasRunning) => {
+  const runCheck = wasRunning === undefined ? !this.state.gameRunning : wasRunning
+  console.log(runCheck)
+  if (runCheck) {
     if (singleGen) {
       this.showNextGen(workArr)
     } else {
