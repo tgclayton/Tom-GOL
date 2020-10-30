@@ -35,7 +35,7 @@ function getCanvasContext () {
 class App extends Component {
   constructor () {
     super()
-    const size = 200
+    const size = 250
     this.state = {
       mapArr: new Array(size * size).fill(0),
       generation: 0,
@@ -67,14 +67,20 @@ class App extends Component {
 
   componentDidMount () {
     workArr = new Array(this.state.size * this.state.size).fill(0)
-    this.canvasDraw(workArr)
+    this.canvasDraw([])
     window.addEventListener('keydown', e => this.handleKey(e))
     this.getSaves()
     // console.log(this.state.field)
   }
 
   componentDidUpdate () {
-    this.canvasDraw(workArr)
+    const liveCells = []
+    workArr.forEach((cell, idx) => {
+      if (cell) {
+        liveCells.push(idx)
+      }
+    })
+    this.canvasDraw(liveCells)
   }
 
   setGen () {
@@ -84,7 +90,7 @@ class App extends Component {
     } else {
       workArr = gameRun[gen]
       generation = gen
-      this.canvasDraw(workArr)
+      this.canvasDraw(workArr) 
       this.setState({
         generation: gen
       })
@@ -201,7 +207,7 @@ class App extends Component {
 
   canvasDraw (cells, context) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 3
+    const tileSize = 2
     if (canvas) {
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height)
