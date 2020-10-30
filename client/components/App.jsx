@@ -49,7 +49,7 @@ class App extends Component {
       saves: [],
       saving: false,
       field: createField(size),
-      canvasContext: getCanvasContext()
+      // canvasContext: getCanvasContext()
     }
     this.setMap = this.setMap.bind(this)
     this.runGame = this.runGame.bind(this)
@@ -287,6 +287,7 @@ clearGame = () => {
 }
 
 setMap = () => {
+  this.clearGame()
   const newMap = makeRandomMap(this.state.size)
   const liveCells = []
   newMap.map.forEach((cell, idx) => {
@@ -295,13 +296,15 @@ setMap = () => {
     }
   })
   this.canvasDraw(liveCells)
+  generation = 0
   gameRun.push(newMap.map)
   workArr = newMap.map
   checkSet = newMap.checkSet
-  this.setState({
-    generation: 0,
-    liveCells: newMap.liveCells
-  })
+  // this.setState({
+  //   generation: 0,
+  //   liveCells: newMap.liveCells,
+  //   genReached: 0
+  // })
 }
 
 pauseGame = () => {
