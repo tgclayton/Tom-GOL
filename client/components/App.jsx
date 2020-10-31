@@ -18,7 +18,7 @@ let checkSet = null
 
 function createField (size) {
   const field = {}
-  const tileSize = 3
+  const tileSize = 10
   for (let i = 0; i < size * size; i++) {
     field[i] = {
       wrappedNeighbours: getNeighbours(i, size),
@@ -28,14 +28,14 @@ function createField (size) {
   return field
 }
 
-function getCanvasContext () {
+// function getCanvasContext () {
 
-}
+// }
 
 class App extends Component {
   constructor () {
     super()
-    const size = 250
+    const size = 65
     this.state = {
       mapArr: new Array(size * size).fill(0),
       generation: 0,
@@ -207,7 +207,7 @@ class App extends Component {
 
   canvasDraw (cells, context) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 2
+    const tileSize = 10
     if (canvas) {
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -320,7 +320,6 @@ pauseGame = () => {
 
 runGame = (singleGen, wasRunning) => {
   const runCheck = wasRunning === undefined ? !this.state.gameRunning : wasRunning
-  console.log(runCheck)
   if (runCheck) {
     if (singleGen) {
       this.showNextGen(workArr)
@@ -385,6 +384,16 @@ showPrevGen () {
   }
 }
 
+async speedTest () {
+  await this.clearGame()
+  await this.setMap()
+  await this.runGame()
+  setTimeout(() => {
+    this.pauseGame()
+    console.log(`Generations/sec: ${generation / 2}`)
+  }, 2000)
+}
+
 render () {
   return (
     <Router>
@@ -420,6 +429,7 @@ render () {
             setMap = {this.setMap}
             mapArr ={this.state.mapArr}
             gen = {this.state.generation}
+            speedTest = {this.speedTest}
           />}
           />
           {/* <button onMouseDown = {() => checkGame()}>Check gameRun</button> */}

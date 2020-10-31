@@ -24,13 +24,14 @@ class GameView extends Component {
       <>
         <div className='page flex-container' >
           <div id='control-panel' className='flex-column side-column'>
-            <button onMouseDown={this.props.setMap}>Create Random Map</button>
+            <button onMouseDown={() => this.props.setMap()}>Create Random Map</button>
             <button onMouseDown={() => this.props.runGame(false)}>Run Game</button>
             <button onMouseDown={() => this.props.pauseGame()}>Pause Game</button>
             <button onMouseDown={() => this.props.runGame(true)}>Run One Generation</button>
             <button onMouseDown={() => this.props.clearGame()}>Clear Game</button>
             <button onMouseDown={() => this.props.toggleGrid()}>Toggle Grid</button>
             <button onMouseDown={() => this.props.save()}>Save Current Map</button>
+            <button onMouseDown={() => this.props.speedTest()}>Speed Test</button>
 
             <div className='right-float'>
               <p id='gen'>Current Generation: {this.props.gen}</p>
