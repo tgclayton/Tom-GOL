@@ -1,12 +1,16 @@
+const size = 500000
+
 function createField (size) {
   const field = {}
-  for (let i = 0; i < size * size; i++) {
+  for (let i = 0; i < size; i++) {
     field[i] = {
-      wrappedNeighbours: getNeighbours(i, size)
+      wrappedNeighbours: getNeighbours(i, size / size)
     }
   }
   return field
 }
+
+const field = createField(size)
 
 const cellTruthTable = {
   0: {
@@ -33,7 +37,6 @@ const cellTruthTable = {
   }
 }
 
-// const field = createField(2000)
 
 function test1 (length) {
   let neighbours = []
@@ -42,16 +45,19 @@ function test1 (length) {
     neighbours.push(field[i].wrappedNeighbours)
   }
   const end = Date.now()
+  console.log('Test: Get neighbours using For loop')
   console.log(`Time taken: ${end - start}ms`)
 }
 
 function test2 (length) {
   let neighbours = []
+  let i = length
   const start = Date.now()
-  for (let i = 0; i < length; i++) {
-    neighbours.push(getNeighbours(i, length / length))
+  while (i--) {
+    neighbours.push(field[i].wrappedNeighbours)
   }
   const end = Date.now()
+  console.log('Test: Get neighbours using while loop')
   console.log(`Time taken: ${end - start}ms`)
 }
 
@@ -68,7 +74,7 @@ function test3 (length) {
   console.log(`Time taken: ${end - start}ms`)
 }
 
-const array = new Array(500000).fill(0)
+// const array = new Array(500000).fill(0)
 
 function test4 (length) {
   const start = Date.now()
@@ -107,8 +113,8 @@ function test5 (length) {
   console.log(`Time taken: ${end - start}ms`)
 }
 
-test4(500000)
-test5()
+// test1(size)
+test2(size)
 
 //
 //

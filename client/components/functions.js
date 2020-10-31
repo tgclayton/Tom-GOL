@@ -31,7 +31,7 @@ export const makeRandomMap = (size) => {
   let checkSet = new Set()
   newField = field.map((tile, idx) => {
     let rand = Math.random()
-    if (rand > 0.8) {
+    if (rand > 0.9) {
       let neighbours = getNeighbours(idx, size)
       tile = 1
       liveCount++
@@ -45,36 +45,40 @@ export const makeRandomMap = (size) => {
 
 // new next generation function using loop instead of map
 export function nextGeneration (map, size, checkSet, field) {
-  let newMap = new Array(size * size).fill(0)
   let liveCount = 0
+  let newMap = []
+  new Array(size * size).fill(0)
   let changedIdx = []
-  let newCheckSet = new Set()
+  // let newCheckSet = new Set()
   let liveCellIdxs = []
-  for (let idx of checkSet) {
-    const oldVal = map[idx]
-    const n = field[idx].wrappedNeighbours
+  const length = map.length
+  for (let i = 0; i < length; i++) {
+    const oldVal = map[i]
+    const n = field[i].wrappedNeighbours
     const ln = findLiveNeighbours(map, n)
     const newVal = cellTruthTable[oldVal][ln]
-    // console.log(` idx: ${idx}`)
-    // console.log(`oldval: ${oldVal}`)
-    // console.log(`n: ${n}`)
-    // console.log(`ln: ${ln}`)
-    // console.log(`newVal: ${newVal}`)
-    // console.log(` `)
-    newMap[idx] = newVal
+    newMap[i] = newVal
     if (oldVal !== newVal) {
-      changedIdx.push(idx)
+      changedIdx.push(i)
     }
     if (newVal === 1) {
-      liveCellIdxs.push(idx)
+      liveCellIdxs.push(i)
       liveCount++
-      newCheckSet.add(idx)
-      n.forEach(n => checkSet.add(n))
-      // newCheckSet = new Set([...newCheckSet, ...n])
     }
   }
+  // for (let idx of checkSet) {
+  // console.log(` idx: ${idx}`)
+  // console.log(`oldval: ${oldVal}`)
+  // console.log(`n: ${n}`)
+  // console.log(`ln: ${ln}`)
+  // console.log(`newVal: ${newVal}`)
+  // console.log(` `)
+  // newCheckSet.add(idx)
+  // n.forEach(n => checkSet.add(n))
+  // newCheckSet = new Set([...newCheckSet, ...n])
+  // }
   // console.log(newCheckSet)
-  return { arr: newMap, live: liveCount, changed: changedIdx, checkSet: newCheckSet, liveCells: liveCellIdxs }
+  return { arr: newMap, live: liveCount, changed: changedIdx, liveCells: liveCellIdxs }
 }
 
 export function idxToCoords (idx, size) {

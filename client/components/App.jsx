@@ -15,10 +15,12 @@ let liveCheck = []
 let changed = []
 let saving = false
 let checkSet = null
+const tileSize = 1
+const size = 200
 
 function createField (size) {
   const field = {}
-  const tileSize = 10
+  // const tileSize = 2
   for (let i = 0; i < size * size; i++) {
     field[i] = {
       wrappedNeighbours: getNeighbours(i, size),
@@ -35,7 +37,6 @@ function createField (size) {
 class App extends Component {
   constructor () {
     super()
-    const size = 65
     this.state = {
       mapArr: new Array(size * size).fill(0),
       generation: 0,
@@ -207,29 +208,28 @@ class App extends Component {
 
   canvasDraw (cells, context) {
     const canvas = document.getElementById('game-canvas')
-    const tileSize = 10
+    // const tileSize = 2
     if (canvas) {
       const ctx = canvas.getContext('2d')
       ctx.clearRect(0, 0, canvas.width, canvas.height)
-      cells.forEach(cell => {
-        const tcrds = this.state.field[cell].canvasTileCrds
+      // cells.forEach(cell => {
+      // })
+      for (let i = 0; i < cells.length; i++) {
+        const tcrds = this.state.field[cells[i]].canvasTileCrds
         ctx.fillStyle = '#008000'
         ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
-      })
-      // for (let i = 0; i < this.state.size * this.state.size; i++) {
-      //   ctx.fillstyle = map[i] ? ctx.fillStyle = '#008000' : ctx.fillStyle = 'rgb(224, 224, 224)'
-      // }
-
-      // map.forEach((cell, idx) => {
-      //   const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
-      //   if (cell) {
-      //     ctx.fillStyle = '#008000'
-      //   } else {
-      //     ctx.fillStyle = 'rgb(224, 224, 224)'
-      //   }
-      //   ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
-      // })
+      }
     }
+    // ctx.fillstyle = map[i] ? ctx.fillStyle = '#008000' : ctx.fillStyle = 'rgb(224, 224, 224)'
+    // map.forEach((cell, idx) => {
+    //   const tcrds = canvasTileCoords(idx, this.state.size, tileSize)
+    //   if (cell) {
+    //     ctx.fillStyle = '#008000'
+    //   } else {
+    //     ctx.fillStyle = 'rgb(224, 224, 224)'
+    //   }
+    //   ctx.fillRect(tcrds.x, tcrds.y, tileSize, tileSize)
+    // })
   }
 
   toggleTile = (crds) => {
@@ -346,10 +346,10 @@ showNextGen = (field) => {
   let checkGen
   gameRun.length > 3 ? checkGen = gameRun[gameRun.length - 2] : checkGen = null
   let nextGen = nextGeneration(field, this.state.size, checkSet, this.state.field)
-  checkSet = nextGen.checkSet
+  // checkSet = nextGen.checkSet
   generation++
   workArr = nextGen.arr
-  gameRun.push(workArr)
+  // gameRun.push(workArr)
   let liveCells = nextGen.live
   if (liveCheck.length < 3) {
     liveCheck.unshift(liveCells)
@@ -384,10 +384,10 @@ showPrevGen () {
   }
 }
 
-async speedTest () {
-  await this.clearGame()
-  await this.setMap()
-  await this.runGame()
+speedTest () {
+  this.clearGame()
+  this.setMap()
+  this.runGame()
   setTimeout(() => {
     this.pauseGame()
     console.log(`Generations/sec: ${generation / 2}`)
