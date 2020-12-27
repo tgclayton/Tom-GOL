@@ -15,8 +15,8 @@ let liveCheck = []
 let changed = []
 let saving = false
 let checkSet = null
-const tileSize = 1
-const size = 200
+const tileSize = 7
+const size = 90
 
 function createField (size) {
   const field = {}
